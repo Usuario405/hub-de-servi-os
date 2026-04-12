@@ -1,369 +1,348 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hub de Serviços – Soluções Digitais para Comércio Local</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+
+<html lang="pt-BR"><head>
+<meta charset="utf-6"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;family=Manrope:wght@200..800&amp;family=Inter:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#d5e3ff",
+                    "inverse-on-surface": "#ebf1ff",
+                    "primary-fixed": "#d3e4ff",
+                    "on-background": "#001c3b",
+                    "on-primary-fixed": "#001c38",
+                    "error": "#ba1a1a",
+                    "surface-dim": "#c7dbff",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed-dim": "#91cdff",
+                    "secondary-fixed-dim": "#b1c7f0",
+                    "surface-tint": "#0060aa",
+                    "on-tertiary-container": "#fcfcff",
+                    "inverse-surface": "#193151",
+                    "surface": "#f9f9ff",
+                    "surface-bright": "#f9f9ff",
+                    "outline": "#717783",
+                    "on-primary-container": "#fdfcff",
+                    "primary-container": "#0576cf",
+                    "on-secondary-container": "#465c7f",
+                    "primary-fixed-dim": "#a3c9ff",
+                    "inverse-primary": "#a3c9ff",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed-variant": "#314769",
+                    "tertiary-container": "#007bb8",
+                    "tertiary-fixed": "#cce5ff",
+                    "surface-container": "#e7eeff",
+                    "surface-container-low": "#f0f3ff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "background": "#f9f9ff",
+                    "secondary": "#495f82",
+                    "error-container": "#ffdad6",
+                    "primary": "#005da6",
+                    "surface-container-high": "#dee8ff",
+                    "on-surface": "#001c3b",
+                    "on-tertiary-fixed": "#001e31",
+                    "on-tertiary-fixed-variant": "#004b72",
+                    "outline-variant": "#c0c7d4",
+                    "on-primary-fixed-variant": "#004882",
+                    "on-secondary-fixed": "#001c3b",
+                    "tertiary": "#006193",
+                    "surface-variant": "#d5e3ff",
+                    "on-primary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "secondary-container": "#bfd5fe",
+                    "surface-container-highest": "#d5e3ff",
+                    "on-surface-variant": "#414752"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "2xl": "1rem",
+                    "3xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Manrope"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
 <style>
-  :root {
-    --blue-deep: #0B2545;
-    --blue-mid: #1B4F8A;
-    --blue-bright: #1E7FD8;
-    --blue-light: #4FA8E8;
-    --blue-pale: #D6EAFF;
-    --blue-ghost: #EEF6FF;
-    --white: #FFFFFF;
-    --gray-soft: #F4F7FB;
-    --gray-text: #5A7090;
-    --text-dark: #0D1B2A;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'DM Sans', sans-serif; color: var(--text-dark); background: var(--white); overflow-x: hidden; }
-
-  /* NAV */
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 6vw; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(30,127,216,0.12); }
-  .logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.25rem; color: var(--blue-deep); letter-spacing: -0.02em; }
-  .logo span { color: var(--blue-bright); }
-  .nav-cta { background: var(--blue-bright); color: var(--white); border: none; border-radius: 50px; padding: 10px 22px; font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 0.88rem; cursor: pointer; text-decoration: none; transition: background 0.2s, transform 0.15s; display: flex; align-items: center; gap: 7px; }
-  .nav-cta:hover { background: var(--blue-mid); transform: translateY(-1px); }
-
-  /* HERO */
-  .hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 6vw 80px; position: relative; overflow: hidden; background: var(--white); }
-  .hero-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 70% 60% at 80% 40%, rgba(30,127,216,0.08) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 10% 80%, rgba(11,37,69,0.05) 0%, transparent 60%); }
-  .hero-grid { position: absolute; inset: 0; z-index: 0; background-image: linear-gradient(rgba(30,127,216,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(30,127,216,0.04) 1px, transparent 1px); background-size: 48px 48px; }
-  .hero-content { position: relative; z-index: 1; max-width: 680px; }
-  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--blue-ghost); border: 1px solid var(--blue-pale); color: var(--blue-bright); padding: 7px 16px; border-radius: 50px; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.02em; margin-bottom: 28px; animation: fadeUp 0.6s ease both; }
-  .hero-badge::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--blue-bright); display: block; animation: pulse 2s infinite; }
-  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.4); } }
-  h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.4rem, 5.5vw, 3.8rem); font-weight: 800; line-height: 1.08; letter-spacing: -0.03em; color: var(--blue-deep); margin-bottom: 22px; animation: fadeUp 0.6s 0.1s ease both; }
-  h1 em { font-style: normal; color: var(--blue-bright); position: relative; }
-  h1 em::after { content: ''; position: absolute; bottom: 2px; left: 0; right: 0; height: 3px; background: var(--blue-light); border-radius: 2px; opacity: 0.4; }
-  .hero-sub { font-size: 1.1rem; line-height: 1.7; color: var(--gray-text); max-width: 520px; margin-bottom: 40px; font-weight: 300; animation: fadeUp 0.6s 0.2s ease both; }
-  .hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; animation: fadeUp 0.6s 0.3s ease both; }
-  .btn-primary { background: var(--blue-bright); color: var(--white); border: none; border-radius: 50px; padding: 16px 32px; font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 1rem; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; box-shadow: 0 8px 32px rgba(30,127,216,0.25); }
-  .btn-primary:hover { background: var(--blue-mid); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(30,127,216,0.35); }
-  .btn-secondary { color: var(--blue-mid); font-weight: 500; font-size: 0.95rem; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s; }
-  .btn-secondary:hover { color: var(--blue-bright); }
-  .hero-float { position: absolute; right: 6vw; top: 50%; transform: translateY(-50%); display: grid; grid-template-columns: 1fr 1fr; gap: 14px; z-index: 1; animation: fadeUp 0.8s 0.4s ease both; }
-  @media (max-width: 900px) { .hero-float { display: none; } }
-  .stat-card { background: var(--white); border: 1px solid rgba(30,127,216,0.15); border-radius: 16px; padding: 20px 22px; min-width: 150px; box-shadow: 0 4px 24px rgba(11,37,69,0.07); }
-  .stat-card.blue { background: var(--blue-bright); }
-  .stat-card.blue .stat-num, .stat-card.blue .stat-label { color: var(--white); }
-  .stat-num { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--blue-deep); line-height: 1; }
-  .stat-label { font-size: 0.78rem; color: var(--gray-text); margin-top: 4px; }
-  .stat-icon { font-size: 1.4rem; margin-bottom: 8px; }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-
-  /* SOBRE */
-  .sobre { background: var(--blue-deep); padding: 80px 6vw; display: flex; align-items: center; gap: 60px; flex-wrap: wrap; }
-  .sobre-icon-wrap { width: 80px; height: 80px; background: rgba(30,127,216,0.25); border-radius: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .sobre-text { flex: 1; min-width: 280px; }
-  .section-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue-light); margin-bottom: 12px; }
-  .sobre h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; color: var(--white); margin-bottom: 16px; letter-spacing: -0.02em; line-height: 1.2; }
-  .sobre p { font-size: 1rem; line-height: 1.75; color: rgba(255,255,255,0.7); max-width: 560px; font-weight: 300; }
-  .sobre-divider { width: 1px; height: 120px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
-  @media (max-width: 700px) { .sobre-divider { display: none; } }
-  .sobre-quote { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-style: italic; color: var(--blue-light); line-height: 1.6; max-width: 280px; font-weight: 400; }
-
-  /* SERVIÇOS */
-  .servicos { padding: 90px 6vw; background: var(--gray-soft); }
-  .section-header { text-align: center; margin-bottom: 56px; }
-  .section-header h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 800; color: var(--blue-deep); letter-spacing: -0.03em; margin-bottom: 12px; }
-  .section-header p { font-size: 1rem; color: var(--gray-text); max-width: 480px; margin: 0 auto; line-height: 1.65; }
-  .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-  .card { background: var(--white); border: 1px solid rgba(30,127,216,0.1); border-radius: 20px; padding: 32px 28px; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; position: relative; overflow: hidden; }
-  .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--blue-bright), var(--blue-light)); opacity: 0; transition: opacity 0.2s; }
-  .card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(30,127,216,0.12); border-color: rgba(30,127,216,0.25); }
-  .card:hover::before { opacity: 1; }
-  .card-icon { width: 52px; height: 52px; background: var(--blue-ghost); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 1.5rem; transition: background 0.2s; }
-  .card:hover .card-icon { background: var(--blue-pale); }
-  .card h3 { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--blue-deep); margin-bottom: 10px; }
-  .card p { font-size: 0.92rem; color: var(--gray-text); line-height: 1.7; font-weight: 300; }
-  .card-tag { display: inline-block; margin-top: 16px; font-size: 0.75rem; font-weight: 500; color: var(--blue-bright); background: var(--blue-ghost); border-radius: 50px; padding: 4px 12px; }
-  .card.featured { background: var(--blue-deep); border-color: transparent; }
-  .card.featured h3 { color: var(--white); }
-  .card.featured p { color: rgba(255,255,255,0.7); }
-  .card.featured .card-icon { background: rgba(255,255,255,0.12); }
-  .card.featured .card-tag { background: rgba(30,127,216,0.3); color: var(--blue-light); }
-  .card.featured:hover { box-shadow: 0 16px 48px rgba(11,37,69,0.3); }
-  .card.cta-card { background: var(--blue-ghost); border-color: rgba(30,127,216,0.2); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-
-  /* NÃO FAZEMOS */
-  .nao-fazemos { padding: 70px 6vw; background: var(--white); }
-  .nao-inner { max-width: 780px; margin: 0 auto; background: var(--gray-soft); border: 1px solid rgba(30,127,216,0.1); border-radius: 24px; padding: 44px 48px; display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap; }
-  .nao-icon { width: 56px; height: 56px; background: var(--blue-ghost); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; flex-shrink: 0; }
-  .nao-content h2 { font-family: 'Syne', sans-serif; font-size: 1.35rem; font-weight: 700; color: var(--blue-deep); margin-bottom: 10px; }
-  .nao-content p { font-size: 0.95rem; color: var(--gray-text); line-height: 1.7; font-weight: 300; margin-bottom: 18px; }
-  .nao-list { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; }
-  .nao-list li { display: flex; align-items: center; gap: 6px; font-size: 0.85rem; color: var(--blue-mid); background: var(--blue-ghost); border-radius: 50px; padding: 5px 14px; }
-
-  /* LOCALIZAÇÃO */
-  .localizacao { padding: 90px 6vw; background: linear-gradient(160deg, var(--blue-deep) 0%, #0d2d5e 100%); position: relative; overflow: hidden; }
-  .loc-bg { position: absolute; inset: 0; background-image: radial-gradient(circle at 15% 50%, rgba(30,127,216,0.15) 0%, transparent 50%), radial-gradient(circle at 85% 20%, rgba(79,168,232,0.08) 0%, transparent 40%); pointer-events: none; }
-  .loc-inner { position: relative; z-index: 1; display: flex; gap: 60px; align-items: center; flex-wrap: wrap; }
-  .loc-text { flex: 1; min-width: 280px; }
-  .loc-text .section-label { color: var(--blue-light); }
-  .loc-text h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 800; color: var(--white); margin-bottom: 18px; letter-spacing: -0.02em; line-height: 1.2; }
-  .loc-text p { font-size: 1rem; color: rgba(255,255,255,0.7); line-height: 1.75; margin-bottom: 32px; font-weight: 300; }
-  .loc-details { display: flex; flex-direction: column; gap: 14px; margin-bottom: 36px; }
-  .loc-item { display: flex; align-items: center; gap: 12px; font-size: 0.95rem; color: rgba(255,255,255,0.85); }
-  .loc-item-icon { width: 36px; height: 36px; background: rgba(30,127,216,0.25); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
-  .loc-map { flex: 1; min-width: 280px; max-width: 420px; }
-  .map-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 20px; padding: 32px; text-align: center; }
-  .map-visual { width: 100%; height: 200px; background: rgba(30,127,216,0.15); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; margin-bottom: 20px; position: relative; overflow: hidden; }
-  .map-pulse { position: absolute; width: 60px; height: 60px; border-radius: 50%; background: rgba(30,127,216,0.3); animation: mapPulse 2.5s infinite; }
-  .map-pulse::after { content: ''; position: absolute; inset: -15px; border-radius: 50%; border: 2px solid rgba(30,127,216,0.2); animation: mapPulse 2.5s 0.5s infinite; }
-  @keyframes mapPulse { 0% { transform: scale(0.8); opacity: 0.9; } 100% { transform: scale(1.8); opacity: 0; } }
-  .map-emoji { position: relative; z-index: 1; }
-  .map-label { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 6px; }
-  .map-region { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--white); }
-
-  /* RODAPÉ */
-  footer { background: var(--text-dark); padding: 50px 6vw 30px; }
-  .footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; flex-wrap: wrap; padding-bottom: 36px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 28px; }
-  .footer-tagline { font-size: 0.85rem; color: rgba(255,255,255,0.4); margin-top: 8px; max-width: 220px; line-height: 1.6; }
-  .footer-links h4 { font-family: 'Syne', sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 14px; }
-  .footer-links ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-  .footer-links ul li a { font-size: 0.9rem; color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.2s; }
-  .footer-links ul li a:hover { color: var(--blue-light); }
-  .socials { display: flex; gap: 10px; margin-top: 16px; }
-  .social-btn { width: 38px; height: 38px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; text-decoration: none; transition: background 0.2s, border-color 0.2s; color: white; cursor: pointer; }
-  .social-btn:hover { background: var(--blue-bright); border-color: var(--blue-bright); }
-  .footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
-  .copyright { font-size: 0.82rem; color: rgba(255,255,255,0.3); }
-  .footer-badge { font-size: 0.78rem; color: rgba(255,255,255,0.3); display: flex; align-items: center; gap: 5px; }
-
-  /* FLOAT WPP */
-  .wpp-float { position: fixed; bottom: 28px; right: 28px; width: 56px; height: 56px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; text-decoration: none; box-shadow: 0 6px 24px rgba(37,211,102,0.4); z-index: 200; transition: transform 0.2s, box-shadow 0.2s; animation: fadeUp 1s 1s ease both; }
-  .wpp-float:hover { transform: scale(1.1); box-shadow: 0 10px 32px rgba(37,211,102,0.5); }
-</style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
 </head>
-<body>
-
-<!-- NAV -->
-<nav>
-  <div class="logo">Hub <span>de Serviços</span></div>
-  <a href="https://wa.me/5511939180038?text=Olá!%20Vi%20o%20site%20do%20Hub%20e%20quero%20saber%20mais." class="nav-cta" target="_blank">💬 Falar pelo WhatsApp</a>
+<body class="bg-surface font-body text-on-surface">
+<!-- Top Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-[0_40px_40px_rgba(0,28,59,0.06)]">
+<div class="flex justify-between items-center max-w-7xl mx-auto px-8 py-4">
+<div class="text-2xl font-bold tracking-tighter text-blue-800 dark:text-blue-200 font-headline uppercase">
+            HUB DIGITAL
+        </div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-blue-700 dark:text-blue-400 font-bold border-b-2 border-blue-700 transition-colors duration-300" href="#">Início</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-600 dark:hover:text-blue-300 transition-colors duration-300" href="#">Serviços</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-600 dark:hover:text-blue-300 transition-colors duration-300" href="#">Método HUB</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-600 dark:hover:text-blue-300 transition-colors duration-300" href="#">Contato</a>
+</div>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-8 py-3 rounded-xl font-bold transition-transform scale-95 active:scale-90">
+            Começar Agora
+        </button>
+</div>
 </nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
-  <div class="hero-content">
-    <div class="hero-badge">📍 Atendemos no raio de 8km — Zona Sul de São Paulo</div>
-    <h1>Seu negócio merece<br><em>presença digital</em><br>de verdade.</h1>
-    <p class="hero-sub">
-      Chega de perder clientes porque seu concorrente aparece primeiro no Google.
-      O Hub de Serviços cuida de tudo que é digital para você focar no que sabe fazer de melhor.
-    </p>
-    <div class="hero-actions">
-      <a href="https://wa.me/5511939180038?text=Olá!%20Quero%20conhecer%20os%20serviços%20do%20Hub." class="btn-primary" target="_blank">💬 Quero uma solução agora</a>
-      <a href="#servicos" class="btn-secondary">Ver serviços →</a>
-    </div>
-  </div>
-  <div class="hero-float">
-    <div class="stat-card blue">
-      <div class="stat-icon">📈</div>
-      <div class="stat-num">8km</div>
-      <div class="stat-label">Raio de atuação local</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-icon">⚡</div>
-      <div class="stat-num">1 hub</div>
-      <div class="stat-label">Para todas as soluções</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-icon">🎯</div>
-      <div class="stat-num">100%</div>
-      <div class="stat-label">Foco no resultado</div>
-    </div>
-    <div class="stat-card blue">
-      <div class="stat-icon">🤝</div>
-      <div class="stat-num">Próximo</div>
-      <div class="stat-label">Parceiro do bairro</div>
-    </div>
-  </div>
+<!-- Hero Section -->
+<section class="relative pt-32 pb-24 overflow-hidden">
+<div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="relative z-10">
+<span class="inline-flex items-center px-4 py-2 rounded-full bg-secondary-container text-on-secondary-container text-xs font-bold mb-6 tracking-widest font-label">
+                SÃO PAULO DIGITAL HUB
+            </span>
+<h1 class="text-6xl md:text-7xl font-headline font-bold text-on-surface leading-[1.1] tracking-tighter mb-8">
+                Presença Digital para sua Empresa <span class="text-primary">em toda São Paulo.</span>
+</h1>
+<p class="text-xl text-on-surface-variant max-w-xl mb-12 leading-relaxed">
+                A HUB Digital Curator transforma sua marca com estratégias de alto impacto. Sem limites geográficos, apenas resultados concretos na maior metrópole da América Latina.
+            </p>
+<div class="flex flex-wrap gap-4">
+<button class="px-10 py-5 rounded-3xl bg-gradient-to-br from-primary to-primary-container text-white font-bold text-lg shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform flex items-center gap-3">
+                    Falar com Especialista
+                    <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="px-10 py-5 rounded-3xl bg-surface-container-low text-primary font-bold text-lg hover:bg-surface-container transition-colors">
+                    Ver Portfólio
+                </button>
+</div>
+</div>
+<div class="relative">
+<div class="aspect-square rounded-[3rem] overflow-hidden shadow-2xl rotate-3 bg-primary-fixed/20 relative group">
+<img class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" data-alt="stunning aerial view of São Paulo skyline at night with luminous city lights and skyscrapers in cool blue tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGfUe4BOIbaya-Zrht5_erCUO6SLAZp1WcxlB_EUjvnvjhf1AlILywDMwgFJx-WwaUXMfthABXcvIWK9XXhDZaSBRplgRkKMaL3N-kvMMjYPBmfOwSR9C4pfVQlgTIqNBcVvm_BpSx71mPWDVzra_Hq81HUkLZxAgc-1iJyE-sjPGYzTMed0qiowPttXFeg4C0PwehjmmZLoNX9feu58kl5ULhVQH9-cHOARvA20D-mJLhw_noLiIx9VJ-YM6gqixxhbwwjwC6Mg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/60 to-transparent"></div>
+<div class="absolute bottom-8 left-8 right-8 text-white">
+<div class="text-4xl font-headline font-bold mb-2">24/7</div>
+<p class="font-label uppercase tracking-widest text-sm opacity-80">Cobertura Metropolitana Total</p>
+</div>
+</div>
+<!-- Floating Decorative Elements -->
+<div class="absolute -top-12 -right-12 w-48 h-48 bg-tertiary/10 rounded-full blur-3xl"></div>
+<div class="absolute -bottom-12 -left-12 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+</div>
+</div>
 </section>
-
-<!-- SOBRE -->
-<section class="sobre" id="sobre">
-  <div class="sobre-icon-wrap">
-    <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#4FA8E8" stroke-width="1.8">
-      <circle cx="12" cy="12" r="3"/>
-      <circle cx="12" cy="4" r="2"/>
-      <circle cx="20" cy="16" r="2"/>
-      <circle cx="4" cy="16" r="2"/>
-      <line x1="12" y1="6" x2="12" y2="9"/>
-      <line x1="18.5" y1="15" x2="14" y2="13"/>
-      <line x1="5.5" y1="15" x2="10" y2="13"/>
-    </svg>
-  </div>
-  <div class="sobre-text">
-    <div class="section-label">Sobre o Hub</div>
-    <h2>Um ponto central para<br>tudo que é digital.</h2>
-    <p>
-      Somos um parceiro local especializado em resolver a vida digital de comerciantes que não têm tempo a perder.
-      Em vez de contratar cinco fornecedores diferentes — um para o site, outro para as redes, outro para o Google —
-      você fala com um só lugar que entende o seu negócio e entrega resultados.
-    </p>
-  </div>
-  <div class="sobre-divider"></div>
-  <p class="sobre-quote">"Você cuida do balcão.<br>A gente cuida da vitrine digital."</p>
+<!-- Services Slider (Bento Carousel) -->
+<section class="py-24 bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-8 mb-16 flex justify-between items-end">
+<div>
+<h2 class="text-4xl font-headline font-bold text-on-surface mb-4">Serviços &amp; Cases de Sucesso</h2>
+<p class="text-on-surface-variant max-w-lg">Curadoria digital completa para escalar seu negócio com precisão editorial.</p>
+</div>
+<div class="flex gap-4">
+<button class="p-4 rounded-full bg-surface-container-lowest text-primary shadow-sm hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="p-4 rounded-full bg-surface-container-lowest text-primary shadow-sm hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto hide-scrollbar flex gap-8 px-8 pb-12 snap-x">
+<!-- Slide 1: Traffic -->
+<div class="min-w-[320px] md:min-w-[450px] snap-center aspect-[4/5] rounded-3xl overflow-hidden relative group bg-surface-container-lowest shadow-sm">
+<img class="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 opacity-80" data-alt="Modern office with digital data screens and graphs glowing in blue light representing traffic management analytics" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCasAk-BgbGx8rMSCdYQvH_GJ1xcCnMaLr6wEsog3ul0XyiPJ1teaZEnvH4Yug5ORlryQwDl06RJuLOUT_e18C0tcMtFNAVp2JYYCQBmSQQBeXbuuSMHWw2-cwolRoShvcKqdtmGPwOaX_ZiFVtTyyqaQoIai3SnPX1w8QpXEKWXAwzRT1kLWTKmMet5GJlIP5O5W4-ixcNyiPEtG53BQCpltWrsFe-hm2wq1pKjfE76S2P-kfBGsBWw6X4g3MCJ9RWuiHIQZAwrQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface via-on-surface/20 to-transparent"></div>
+<div class="absolute bottom-8 left-8 right-8">
+<span class="text-primary-fixed font-label text-xs font-bold uppercase tracking-[0.2em] mb-3 block">01 / Performance</span>
+<h3 class="text-3xl font-headline font-bold text-white mb-4">Gestão de Tráfego Pago</h3>
+<p class="text-white/70 text-sm mb-6">Maximizando ROI em toda a região metropolitana de SP.</p>
+<button class="text-white flex items-center gap-2 font-bold group-hover:gap-4 transition-all">
+                    Detalhes <span class="material-symbols-outlined text-sm">north_east</span>
+</button>
+</div>
+</div>
+<!-- Slide 2: Social Media -->
+<div class="min-w-[320px] md:min-w-[450px] snap-center aspect-[4/5] rounded-3xl overflow-hidden relative group bg-surface-container-lowest shadow-sm">
+<img class="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 opacity-80" data-alt="Clean minimalist shot of a smartphone with colorful social media app icons on a desk with a plant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAa5o0eO2luqBpWRHuWE9yWgtmJztH52UInBPGVstIPlnvFMAplW7zNyRFLi1ZQPxvIQFMuUl28V_58154zj0yp6p0xaHlsxKhZfcNS_oeQ2JQfd2CgAPYD51iteIGsoAB2gy_0UnQ9IGVwYBv26Vlj95Wc9EYxAgrEc9zK1u6QDgn1CuKPQkTm9TQqAJLXVsmbxocM_uElfzYTq6fIR2NGyHMK9WbE22JQnYIAUdWRTf80R9NTlYy3_IjAs89Ov4OxQ3DiyScnzw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface via-on-surface/20 to-transparent"></div>
+<div class="absolute bottom-8 left-8 right-8">
+<span class="text-primary-fixed font-label text-xs font-bold uppercase tracking-[0.2em] mb-3 block">02 / Conteúdo</span>
+<h3 class="text-3xl font-headline font-bold text-white mb-4">Autoridade em Redes Sociais</h3>
+<p class="text-white/70 text-sm mb-6">Narrativas visuais que conectam marcas a paulistanos.</p>
+<button class="text-white flex items-center gap-2 font-bold group-hover:gap-4 transition-all">
+                    Detalhes <span class="material-symbols-outlined text-sm">north_east</span>
+</button>
+</div>
+</div>
+<!-- Slide 3: Web Dev -->
+<div class="min-w-[320px] md:min-w-[450px] snap-center aspect-[4/5] rounded-3xl overflow-hidden relative group bg-surface-container-lowest shadow-sm">
+<img class="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 opacity-80" data-alt="Close up of high-end laptop display showing beautiful modern website user interface design with sleek typography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxbbhbi52d7NPs0Z2mDp8XVmBV5z2_NBQgY7rB06eT7ThWAG3jJ3iMn8oRsJNtWUghUeQbiIXE1QzEnoZryCqeOnbb1i4IhBATI4V0JQ8dZBzGMTJwMOAX6Gz34TlbhtYIO89frP1e3qCzJLbWA6o3u9jMwnQon9PmnWcXI7XAHjpjFWcYwf2tneEam2b1BikAqKnrxeHcddOePRDCviO-34RzEgg23k8jYhd6-XCrtTMCLRgBLbbr4HX8gAGSLZefZM45V5Otew"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface via-on-surface/20 to-transparent"></div>
+<div class="absolute bottom-8 left-8 right-8">
+<span class="text-primary-fixed font-label text-xs font-bold uppercase tracking-[0.2em] mb-3 block">03 / Plataforma</span>
+<h3 class="text-3xl font-headline font-bold text-white mb-4">Desenvolvimento Web</h3>
+<p class="text-white/70 text-sm mb-6">Sites que funcionam como verdadeiras filiais digitais.</p>
+<button class="text-white flex items-center gap-2 font-bold group-hover:gap-4 transition-all">
+                    Detalhes <span class="material-symbols-outlined text-sm">north_east</span>
+</button>
+</div>
+</div>
+<!-- More Slides -->
+<div class="min-w-[320px] md:min-w-[450px] snap-center aspect-[4/5] rounded-3xl overflow-hidden relative group bg-surface-container-lowest shadow-sm flex items-center justify-center border-2 border-dashed border-outline-variant">
+<div class="text-center p-8">
+<span class="material-symbols-outlined text-5xl text-primary mb-4">more_horiz</span>
+<h3 class="text-xl font-headline font-bold text-on-surface">Explore mais +6 Cases de Serviços</h3>
+<p class="text-on-surface-variant text-sm mt-2">SEO, Branding, CRM e muito mais.</p>
+</div>
+</div>
+</div>
 </section>
-
-<!-- SERVIÇOS -->
-<section class="servicos" id="servicos">
-  <div class="section-header">
-    <div class="section-label" style="color: var(--blue-bright);">O que fazemos</div>
-    <h2>Soluções que fazem<br>diferença de verdade</h2>
-    <p>Escolha o que você precisa agora — ou deixe a gente montar um pacote sob medida para o seu negócio.</p>
-  </div>
-  <div class="cards-grid">
-
-    <div class="card featured">
-      <div class="card-icon">📣</div>
-      <h3>Gestão de Tráfego Local</h3>
-      <p>Anúncios no Google que colocam o seu negócio na frente de quem está perto e pronto para comprar. Seu telefone começa a tocar.</p>
-      <span class="card-tag">Google Ads · Tráfego Pago</span>
-    </div>
-
-    <div class="card">
-      <div class="card-icon">📸</div>
-      <h3>Fotografia Profissional</h3>
-      <p>Fotos que vendem. Imagens de produto, ambiente e equipe com qualidade profissional — feitas no seu espaço ou no nosso estúdio local.</p>
-      <span class="card-tag">Produto · Ambiente · Equipe</span>
-    </div>
-
-    <div class="card">
-      <div class="card-icon">🎯</div>
-      <h3>Google Ads & Meta Ads</h3>
-      <p>Criação, gestão e otimização de campanhas no Google e nas redes sociais para atrair mais clientes e vender mais — sem desperdício de verba.</p>
-      <span class="card-tag">Google · Instagram · Facebook</span>
-    </div>
-
-    <div class="card">
-      <div class="card-icon">✨</div>
-      <h3>Clínica de Redes Sociais & Identidade</h3>
-      <p>Ajustamos seu perfil do Instagram e Facebook para parecerem profissionais e criamos seu cartão de visita digital (link em bio, WhatsApp Business, Google Meu Negócio).</p>
-      <span class="card-tag">Identidade Digital · Perfis</span>
-    </div>
-
-    <div class="card">
-      <div class="card-icon">🌐</div>
-      <h3>Criação de Sites</h3>
-      <p>Site profissional nas plataformas certas para o seu negócio — Nuvemshop para e-commerce, Shopify para lojas escaláveis, Wix para presença rápida.</p>
-      <span class="card-tag">Nuvemshop · Shopify · Wix</span>
-    </div>
-
-    <div class="card cta-card">
-      <div style="font-size:2rem; margin-bottom:16px;">💬</div>
-      <h3 style="margin-bottom:10px;">Não sabe por onde começar?</h3>
-      <p style="margin-bottom:20px;">Fale com a gente e a gente descobre junto o que faz mais sentido pro seu negócio agora.</p>
-      <a href="https://wa.me/5511939180038?text=Oi!%20Quero%20saber%20qual%20serviço%20é%20certo%20para%20meu%20negócio." class="btn-primary" target="_blank" style="font-size:0.9rem; padding:13px 24px;">Falar no WhatsApp</a>
-    </div>
-
-  </div>
+<!-- Detailed Services Overview (Asymmetric) -->
+<section class="py-32 bg-surface">
+<div class="max-w-7xl mx-auto px-8">
+<div class="flex flex-col lg:flex-row gap-16 mb-24">
+<div class="lg:w-1/3">
+<h2 class="text-5xl font-headline font-bold text-on-surface sticky top-32">Nossa Curadoria de Serviços.</h2>
+</div>
+<div class="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-24">
+<!-- Service 1 -->
+<div class="group">
+<div class="w-16 h-16 rounded-2xl bg-primary-fixed flex items-center justify-center mb-8 group-hover:rotate-6 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl">ads_click</span>
+</div>
+<h4 class="text-2xl font-headline font-bold mb-4">Google &amp; Meta Ads</h4>
+<p class="text-on-surface-variant leading-relaxed mb-6">Campanhas segmentadas por distritos, garantindo que sua mensagem chegue a quem realmente importa em São Paulo.</p>
+<span class="text-xs font-bold text-primary font-label uppercase tracking-widest">Estratégia Premium</span>
+</div>
+<!-- Service 2 -->
+<div class="group">
+<div class="w-16 h-16 rounded-2xl bg-tertiary-fixed flex items-center justify-center mb-8 group-hover:rotate-6 transition-transform">
+<span class="material-symbols-outlined text-tertiary text-3xl">brush</span>
+</div>
+<h4 class="text-2xl font-headline font-bold mb-4">Identidade Visual</h4>
+<p class="text-on-surface-variant leading-relaxed mb-6">Design que transmite a autoridade e a sofisticação necessárias para se destacar no mercado corporativo paulistano.</p>
+<span class="text-xs font-bold text-tertiary font-label uppercase tracking-widest">Design Visual</span>
+</div>
+<!-- Service 3 -->
+<div class="group">
+<div class="w-16 h-16 rounded-2xl bg-secondary-fixed flex items-center justify-center mb-8 group-hover:rotate-6 transition-transform">
+<span class="material-symbols-outlined text-secondary text-3xl">trending_up</span>
+</div>
+<h4 class="text-2xl font-headline font-bold mb-4">Inbound Marketing</h4>
+<p class="text-on-surface-variant leading-relaxed mb-6">Atração e conversão de leads qualificados através de conteúdo estratégico e automação inteligente.</p>
+<span class="text-xs font-bold text-secondary font-label uppercase tracking-widest">Motor de Crescimento</span>
+</div>
+<!-- Service 4 -->
+<div class="group">
+<div class="w-16 h-16 rounded-2xl bg-outline-variant/30 flex items-center justify-center mb-8 group-hover:rotate-6 transition-transform">
+<span class="material-symbols-outlined text-on-surface text-3xl">hub</span>
+</div>
+<h4 class="text-2xl font-headline font-bold mb-4">SEO Local São Paulo</h4>
+<p class="text-on-surface-variant leading-relaxed mb-6">Otimização completa para que sua empresa domine as buscas em todos os bairros e zonas da capital.</p>
+<span class="text-xs font-bold text-on-surface font-label uppercase tracking-widest">SEO Metropolitano</span>
+</div>
+</div>
+</div>
+</div>
 </section>
-
-<!-- NÃO FAZEMOS -->
-<section class="nao-fazemos">
-  <div class="nao-inner">
-    <div class="nao-icon">🔍</div>
-    <div class="nao-content">
-      <h2>Transparência: o que está fora do nosso foco</h2>
-      <p>Somos especialistas no digital. Para entregarmos o melhor resultado, mantemos nosso foco nas soluções que realmente transformam a presença online do seu negócio. Os itens abaixo não fazem parte do nosso escopo:</p>
-      <ul class="nao-list">
-        <li>✕ Impressão gráfica (banners e flyers físicos)</li>
-        <li>✕ Fotografia de eventos sociais</li>
-        <li>✕ Desenvolvimento de apps mobile</li>
-        <li>✕ Suporte de hardware e informática</li>
-      </ul>
-    </div>
-  </div>
+<!-- Highlight: São Paulo Presence -->
+<section class="py-24 bg-on-surface text-white rounded-t-[4rem] overflow-hidden">
+<div class="max-w-7xl mx-auto px-8 relative">
+<div class="absolute -top-24 -right-24 w-96 h-96 bg-primary opacity-20 blur-[120px]"></div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div>
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 mb-8 font-label text-sm uppercase tracking-widest">
+<span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                    Disponibilidade Imediata
+                </div>
+<h2 class="text-5xl md:text-6xl font-headline font-bold mb-8 leading-tight">Atendimento em toda <span class="text-primary-fixed">São Paulo.</span></h2>
+<p class="text-xl text-white/70 mb-12 leading-relaxed">
+                    Esqueça as limitações de bairro. Nossa estrutura digital permite uma cobertura completa da Zona Sul à Zona Norte, da Leste à Oeste. Onde houver oportunidade, a HUB estará lá com você.
+                </p>
+<div class="grid grid-cols-2 gap-8 border-t border-white/10 pt-12">
+<div>
+<div class="text-4xl font-headline font-bold mb-2">100%</div>
+<p class="text-white/50 text-sm font-label uppercase tracking-wider">Cobertura na Capital</p>
+</div>
+<div>
+<div class="text-4xl font-headline font-bold mb-2">24h</div>
+<p class="text-white/50 text-sm font-label uppercase tracking-wider">Suporte Digital</p>
+</div>
+</div>
+</div>
+<div class="relative h-[500px] rounded-3xl overflow-hidden shadow-2xl">
+<img class="w-full h-full object-cover" data-alt="stylized map view of São Paulo with digital glowing nodes connecting different areas of the city" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdKRZkBqQKy-PNSVQLwfW7LG7hd-pohdWeH6lzufNSh3ps1RHBx5g9xBvGwbgq2Mm4f0YVNbluxlM_c5lgdjcxN1uEf-8Z2o6kd9fHm88qbEUWVWCEMKTabqj71pU0EWQQYKC1ts_R88pFn7tEoFL9-px4-7mD1_sJkBtnYB-Eh21TzavewRslZHgu6rwagfue5KJs5unny-dx9KdxeZv3UoGiP_-OXWvhv_Th4s7XjIjA-LYU8C5-e6XHP8t32zdFIvt0tUhDHg"/>
+<div class="absolute inset-0 bg-primary/20 mix-blend-overlay"></div>
+</div>
+</div>
+</div>
 </section>
-
-<!-- LOCALIZAÇÃO -->
-<section class="localizacao" id="contato">
-  <div class="loc-bg"></div>
-  <div class="loc-inner">
-    <div class="loc-text">
-      <div class="section-label">Localização & Contato</div>
-      <h2>Aqui do lado,<br>sempre disponíveis.</h2>
-      <p>Atendemos comerciantes em um raio de 8km a partir do CEP 04414-010, na Zona Sul de São Paulo. Somos o parceiro digital do seu bairro — e você pode falar com a gente agora mesmo pelo WhatsApp.</p>
-      <div class="loc-details">
-        <div class="loc-item"><div class="loc-item-icon">📍</div>Raio de 8km — CEP de referência 04414-010, Zona Sul de SP</div>
-        <div class="loc-item"><div class="loc-item-icon">💬</div>Atendimento pelo WhatsApp em horário comercial</div>
-        <div class="loc-item"><div class="loc-item-icon">⚡</div>Resposta em até 2 horas em dias úteis</div>
-        <div class="loc-item"><div class="loc-item-icon">🤝</div>Visita presencial disponível para diagnóstico inicial</div>
-      </div>
-      <a href="https://wa.me/5511939180038?text=Olá!%20Quero%20agendar%20uma%20conversa%20sobre%20meu%20negócio." class="btn-primary" target="_blank">💬 Falar agora pelo WhatsApp</a>
-    </div>
-    <div class="loc-map">
-      <div class="map-card">
-        <div class="map-visual">
-          <div class="map-pulse"></div>
-          <div class="map-emoji">🗺️</div>
-        </div>
-        <p class="map-label">Área de atendimento</p>
-        <p class="map-region">Zona Sul · São Paulo · SP</p>
-        <div style="margin-top:16px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.1);">
-          <p style="font-size:0.8rem; color:rgba(255,255,255,0.4); line-height:1.6;">📌 CEP 04414-010 · Raio de 8 quilômetros</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- RODAPÉ -->
-<footer>
-  <div class="footer-top">
-    <div>
-      <div class="logo">Hub <span>de Serviços</span></div>
-      <p class="footer-tagline">Soluções digitais para o comércio local da Zona Sul de SP.</p>
-      <div class="socials">
-        <a class="social-btn" href="#" title="Instagram">📸</a>
-        <a class="social-btn" href="#" title="Facebook">👍</a>
-        <a class="social-btn" href="https://wa.me/5511939180038" target="_blank" title="WhatsApp">💬</a>
-        <a class="social-btn" href="#" title="Google Meu Negócio">🔍</a>
-      </div>
-    </div>
-    <div class="footer-links">
-      <h4>Serviços</h4>
-      <ul>
-        <li><a href="#servicos">Tráfego Local</a></li>
-        <li><a href="#servicos">Fotografia Profissional</a></li>
-        <li><a href="#servicos">Google Ads & Meta Ads</a></li>
-        <li><a href="#servicos">Redes Sociais</a></li>
-        <li><a href="#servicos">Criação de Sites</a></li>
-      </ul>
-    </div>
-    <div class="footer-links">
-      <h4>Institucional</h4>
-      <ul>
-        <li><a href="#sobre">Sobre o Hub</a></li>
-        <li><a href="#contato">Contato</a></li>
-        <li><a href="#">Política de Privacidade</a></li>
-      </ul>
-    </div>
-    <div class="footer-links">
-      <h4>Fale conosco</h4>
-      <ul>
-        <li><a href="https://wa.me/5511939180038">WhatsApp</a></li>
-        <li><a href="mailto:contato@hubdeservicos.com.br">E-mail</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p class="copyright">© 2025 Hub de Serviços. Todos os direitos reservados.</p>
-    <p class="footer-badge">🔵 Feito com cuidado para o comércio local</p>
-  </div>
+<!-- Footer -->
+<footer class="w-full rounded-t-[2rem] bg-slate-50 dark:bg-slate-900">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-7xl mx-auto px-8 py-16">
+<div class="space-y-6">
+<div class="text-lg font-bold text-blue-800 dark:text-blue-200 uppercase tracking-tighter">HUB DIGITAL</div>
+<p class="text-slate-500 dark:text-slate-400 font-body text-sm leading-relaxed">
+                Especialistas em curadoria digital e estratégias de crescimento para empresas que buscam autoridade no mercado de São Paulo.
+            </p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center hover:text-blue-700 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">share</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center hover:text-blue-700 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">podcasts</span>
+</a>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-8">
+<div>
+<h5 class="font-headline font-bold text-on-surface mb-6">Navegação</h5>
+<ul class="space-y-4 text-sm text-slate-500">
+<li><a class="hover:text-blue-800 transition-all" href="#">Início</a></li>
+<li><a class="hover:text-blue-800 transition-all" href="#">Serviços</a></li>
+<li><a class="hover:text-blue-800 transition-all" href="#">Método HUB</a></li>
+<li><a class="hover:text-blue-800 transition-all" href="#">Contato</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-headline font-bold text-on-surface mb-6">Jurídico</h5>
+<ul class="space-y-4 text-sm text-slate-500">
+<li><a class="hover:text-blue-800 transition-all" href="#">Política de Privacidade</a></li>
+<li><a class="hover:text-blue-800 transition-all" href="#">Termos de Uso</a></li>
+</ul>
+</div>
+</div>
+<div class="bg-primary-container p-8 rounded-3xl text-white">
+<h5 class="font-headline font-bold text-xl mb-4">Pronto para começar?</h5>
+<p class="text-white/80 text-sm mb-8 leading-relaxed">Agende uma consultoria gratuita agora e transforme sua presença digital.</p>
+<a class="w-full inline-flex items-center justify-center gap-3 bg-white text-primary py-4 rounded-2xl font-bold hover:scale-[1.02] transition-transform shadow-lg" href="https://wa.me/yournumber">
+<span class="material-symbols-outlined">chat</span>
+                WhatsApp HUB
+            </a>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-8 py-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:row justify-between items-center gap-4 text-slate-500 text-xs">
+<p>© 2024 HUB Digital Curator. Soluções para toda São Paulo.</p>
+<div class="flex gap-8">
+<a class="hover:text-blue-800 transition-all" href="#">Instagram</a>
+<a class="hover:text-blue-800 transition-all" href="#">LinkedIn</a>
+</div>
+</div>
 </footer>
-
-<!-- BOTÃO FLUTUANTE WHATSAPP -->
-<a class="wpp-float" href="https://wa.me/5511939180038?text=Olá!%20Vi%20o%20site%20do%20Hub%20e%20quero%20saber%20mais." target="_blank" title="Falar no WhatsApp">💬</a>
-
-</body>
-</html>
+<!-- Fixed Floating WhatsApp -->
+<a class="fixed bottom-8 right-8 z-50 bg-[#25D366] text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform" href="https://wa.me/yournumber">
+<svg class="w-8 h-8 fill-current" viewbox="0 0 24 24">
+<path d="M12.031 6.172c-2.32 0-4.518.892-6.193 2.512-3.418 3.3-3.418 8.666 0 11.967 1.133 1.096 2.525 1.842 4.022 2.152l.245.051.107 1.413 1.821-1.127.185-.114.283.041c.493.072.993.108 1.492.108 2.32 0 4.519-.892 6.194-2.512 3.418-3.3 3.418-8.666 0-11.967-1.675-1.62-3.874-2.512-6.157-2.512zm0-2.172c2.901 0 5.8 1.11 8.016 3.33 4.432 4.43 4.432 11.61 0 16.04-2.216 2.22-5.115 3.33-8.016 3.33-.82 0-1.644-.09-2.453-.27l-4.57 2.827-.271-3.567c-1.896-.51-3.642-1.55-5.066-3.01-4.432-4.43-4.432-11.61 0-16.04 2.216-2.22 5.115-3.33 8.016-3.33z"></path>
+</svg>
+</a>
+</body></html>
