@@ -1,4 +1,106 @@
-<!-- TopNavBar — cole esse <nav> em TODOS os 6 arquivos -->
+html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#d5e3ff",
+                    "inverse-on-surface": "#ebf1ff",
+                    "primary-fixed": "#d3e4ff",
+                    "on-background": "#001c3b",
+                    "on-primary-fixed": "#001c38",
+                    "error": "#ba1a1a",
+                    "surface-dim": "#c7dbff",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed-dim": "#91cdff",
+                    "secondary-fixed-dim": "#b1c7f0",
+                    "surface-tint": "#0060aa",
+                    "on-tertiary-container": "#fcfcff",
+                    "inverse-surface": "#193151",
+                    "surface": "#f9f9ff",
+                    "surface-bright": "#f9f9ff",
+                    "outline": "#717783",
+                    "on-primary-container": "#fdfcff",
+                    "primary-container": "#0576cf",
+                    "on-secondary-container": "#465c7f",
+                    "primary-fixed-dim": "#a3c9ff",
+                    "inverse-primary": "#a3c9ff",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed-variant": "#314769",
+                    "tertiary-container": "#007bb8",
+                    "tertiary-fixed": "#cce5ff",
+                    "surface-container": "#e7eeff",
+                    "surface-container-low": "#f0f3ff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "background": "#f9f9ff",
+                    "secondary": "#495f82",
+                    "error-container": "#ffdad6",
+                    "primary": "#005da6",
+                    "surface-container-high": "#dee8ff",
+                    "on-surface": "#001c3b",
+                    "on-tertiary-fixed": "#001e31",
+                    "on-tertiary-fixed-variant": "#004b72",
+                    "outline-variant": "#c0c7d4",
+                    "on-primary-fixed-variant": "#004882",
+                    "on-secondary-fixed": "#001c3b",
+                    "tertiary": "#006193",
+                    "surface-variant": "#d5e3ff",
+                    "on-primary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "secondary-container": "#bfd5fe",
+                    "surface-container-highest": "#d5e3ff",
+                    "on-surface-variant": "#414752"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "xxl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Manrope"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-gradient {
+            background: linear-gradient(135deg, #005da6 0%, #0576cf 100%);
+        }
+        .glass-nav {
+            backdrop-filter: blur(20px);
+        }
+        .dark-section {
+            background-color: #001c3b;
+        }
+        .step-tag {
+            background: rgba(0, 93, 166, 0.1);
+            color: #005da6;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
 <nav class="w-full sticky top-0 z-50 bg-white/80 backdrop-blur-xl shadow-[0_40px_40px_rgba(0,28,59,0.06)]">
   <div class="flex justify-between items-center w-full px-8 py-4 max-w-7xl mx-auto">
 
@@ -24,3 +126,238 @@
 
   </div>
 </nav>
+
+<main class="pt-32">
+<!-- Hero Section: Marketing Panorâmico -->
+<section class="max-w-7xl mx-auto px-8 mb-24 lg:mb-32">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div>
+<span class="step-tag mb-6 inline-block">Metodologia</span>
+<h1 class="text-5xl lg:text-7xl font-headline font-bold tracking-tight text-on-surface leading-[1.1] mb-6">
+                    O Que é o <span class="text-primary">Marketing Panorâmico</span>?
+                </h1>
+<p class="text-2xl text-primary font-medium mb-8">Uma Visão 360° da Sua Marca</p>
+<div class="grid grid-cols-1 gap-4">
+<div class="flex items-start gap-4 p-4 rounded-xl border border-outline-variant bg-white shadow-sm">
+<span class="text-2xl font-headline font-bold text-primary">01</span>
+<div>
+<div class="font-bold text-lg">Multi-Canal</div>
+<p class="text-on-surface-variant text-sm">Não escolhemos apenas um canal — ativamos sua marca onde o cliente está, no momento certo.</p>
+</div>
+</div>
+<div class="flex items-start gap-4 p-4 rounded-xl border border-outline-variant bg-white shadow-sm">
+<span class="text-2xl font-headline font-bold text-primary">02</span>
+<div>
+<div class="font-bold text-lg">Integrado</div>
+<p class="text-on-surface-variant text-sm">Unimos o mundo digital, o mundo físico e o relacionamento humano em uma estratégia coesa.</p>
+</div>
+</div>
+<div class="flex items-start gap-4 p-4 rounded-xl border border-outline-variant bg-white shadow-sm">
+<span class="text-2xl font-headline font-bold text-primary">03</span>
+<div>
+<div class="font-bold text-lg">Orientado a Resultado</div>
+<p class="text-on-surface-variant text-sm">Cada ação tem propósito mensurável. Sua marca em todo lugar que importa.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="relative">
+<img alt="Marketing Panorâmico Concept" class="rounded-xxl shadow-2xl w-full object-cover aspect-video lg:aspect-square" src="https://lh3.googleusercontent.com/aida/ADBb0uhLyqt1tpfvQJ1OPneX-yLWCLoZYglkm21cf9kBYOTv75-dzWmVxfNjbqZRK3BW2oxP7zv--hj0KfTGvsFSlmZq1Au2AAfkQOrR7aJOow5Qvngni-myE4tbYx72l3pldZyCVsa-qaiesn30-oeW_RaMMNdep-Qy9TPR1ePilVVsZKHo6gXyvj8paUULTpcvTxWUzQpYC_PQFfLtH25fvKuIcY_H9lFr82PtBnNpzZrVNvOble6AkYMhw4Rn1-p5WgKdBqS13Z0"/>
+<div class="absolute -bottom-8 -left-8 bg-primary p-6 rounded-xxl shadow-xl text-white hidden lg:block max-w-xs">
+<p class="font-bold text-lg">Estratégia com Foco em Resultado</p>
+<p class="text-white/80 text-sm mt-2">Visão ampla para decisões cirúrgicas no mercado de São Paulo.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Step 01: Diagnóstico / Essência -->
+<section class="bg-surface-container-low py-24 lg:py-32 rounded-t-[3rem] lg:rounded-t-[5rem]">
+<div class="max-w-7xl mx-auto px-8">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="order-2 lg:order-1">
+<img alt="Conhecendo a sua Essência" class="rounded-xxl shadow-xl w-full" src="https://lh3.googleusercontent.com/aida/ADBb0ui6hiJs9soKBKAIBL3_DCkRlIney90tHCaaE5ni8kEjy_GXpvEdvp4ecvpo3NP1A0k5hju7lQcUzu_juX-6N5B0DVKrd6yZpoIw9WWMieOvbuITDiqP0UVUnEyRnYlliKBNmW8o4S8mwSnqmMZIXxXAd4BnHyXLGyuypsB_ZhDZy5K6d5S5mcrUyNLeZHO5PXtHF7ldlRaZwV7ZyowC7TJ-hXy82tLMRtSdUgwzLU0EM1pLGoJxttwxniP6D89h48Ku2edu-4In"/>
+</div>
+<div class="order-1 lg:order-2">
+<span class="step-tag mb-6 inline-block">Passo 01 — Diagnóstico</span>
+<h2 class="text-4xl lg:text-5xl font-headline font-bold text-on-surface mb-4">Conhecendo a Sua Essência</h2>
+<p class="text-xl text-primary font-medium mb-8">Branding e DNA: O Coração da Estratégia</p>
+<div class="space-y-6">
+<div class="p-5 bg-white rounded-xl shadow-sm border-l-4 border-primary">
+<p class="text-on-surface">Identificamos o que torna o seu negócio único e inimitável.</p>
+</div>
+<div class="p-5 bg-white rounded-xl shadow-sm border-l-4 border-primary">
+<p class="text-on-surface">Uma marca forte não compete por preço — ela compete por conexão emocional.</p>
+</div>
+<div class="p-5 bg-white rounded-xl shadow-sm border-l-4 border-primary">
+<p class="text-on-surface">Criamos um universo visual e verbal reconhecível pelo seu público.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Step 02: Inteligência de Mercado (SWOT) -->
+<section class="py-24 lg:py-32 bg-surface">
+<div class="max-w-7xl mx-auto px-8">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<span class="step-tag mb-6 inline-block">Passo 02 — Inteligência de Mercado</span>
+<h2 class="text-4xl lg:text-5xl font-headline font-bold text-on-surface mb-6">Entendendo o Campo de Jogo</h2>
+<p class="text-lg text-on-surface-variant">Análise de Mercado e Público para criar vantagem real.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+<div class="space-y-8">
+<div class="flex gap-6">
+<div class="w-12 h-12 rounded-lg bg-primary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary">analytics</span>
+</div>
+<div>
+<h3 class="text-xl font-bold mb-2">Análise SWOT</h3>
+<p class="text-on-surface-variant">Identificamos suas forças e as brechas dos concorrentes para criar vantagem real.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="w-12 h-12 rounded-lg bg-primary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary">groups</span>
+</div>
+<div>
+<h3 class="text-xl font-bold mb-2">Pesquisa de Público</h3>
+<p class="text-on-surface-variant">Entendemos quem é a sua persona para não desperdiçar tempo nem investimento.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="w-12 h-12 rounded-lg bg-primary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary">ads_click</span>
+</div>
+<div>
+<h3 class="text-xl font-bold mb-2">Posicionamento</h3>
+<p class="text-on-surface-variant">Definimos como você quer ser percebido e lembrado na mente do seu cliente.</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-high p-8 rounded-xxl shadow-inner border border-outline-variant">
+<img alt="SWOT Analysis Grid" class="rounded-xl w-full shadow-lg" src="https://lh3.googleusercontent.com/aida/ADBb0uh3N2HolRbAHY4HK0wKDovTzF_UNBxXoep2jebX7PYkRkyQWPcMRQcNXpBFfN3n7WRUN5Pfhmko9ofSdMX2wYY6ujHlRHmBiieawdwRvAGL61C15mSpn3M14tFlJbAFpAX5f2RUd71ly8yc_r6g_0y_Fu3JdV3E66RPPIso8XLIv-zsq3HyBWEj2VutImJAd2s5yE5IyQOETGsPYtaqfOoryv6ZLsTwn-SGHi68kTjyz44jCdV0kq6fYdnj5WEBS0U-nNA8kQmy"/>
+</div>
+</div>
+</div>
+</section>
+<!-- The Ecosystem: Ecossistema que Faz o Seu Negócio Vender -->
+<section class="dark-section py-24 lg:py-32 rounded-[3rem] lg:rounded-[5rem] mx-4 lg:mx-8">
+<div class="max-w-7xl mx-auto px-8">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+<div class="lg:col-span-5">
+<span class="text-primary-fixed text-xs font-bold uppercase tracking-widest mb-4 block">Marketing Panorâmico</span>
+<h2 class="text-4xl lg:text-5xl font-headline font-bold text-white mb-8">O Ecossistema que Faz o Seu Negócio Vender</h2>
+<p class="text-white/70 text-lg mb-8 leading-relaxed">
+                        Não trabalhamos com peças isoladas. Nossa metodologia integra todos os pontos de contato para garantir uma jornada de compra sem fricção.
+                    </p>
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-3 text-white/90">
+<span class="material-symbols-outlined text-primary-fixed">check_circle</span>
+<span>Estratégia completa de Tráfego Pago</span>
+</div>
+<div class="flex items-center gap-3 text-white/90">
+<span class="material-symbols-outlined text-primary-fixed">check_circle</span>
+<span>Gestão de Redes Sociais e Canais Digitais</span>
+</div>
+<div class="flex items-center gap-3 text-white/90">
+<span class="material-symbols-outlined text-primary-fixed">check_circle</span>
+<span>Integração com o Mundo Físico e Experiência</span>
+</div>
+</div>
+</div>
+<div class="lg:col-span-7">
+<img alt="Serviços e Ecossistema" class="rounded-xxl shadow-2xl w-full" src="https://lh3.googleusercontent.com/aida/ADBb0ug7FuQp1Mo8ikdBO2k1a9GThz5QeFsfUN4ZPyCas0yIWR9WcQvIzkSlVr7cQtSaQ9o6LShCR4yD2HxtOrufmUyjJ-aIXV1H085GGKIVaeBDnwC6h-LrvcoecMrcgsGygTZYRlKy8IhRGNM-mfAeQIspNZjXvKXd5aAL0Tf-LTTyePnNi7evUpYZmPZ1w0lzDW8RhJ4Yhv59zsXlHakbXVBbZfONjh-5Ipas33gCpSfb6TJ8Hx8Fr28d1D6MB-NdjOMLhw2afTh5"/>
+</div>
+</div>
+</div>
+</section>
+<!-- The Challenge: O Desafio do Empreendedor -->
+<section class="py-24 lg:py-32 bg-surface">
+<div class="max-w-7xl mx-auto px-8">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="relative">
+<img alt="O Desafio do Empreendedor" class="rounded-xxl shadow-xl w-full" src="https://lh3.googleusercontent.com/aida/ADBb0ugr-CWgQO8AMWqGjkAvE3wE3zSsHerdDKPe8jOX3z1igUGTLmK1_KBLFNnmG8TdtSnV1GxSisB0ukV53YiaOb5RiMIJ9e7wmkZEc7XlMCRJCgG8EDXFO1W6wR1KrHV-H7NA6wxQtvmkG96nyOfpmob8vePG0rdT7CvJJcbqTMwKmeniU05v7v6XTkrKieLpaXI4UbbNrSeW__uKcscAR9F9V3gUWsFMKuxVfyABZ3-so2nLqIDWp1rChkzE3wdxljTQJIJi93Y"/>
+</div>
+<div>
+<span class="step-tag mb-6 inline-block">O Ponto de Partida</span>
+<h2 class="text-4xl font-headline font-bold text-on-surface mb-6">O Desafio do Empreendedor</h2>
+<p class="text-xl text-on-surface-variant italic mb-10">Onde Está o Foco do Seu Negócio?</p>
+<div class="space-y-6">
+<div class="flex gap-4 items-start">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-surface-variant">settings</span>
+</div>
+<p class="text-on-surface">Muitas empresas ficam presas apenas na operação — postar por postar, sem estratégia.</p>
+</div>
+<div class="flex gap-4 items-start">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary">trending_up</span>
+</div>
+<p class="text-on-surface font-semibold">A verdadeira virada acontece quando você passa da execução para a Estratégia.</p>
+</div>
+<div class="flex gap-4 items-start">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-surface-variant">insights</span>
+</div>
+<p class="text-on-surface">Decisões informadas hoje constroem o lucro e a autoridade de amanhã.</p>
+</div>
+</div>
+<div class="mt-12 p-8 bg-primary rounded-xxl text-white">
+<p class="text-2xl font-headline font-bold mb-2">Da Operação à Estratégia</p>
+<p class="opacity-80">Esse é o nosso trabalho: tirar o peso operacional e focar na inteligência que escala.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="max-w-7xl mx-auto px-8 mb-24">
+<div class="editorial-gradient rounded-[3rem] p-12 lg:p-24 text-center relative overflow-hidden">
+<div class="relative z-10">
+<h2 class="text-4xl lg:text-6xl font-headline font-bold text-white mb-8 tracking-tight">Pronto para a transformação panorâmica?</h2>
+<p class="text-xl text-white/80 max-w-2xl mx-auto mb-12">
+                    Agende sua auditoria estratégica e descubra como o Método HUB pode redefinir a autoridade digital da sua marca em São Paulo.
+                </p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<button class="bg-white text-primary px-10 py-4 rounded-xxl font-bold text-lg hover:scale-105 transition-transform shadow-xl">
+                        Agendar Consultoria
+                    </button>
+<button class="border border-white/20 text-white px-10 py-4 rounded-xxl font-bold text-lg hover:bg-white/10 transition-colors">
+                        Ver Case Studies
+                    </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-slate-50 dark:bg-slate-900 rounded-t-[2rem]">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-7xl mx-auto px-8 py-16">
+<div class="flex flex-col gap-4">
+<div class="text-lg font-bold text-blue-800 dark:text-blue-200">HUB DIGITAL</div>
+<p class="text-slate-500 dark:text-slate-400 font-body text-sm leading-relaxed max-w-xs">
+                Curadoria de ecossistemas digitais de alta performance para o mercado de elite de São Paulo.
+            </p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="flex flex-col gap-2">
+<a class="text-slate-500 dark:text-slate-400 text-sm hover:text-blue-800 dark:hover:text-blue-200 transition-all" href="#">Política de Privacidade</a>
+<a class="text-slate-500 dark:text-slate-400 text-sm hover:text-blue-800 dark:hover:text-blue-200 transition-all" href="#">Termos de Uso</a>
+</div>
+<div class="flex flex-col gap-2">
+<a class="text-slate-500 dark:text-slate-400 text-sm hover:text-blue-800 dark:hover:text-blue-200 transition-all" href="#">Instagram</a>
+<a class="text-slate-500 dark:text-slate-400 text-sm hover:text-blue-800 dark:hover:text-blue-200 transition-all" href="#">LinkedIn</a>
+</div>
+</div>
+<div class="flex flex-col gap-4 text-right md:items-end">
+<div class="text-slate-500 dark:text-slate-400 font-body text-sm leading-relaxed">
+                © 2024 HUB Digital Horizon.<br/>
+                Soluções para toda São Paulo.
+            </div>
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-high text-on-surface text-[10px] font-bold uppercase tracking-widest">
+                Avenida Paulista, SP
+            </div>
+</div>
+</div>
+</footer>
+</body></html>
