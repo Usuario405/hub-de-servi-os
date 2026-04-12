@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;family=Manrope:wght@200..800&amp;family=Inter:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#d5e3ff",
+                    "inverse-on-surface": "#ebf1ff",
+                    "primary-fixed": "#d3e4ff",
+                    "on-background": "#001c3b",
+                    "on-primary-fixed": "#001c38",
+                    "error": "#ba1a1a",
+                    "surface-dim": "#c7dbff",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed-dim": "#91cdff",
+                    "secondary-fixed-dim": "#b1c7f0",
+                    "surface-tint": "#0060aa",
+                    "on-tertiary-container": "#fcfcff",
+                    "inverse-surface": "#193151",
+                    "surface": "#f9f9ff",
+                    "surface-bright": "#f9f9ff",
+                    "outline": "#717783",
+                    "on-primary-container": "#fdfcff",
+                    "primary-container": "#0576cf",
+                    "on-secondary-container": "#465c7f",
+                    "primary-fixed-dim": "#a3c9ff",
+                    "inverse-primary": "#a3c9ff",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed-variant": "#314769",
+                    "tertiary-container": "#007bb8",
+                    "tertiary-fixed": "#cce5ff",
+                    "surface-container": "#e7eeff",
+                    "surface-container-low": "#f0f3ff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "background": "#f9f9ff",
+                    "secondary": "#495f82",
+                    "error-container": "#ffdad6",
+                    "primary": "#005da6",
+                    "surface-container-high": "#dee8ff",
+                    "on-surface": "#001c3b",
+                    "on-tertiary-fixed": "#001e31",
+                    "on-tertiary-fixed-variant": "#004b72",
+                    "outline-variant": "#c0c7d4",
+                    "on-primary-fixed-variant": "#004882",
+                    "on-secondary-fixed": "#001c3b",
+                    "tertiary": "#006193",
+                    "surface-variant": "#d5e3ff",
+                    "on-primary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "secondary-container": "#bfd5fe",
+                    "surface-container-highest": "#d5e3ff",
+                    "on-surface-variant": "#414752"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "2xl": "1rem",
+                    "3xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Manrope"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface">
+<!-- Top Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-[0_40px_40px_rgba(0,28,59,0.06)]">
+<div class="flex justify-between items-center max-w-7xl mx-auto px-8 py-4">
+<div class="text-2xl font-bold tracking-tighter text-blue-800 dark:text-blue-200 font-headline uppercase">
+            HUB DIGITAL
+        </div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-blue-700 dark:text-blue-400 font-bold border-b-2 border-blue-700 transition-colors duration-300" href="#">Início</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-600 dark:hover:text-blue-300 transition-colors duration-300" href="#">Serviços</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-600 dark:hover:text-blue-300 transition-colors duration-300" href="#">Método HUB</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-600 dark:hover:text-blue-300 transition-colors duration-300" href="#">Contato</a>
+</div>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-8 py-3 rounded-xl font-bold transition-transform scale-95 active:scale-90">
+            Começar Agora
+        </button>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative pt-32 pb-24 overflow-hidden">
+<div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="relative z-10">
+<span class="inline-flex items-center px-4 py-2 rounded-full bg-secondary-container text-on-secondary-container text-xs font-bold mb-6 tracking-widest font-label">
+                SÃO PAULO DIGITAL HUB
+            </span>
+<h1 class="text-6xl md:text-7xl font-headline font-bold text-on-surface leading-[1.1] tracking-tighter mb-8">
+                Presença Digital para sua Empresa <span class="text-primary">em toda São Paulo.</span>
+</h1>
+<p class="text-xl text-on-surface-variant max-w-xl mb-12 leading-relaxed">
+                A HUB Digital Curator transforma sua marca com estratégias de alto impacto. Sem limites geográficos, apenas resultados concretos na maior metrópole da América Latina.
+            </p>
+<div class="flex flex-wrap gap-4">
+<button class="px-10 py-5 rounded-3xl bg-gradient-to-br from-primary to-primary-container text-white font-bold text-lg shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform flex items-center gap-3">
+                    Falar com Especialista
+                    <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="px-10 py-5 rounded-3xl bg-surface-container-low text-primary font-bold text-lg hover:bg-surface-container transition-colors">
+                    Ver Portfólio
+                </button>
+</div>
+</div>
+<div class="relative">
+<div class="aspect-square rounded-[3rem] overflow-hidden shadow-2xl rotate-3 bg-primary-fixed/20 relative group">
+<img class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" data-alt="stunning aerial view of São Paulo skyline at night with luminous city lights and skyscrapers in cool blue tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGfUe4BOIbaya-Zrht5_erCUO6SLAZp1WcxlB_EUjvnvjhf1AlILywDMwgFJx-WwaUXMfthABXcvIWK9XXhDZaSBRplgRkKMaL3N-kvMMjYPBmfOwSR9C4pfVQlgTIqNBcVvm_BpSx71mPWDVzra_Hq81HUkLZxAgc-1iJyE-sjPGYzTMed0qiowPttXFeg4C0PwehjmmZLoNX9feu58kl5ULhVQH9-cHOARvA20D-mJLhw_noLiIx9VJ-YM6gqixxhbwwjwC6Mg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/60 to-transparent"></div>
+<div class="absolute bottom-8 left-8 right-8 text-white">
+<div class="text-4xl font-headline font-bold mb-2">24/7</div>
+<p class="font-label uppercase tracking-widest text-sm opacity-80">Cobertura Metropolitana Total</p>
+</div>
+</div>
+<!-- Floating Decorative Elements -->
+<div class="absolute -top-12 -right-12 w-48 h-48 bg-tertiary/10 rounded-full blur-3xl"></div>
+<div class="absolute -bottom-12 -left-12 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+</div>
+</div>
+</section>
+<!-- Services Slider (Bento Carousel) -->
+<section class="py-24 bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-8 mb-16 flex justify-between items-end">
+<div>
+<h2 class="text-4xl font-headline font-bold text-on-surface mb-4">Serviços &amp; Cases de Sucesso</h2>
+<p class="text-on-surface-variant max-w-lg">Curadoria digital completa para escalar seu negócio com precisão editorial.</p>
+</div>
+<div class="flex gap-4">
+<button class="p-4 rounded-full bg-surface-container-lowest text-primary shadow-sm hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="p-4 rounded-full bg-surface-container-lowest text-primary shadow-sm hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto hide-scrollbar flex gap-8 px-8 pb-12 snap-x">
+<!-- Slide 1: Traffic -->
+<div class="min-w-[320px] md:min-w-[450px] snap-center aspect-[4/5] rounded-3xl overflow-hidden relative group bg-surface-container-lowest shadow-sm">
+<img class="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 opacity-80" data-alt="Modern office with digital data screens and graphs glowing in blue light representing traffic management analytics" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCasAk-BgbGx8rMSCdYQvH_GJ1xcCnMaLr6wEsog3ul0XyiPJ1teaZEnvH4Yug5ORlryQwDl06RJuLOUT_e18C0tcMtFNAVp2JYYCQBmSQQBeXbuuSMHWw2-cwolRoShvcKqdtmGPwOaX_ZiFVtTyyqaQoIai3SnPX1w8QpXEKWXAwzRT1kLWTKmMet5GJlIP5O5W4-ixcNyiPEtG53BQCpltWrsFe-hm2wq1pKjfE76S2P-kfBGsBWw6X4g3MCJ9RWuiHIQZAwrQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface via-on-surface/20 to-transparent"></div>
+<div class="absolute bottom-8 left-8 right-8">
+<span class="text-primary-fixed font-label text-xs font-bold uppercase tracking-[0.2em] mb-3 block">01 / Performance</span>
+<h3 class="text-3xl font-headline font-bold text-white mb-4">Gestão de Tráfego Pago</h3>
+<p class="text-white/70 text-sm mb-6">Maximizando ROI em toda a região metropolitana de SP.</p>
+<button class="text-white flex items-center gap-2 font-bold group-hover:gap-4 transition-all">
+                    Detalhes <span class="material-symbols-outlined text-sm">north_east</span>
+</button>
+</div>
+</div>
+<!-- Slide 2: Social Media -->
+<div class="min-w-[320px] md:min-w-[450px] snap-center aspect-[4/5] rounded-3xl overflow-hidden relative group bg-surface-container-lowest shadow-sm">
+<img class="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 opacity-80" data-alt="Clean minimalist shot of a smartphone with colorful social media app icons on a desk with a plant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAa5o0eO2luqBpWRHuWE9yWgtmJztH52UInBPGVstIPlnvFMAplW7zNyRFLi1ZQPxvIQFMuUl28V_58154zj0yp6p0xaHlsxKhZfcNS_oeQ2JQfd2CgAPYD51iteIGsoAB2gy_0UnQ9IGVwYBv26Vlj95Wc9EYxAgrEc9zK1u6QDgn1CuKPQkTm9TQqAJLXVsmbxocM_uElfzYTq6fIR2NGyHMK9WbE22JQnYIAUdWRTf80R9NTlYy3_IjAs89Ov4OxQ3DiyScnzw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface via-on-surface/20 to-transparent"></div>
+<div class="absolute bottom-8 left-8 right-8">
+<span class="text-primary-fixed font-label text-xs font-bold uppercase tracking-[0.2em] mb-3 block">02 / Conteúdo</span>
+<h3 class="text-3xl font-headline font-bold text-white mb-4">Autoridade em Redes Sociais</h3>
+<p class="text-white/70 text-sm mb-6">Narrativas visuais que conectam marcas a paulistanos.</p>
+<button class="text-white flex items-center gap-2 font-bold group-hover:gap-4 transition-all">
+                    Detalhes <span class="material-symbols-outlined text-sm">north_east</span>
+</button>
+</div>
+</div>
+<!-- Slide 3: Web Dev -->
+<div class="min-w-[320px] md:min-w-[450px] snap-center aspect-[4/5] rounded-3xl overflow-hidden relative group bg-surface-container-lowest shadow-sm">
+<img class="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 opacity-80" data-alt="Close up of high-end laptop display showing beautiful modern website user interface design with sleek typography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxbbhbi52d7NPs0Z2mDp8XVmBV5z2_NBQgY7rB06eT7ThWAG3jJ3iMn8oRsJNtWUghUeQbiIXE1QzEnoZryCqeOnbb1i4IhBATI4V0JQ8dZBzGMTJwMOAX6Gz34TlbhtYIO89frP1e3qCzJLbWA6o3u9jMwnQon9PmnWcXI7XAHjpjFWcYwf2tneEam2b1BikAqKnrxeHcddOePRDCviO-34RzEgg23k8jYhd6-XCrtTMCLRgBLbbr4HX8gAGSLZefZM45V5Otew"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface via-on-surface/20 to-transparent"></div>
+<div class="absolute bottom-8 left-8 right-8">
+<span class="text-primary-fixed font-label text-xs font-bold uppercase tracking-[0.2em] mb-3 block">03 / Plataforma</span>
+<h3 class="text-3xl font-headline font-bold text-white mb-4">Desenvolvimento Web</h3>
+<p class="text-white/70 text-sm mb-6">Sites que funcionam como verdadeiras filiais digitais.</p>
+<button class="text-white flex items-center gap-2 font-bold group-hover:gap-4 transition-all">
+                    Detalhes <span class="material-symbols-outlined text-sm">north_east</span>
+</button>
+</div>
+</div>
+<!-- More Slides -->
+<div class="min-w-[320px] md:min-w-[450px] snap-center aspect-[4/5] rounded-3xl overflow-hidden relative group bg-surface-container-lowest shadow-sm flex items-center justify-center border-2 border-dashed border-outline-variant">
+<div class="text-center p-8">
+<span class="material-symbols-outlined text-5xl text-primary mb-4">more_horiz</span>
+<h3 class="text-xl font-headline font-bold text-on-surface">Explore mais +6 Cases de Serviços</h3>
+<p class="text-on-surface-variant text-sm mt-2">SEO, Branding, CRM e muito mais.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Detailed Services Overview (Asymmetric) -->
+<section class="py-32 bg-surface">
+<div class="max-w-7xl mx-auto px-8">
+<div class="flex flex-col lg:flex-row gap-16 mb-24">
+<div class="lg:w-1/3">
+<h2 class="text-5xl font-headline font-bold text-on-surface sticky top-32">Nossa Curadoria de Serviços.</h2>
+</div>
+<div class="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-24">
+<!-- Service 1 -->
+<div class="group">
+<div class="w-16 h-16 rounded-2xl bg-primary-fixed flex items-center justify-center mb-8 group-hover:rotate-6 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl">ads_click</span>
+</div>
+<h4 class="text-2xl font-headline font-bold mb-4">Google &amp; Meta Ads</h4>
+<p class="text-on-surface-variant leading-relaxed mb-6">Campanhas segmentadas por distritos, garantindo que sua mensagem chegue a quem realmente importa em São Paulo.</p>
+<span class="text-xs font-bold text-primary font-label uppercase tracking-widest">Estratégia Premium</span>
+</div>
+<!-- Service 2 -->
+<div class="group">
+<div class="w-16 h-16 rounded-2xl bg-tertiary-fixed flex items-center justify-center mb-8 group-hover:rotate-6 transition-transform">
+<span class="material-symbols-outlined text-tertiary text-3xl">brush</span>
+</div>
+<h4 class="text-2xl font-headline font-bold mb-4">Identidade Visual</h4>
+<p class="text-on-surface-variant leading-relaxed mb-6">Design que transmite a autoridade e a sofisticação necessárias para se destacar no mercado corporativo paulistano.</p>
+<span class="text-xs font-bold text-tertiary font-label uppercase tracking-widest">Design Visual</span>
+</div>
+<!-- Service 3 -->
+<div class="group">
+<div class="w-16 h-16 rounded-2xl bg-secondary-fixed flex items-center justify-center mb-8 group-hover:rotate-6 transition-transform">
+<span class="material-symbols-outlined text-secondary text-3xl">trending_up</span>
+</div>
+<h4 class="text-2xl font-headline font-bold mb-4">Inbound Marketing</h4>
+<p class="text-on-surface-variant leading-relaxed mb-6">Atração e conversão de leads qualificados através de conteúdo estratégico e automação inteligente.</p>
+<span class="text-xs font-bold text-secondary font-label uppercase tracking-widest">Motor de Crescimento</span>
+</div>
+<!-- Service 4 -->
+<div class="group">
+<div class="w-16 h-16 rounded-2xl bg-outline-variant/30 flex items-center justify-center mb-8 group-hover:rotate-6 transition-transform">
+<span class="material-symbols-outlined text-on-surface text-3xl">hub</span>
+</div>
+<h4 class="text-2xl font-headline font-bold mb-4">SEO Local São Paulo</h4>
+<p class="text-on-surface-variant leading-relaxed mb-6">Otimização completa para que sua empresa domine as buscas em todos os bairros e zonas da capital.</p>
+<span class="text-xs font-bold text-on-surface font-label uppercase tracking-widest">SEO Metropolitano</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Highlight: São Paulo Presence -->
+<section class="py-24 bg-on-surface text-white rounded-t-[4rem] overflow-hidden">
+<div class="max-w-7xl mx-auto px-8 relative">
+<div class="absolute -top-24 -right-24 w-96 h-96 bg-primary opacity-20 blur-[120px]"></div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div>
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 mb-8 font-label text-sm uppercase tracking-widest">
+<span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                    Disponibilidade Imediata
+                </div>
+<h2 class="text-5xl md:text-6xl font-headline font-bold mb-8 leading-tight">Atendimento em toda <span class="text-primary-fixed">São Paulo.</span></h2>
+<p class="text-xl text-white/70 mb-12 leading-relaxed">
+                    Esqueça as limitações de bairro. Nossa estrutura digital permite uma cobertura completa da Zona Sul à Zona Norte, da Leste à Oeste. Onde houver oportunidade, a HUB estará lá com você.
+                </p>
+<div class="grid grid-cols-2 gap-8 border-t border-white/10 pt-12">
+<div>
+<div class="text-4xl font-headline font-bold mb-2">100%</div>
+<p class="text-white/50 text-sm font-label uppercase tracking-wider">Cobertura na Capital</p>
+</div>
+<div>
+<div class="text-4xl font-headline font-bold mb-2">24h</div>
+<p class="text-white/50 text-sm font-label uppercase tracking-wider">Suporte Digital</p>
+</div>
+</div>
+</div>
+<div class="relative h-[500px] rounded-3xl overflow-hidden shadow-2xl">
+<img class="w-full h-full object-cover" data-alt="stylized map view of São Paulo with digital glowing nodes connecting different areas of the city" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdKRZkBqQKy-PNSVQLwfW7LG7hd-pohdWeH6lzufNSh3ps1RHBx5g9xBvGwbgq2Mm4f0YVNbluxlM_c5lgdjcxN1uEf-8Z2o6kd9fHm88qbEUWVWCEMKTabqj71pU0EWQQYKC1ts_R88pFn7tEoFL9-px4-7mD1_sJkBtnYB-Eh21TzavewRslZHgu6rwagfue5KJs5unny-dx9KdxeZv3UoGiP_-OXWvhv_Th4s7XjIjA-LYU8C5-e6XHP8t32zdFIvt0tUhDHg"/>
+<div class="absolute inset-0 bg-primary/20 mix-blend-overlay"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full rounded-t-[2rem] bg-slate-50 dark:bg-slate-900">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-7xl mx-auto px-8 py-16">
+<div class="space-y-6">
+<div class="text-lg font-bold text-blue-800 dark:text-blue-200 uppercase tracking-tighter">HUB DIGITAL</div>
+<p class="text-slate-500 dark:text-slate-400 font-body text-sm leading-relaxed">
+                Especialistas em curadoria digital e estratégias de crescimento para empresas que buscam autoridade no mercado de São Paulo.
+            </p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center hover:text-blue-700 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">share</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center hover:text-blue-700 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">podcasts</span>
+</a>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-8">
+<div>
+<h5 class="font-headline font-bold text-on-surface mb-6">Navegação</h5>
+<ul class="space-y-4 text-sm text-slate-500">
+<li><a class="hover:text-blue-800 transition-all" href="#">Início</a></li>
+<li><a class="hover:text-blue-800 transition-all" href="#">Serviços</a></li>
+<li><a class="hover:text-blue-800 transition-all" href="#">Método HUB</a></li>
+<li><a class="hover:text-blue-800 transition-all" href="#">Contato</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-headline font-bold text-on-surface mb-6">Jurídico</h5>
+<ul class="space-y-4 text-sm text-slate-500">
+<li><a class="hover:text-blue-800 transition-all" href="#">Política de Privacidade</a></li>
+<li><a class="hover:text-blue-800 transition-all" href="#">Termos de Uso</a></li>
+</ul>
+</div>
+</div>
+<div class="bg-primary-container p-8 rounded-3xl text-white">
+<h5 class="font-headline font-bold text-xl mb-4">Pronto para começar?</h5>
+<p class="text-white/80 text-sm mb-8 leading-relaxed">Agende uma consultoria gratuita agora e transforme sua presença digital.</p>
+<a class="w-full inline-flex items-center justify-center gap-3 bg-white text-primary py-4 rounded-2xl font-bold hover:scale-[1.02] transition-transform shadow-lg" href="https://wa.me/yournumber">
+<span class="material-symbols-outlined">chat</span>
+                WhatsApp HUB
+            </a>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-8 py-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:row justify-between items-center gap-4 text-slate-500 text-xs">
+<p>© 2024 HUB Digital Curator. Soluções para toda São Paulo.</p>
+<div class="flex gap-8">
+<a class="hover:text-blue-800 transition-all" href="#">Instagram</a>
+<a class="hover:text-blue-800 transition-all" href="#">LinkedIn</a>
+</div>
+</div>
+</footer>
+<!-- Fixed Floating WhatsApp -->
+<a class="fixed bottom-8 right-8 z-50 bg-[#25D366] text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform" href="https://wa.me/yournumber">
+<svg class="w-8 h-8 fill-current" viewbox="0 0 24 24">
+<path d="M12.031 6.172c-2.32 0-4.518.892-6.193 2.512-3.418 3.3-3.418 8.666 0 11.967 1.133 1.096 2.525 1.842 4.022 2.152l.245.051.107 1.413 1.821-1.127.185-.114.283.041c.493.072.993.108 1.492.108 2.32 0 4.519-.892 6.194-2.512 3.418-3.3 3.418-8.666 0-11.967-1.675-1.62-3.874-2.512-6.157-2.512zm0-2.172c2.901 0 5.8 1.11 8.016 3.33 4.432 4.43 4.432 11.61 0 16.04-2.216 2.22-5.115 3.33-8.016 3.33-.82 0-1.644-.09-2.453-.27l-4.57 2.827-.271-3.567c-1.896-.51-3.642-1.55-5.066-3.01-4.432-4.43-4.432-11.61 0-16.04 2.216-2.22 5.115-3.33 8.016-3.33z"></path>
+</svg>
+</a>
+</body></html>
