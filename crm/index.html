@@ -143,10 +143,44 @@
         <h2 style="font-family:Syne; margin-bottom:20px">Novo Negócio</h2>
         <input id="new-name" class="form-input" placeholder="Nome do Cliente">
         <input id="new-val" type="number" class="form-input" placeholder="Valor (R$)">
-        <input id="new-svc" class="form-input" placeholder="Serviço (ex: Meta Ads)">
+        
+        <select id="new-svc" class="form-input" style="background: var(--bg); color: #fff;">
+            <option value="">Selecione o Serviço...</option>
+            <option value="Gestão de Tráfego">Gestão de Tráfego</option>
+            <option value="Clínica de Redes Sociais">Clínica de Redes Sociais</option>
+            <option value="Identidade Visual">Identidade Visual</option>
+            <option value="Landing Page">Landing Page</option>
+            <option value="Consultoria Digital">Consultoria Digital</option>
+        </select>
+
         <input id="new-phone" class="form-input" placeholder="WhatsApp (5511...)">
         <button class="btn-primary" onclick="saveLead()">CADASTRAR</button>
         <button onclick="closeM('modal-new')" style="background:none; border:none; color:var(--text2); width:100%; margin-top:10px; cursor:pointer">Cancelar</button>
+    </div>
+</div>
+
+<div class="overlay" id="modal-edit">
+    <div class="modal">
+        <h2 style="font-family:Syne; margin-bottom:20px">Editar Negócio</h2>
+        <input id="edit-id" type="hidden"> <input id="edit-name" class="form-input" placeholder="Nome do Cliente">
+        <input id="edit-val" type="number" class="form-input" placeholder="Valor (R$)">
+        
+        <select id="edit-svc" class="form-input" style="background: var(--bg); color: #fff;">
+            <option value="">Selecione o Serviço...</option>
+            <option value="Gestão de Tráfego">Gestão de Tráfego</option>
+            <option value="Clínica de Redes Sociais">Clínica de Redes Sociais</option>
+            <option value="Identidade Visual">Identidade Visual</option>
+            <option value="Landing Page">Landing Page</option>
+            <option value="Consultoria Digital">Consultoria Digital</option>
+        </select>
+
+        <input id="edit-phone" class="form-input" placeholder="WhatsApp (5511...)">
+        
+        <button class="btn-primary" onclick="updateLead()">SALVAR ALTERAÇÕES</button>
+        
+        <button class="btn-primary" style="background: var(--perdido); margin-top: 10px; color: white;" onclick="deleteLead()">EXCLUIR LEAD</button>
+        
+        <button onclick="closeM('modal-edit')" style="background:none; border:none; color:var(--text2); width:100%; margin-top:10px; cursor:pointer">Cancelar</button>
     </div>
 </div>
 
