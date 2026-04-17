@@ -1,301 +1,394 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Sobre | HUB DIGITAL</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Serviços | HUB DIGITAL</title>
+<meta name="description" content="Conheça todos os serviços da HUB Digital Curator: impressos, design, identidade visual, tráfego pago, criação de sites e muito mais para São Paulo."/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&family=Manrope:wght@200;300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
-        tailwind.config = {
-          darkMode: "class",
-          theme: {
-            extend: {
-              "colors": {
-                      "on-primary-fixed": "#001c38",
-                      "error-container": "#ffdad6",
-                      "surface-variant": "#d5e3ff",
-                      "on-secondary-container": "#465c7f",
-                      "on-surface-variant": "#414753",
-                      "on-primary": "#ffffff",
-                      "primary-fixed-dim": "#a3c9ff",
-                      "on-error": "#ffffff",
-                      "on-tertiary-container": "#fcfcff",
-                      "on-background": "#001c3b",
-                      "secondary-container": "#bfd5fe",
-                      "surface-dim": "#c7dbff",
-                      "surface-container-highest": "#d5e3ff",
-                      "primary": "#005da6",
-                      "on-secondary-fixed-variant": "#314769",
-                      "inverse-primary": "#a3c9ff",
-                      "on-secondary-fixed": "#001c3b",
-                      "background": "#f9f9ff",
-                      "on-tertiary-fixed": "#001e31",
-                      "tertiary-fixed": "#cce5ff",
-                      "surface": "#f9f9ff",
-                      "outline": "#717783",
-                      "error": "#ba1a1a",
-                      "on-error-container": "#93000a",
-                      "on-tertiary": "#ffffff",
-                      "primary-container": "#0576cf",
-                      "primary-fixed": "#d3e4ff",
-                      "surface-container-lowest": "#ffffff",
-                      "tertiary": "#006193",
-                      "on-secondary": "#ffffff",
-                      "secondary-fixed-dim": "#b1c7f0",
-                      "outline-variant": "#c0c7d4",
-                      "tertiary-fixed-dim": "#91cdff",
-                      "on-tertiary-fixed-variant": "#004b72",
-                      "surface-container-low": "#f0f3ff",
-                      "on-primary-fixed-variant": "#004882",
-                      "surface-tint": "#0060aa",
-                      "inverse-surface": "#193151",
-                      "surface-container": "#e7eeff",
-                      "on-surface": "#001c3b",
-                      "on-primary-container": "#fdfcff",
-                      "surface-bright": "#f9f9ff",
-                      "inverse-on-surface": "#ebf1ff",
-                      "secondary": "#495f82",
-                      "secondary-fixed": "#d5e3ff",
-                      "surface-container-high": "#dee8ff",
-                      "tertiary-container": "#007bb8"
-              },
-              "borderRadius": {
-                      "DEFAULT": "0.25rem",
-                      "lg": "0.5rem",
-                      "xl": "0.75rem",
-                      "full": "9999px"
-              },
-              "fontFamily": {
-                      "headline": ["Space Grotesk"],
-                      "body": ["Manrope"],
-                      "label": ["Inter"]
-              }
-            },
-          },
-        }
-    </script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "secondary-fixed": "#d5e3ff", "inverse-on-surface": "#ebf1ff",
+          "primary-fixed": "#d3e4ff", "on-background": "#001c3b",
+          "on-primary-fixed": "#001c38", "error": "#ba1a1a",
+          "surface-dim": "#c7dbff", "on-error-container": "#93000a",
+          "tertiary-fixed-dim": "#91cdff", "secondary-fixed-dim": "#b1c7f0",
+          "surface-tint": "#0060aa", "on-tertiary-container": "#fcfcff",
+          "inverse-surface": "#193151", "surface": "#f9f9ff",
+          "surface-bright": "#f9f9ff", "outline": "#717783",
+          "on-primary-container": "#fdfcff", "primary-container": "#0576cf",
+          "on-secondary-container": "#465c7f", "primary-fixed-dim": "#a3c9ff",
+          "inverse-primary": "#a3c9ff", "on-secondary": "#ffffff",
+          "on-secondary-fixed-variant": "#314769", "tertiary-container": "#007bb8",
+          "tertiary-fixed": "#cce5ff", "surface-container": "#e7eeff",
+          "surface-container-low": "#f0f3ff", "surface-container-lowest": "#ffffff",
+          "on-tertiary": "#ffffff", "background": "#f9f9ff",
+          "secondary": "#495f82", "error-container": "#ffdad6",
+          "primary": "#005da6", "surface-container-high": "#dee8ff",
+          "on-surface": "#001c3b", "on-tertiary-fixed": "#001e31",
+          "on-tertiary-fixed-variant": "#004b72", "outline-variant": "#c0c7d4",
+          "on-primary-fixed-variant": "#004882", "on-secondary-fixed": "#001c3b",
+          "tertiary": "#006193", "surface-variant": "#d5e3ff",
+          "on-primary": "#ffffff", "on-error": "#ffffff",
+          "secondary-container": "#bfd5fe", "surface-container-highest": "#d5e3ff",
+          "on-surface-variant": "#414752"
+        },
+        borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", "2xl": "1rem", "3xl": "1.5rem", full: "9999px" },
+        fontFamily: { headline: ["Space Grotesk"], body: ["Manrope"], label: ["Inter"] }
+      }
+    }
+  }
+</script>
 <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        body { font-family: 'Manrope', sans-serif; }
-        h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
-    </style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  #mobile-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: white; box-shadow: 0 20px 40px rgba(0,28,59,0.10); border-top: 1px solid #e2e8f0; z-index: 100; }
+  #mobile-menu.open { display: flex; }
+  #mobile-menu a { padding: 16px 24px; font-weight: 500; color: #475569; font-family: 'Inter', sans-serif; font-size: 15px; border-bottom: 1px solid #f1f5f9; transition: background 0.2s; }
+  #mobile-menu a:hover { background: #f8fafc; color: #1e40af; }
+  #mobile-menu a:last-child { border-bottom: none; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  .fade-up   { animation: fadeUp 0.7s ease both; }
+  .fade-up-2 { animation: fadeUp 0.7s 0.15s ease both; }
+  .fade-up-3 { animation: fadeUp 0.7s 0.3s ease both; }
+</style>
 </head>
-<body class="bg-surface text-on-surface antialiased">
+<body class="bg-surface font-body text-on-surface">
 
-<!-- ✅ TopNavBar — estrutura corrigida, botão dentro do nav -->
-<nav class="w-full sticky top-0 z-50 bg-white/80 backdrop-blur-xl shadow-[0_40px_40px_rgba(0,28,59,0.06)]">
-  <div class="flex justify-between items-center w-full px-8 py-4 max-w-7xl mx-auto">
-
-    <!-- Logo -->
-    <a href="index.html" class="text-2xl font-black text-blue-900 tracking-tighter">HUB DIGITAL</a>
-
-    <!-- Links Desktop -->
+<!-- NAV -->
+<nav class="w-full sticky top-0 z-50 bg-white/90 backdrop-blur-xl shadow-[0_4px_40px_rgba(0,28,59,0.07)] relative">
+  <div class="flex justify-between items-center w-full px-6 md:px-8 py-4 max-w-7xl mx-auto">
+    <a href="index.html" class="text-2xl font-black text-blue-900 tracking-tighter font-headline">HUB DIGITAL</a>
     <div class="hidden md:flex gap-8 items-center">
-      <a href="index.html"    class="text-slate-600 font-medium hover:text-blue-600 transition-colors duration-300">Início</a>
-      <a href="servicos.html" class="text-slate-600 font-medium hover:text-blue-600 transition-colors duration-300">Serviços</a>
-      <a href="metodo.html"   class="text-slate-600 font-medium hover:text-blue-600 transition-colors duration-300">Método HUB</a>
-      <!-- Página atual: Sobre — link destacado -->
-      <a href="sobre.html"    class="text-blue-700 border-b-2 border-blue-700 pb-1 font-bold tracking-tight">Sobre</a>
-      <a href="contato.html"  class="text-slate-600 font-medium hover:text-blue-600 transition-colors duration-300">Contato</a>
+      <a href="index.html"    class="text-slate-600 font-medium hover:text-blue-600 transition-colors font-label text-sm">Início</a>
+      <a href="servicos.html" class="text-blue-700 border-b-2 border-blue-700 pb-0.5 font-bold font-label text-sm">Serviços</a>
+      <a href="metodo.html"   class="text-slate-600 font-medium hover:text-blue-600 transition-colors font-label text-sm">Método HUB</a>
+      <a href="index.html#planos" class="text-slate-600 font-medium hover:text-blue-600 transition-colors font-label text-sm">Planos</a>
+      <a href="sobre.html"    class="text-slate-600 font-medium hover:text-blue-600 transition-colors font-label text-sm">Sobre</a>
+      <a href="contato.html"  class="text-slate-600 font-medium hover:text-blue-600 transition-colors font-label text-sm">Contato</a>
+      <a href="https://hubservicodigital.com.br/crm/" class="flex items-center gap-2 text-slate-500 font-medium border border-slate-200 px-4 py-2 rounded-lg hover:bg-slate-50 transition-all text-sm font-label">
+        <span class="material-symbols-outlined" style="font-size:18px;">admin_panel_settings</span>Login Admin
+      </a>
     </div>
-
-    <!-- ✅ Botão Orçamento dentro do nav -->
-    <a href="orcamento.html"
-       class="bg-gradient-to-br from-primary to-primary-container text-white px-8 py-3 rounded-xl font-bold font-headline transition-transform scale-95 active:opacity-80 shadow-lg shadow-primary/20">
-      Orçamento
-    </a>
-
+    <div class="flex items-center gap-3">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdWKYXu30_4jYYQ_xXAV6XlnwPNNtrnmYZ8px_PX2SxrrYoBg/viewform" target="_blank"
+         class="bg-gradient-to-br from-primary to-primary-container text-white px-6 py-3 rounded-xl font-bold font-headline text-sm hover:scale-[1.03] transition-transform shadow-lg shadow-primary/20">
+        Orçamento
+      </a>
+      <button id="menu-btn" class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-slate-100 transition-colors" aria-label="Abrir menu" aria-expanded="false">
+        <span class="material-symbols-outlined text-slate-700">menu</span>
+      </button>
+    </div>
+  </div>
+  <div id="mobile-menu" role="navigation" aria-label="Menu mobile">
+    <a href="index.html">Início</a>
+    <a href="servicos.html">Serviços</a>
+    <a href="metodo.html">Método HUB</a>
+    <a href="index.html#planos">Planos & Preços</a>
+    <a href="sobre.html">Sobre</a>
+    <a href="contato.html">Contato</a>
+    <a href="https://hubservicodigital.com.br/crm/">Login Administrativo</a>
+    <a href="https://api.whatsapp.com/send?phone=5511939180038" target="_blank" class="text-green-700 font-bold">WhatsApp HUB</a>
   </div>
 </nav>
 
-<main class="max-w-7xl mx-auto px-8 py-16">
+<main>
 
-  <!-- Header Section -->
-  <header class="mb-20 text-left">
-    <div class="inline-flex items-center px-4 py-1.5 rounded-full bg-secondary-container text-on-secondary-container text-xs font-bold mb-6 tracking-wider uppercase">
-      Atendimento em toda São Paulo
+  <!-- HERO -->
+  <section class="relative px-6 md:px-8 pt-20 pb-16 overflow-hidden">
+    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/3 translate-x-1/4 pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto">
+      <div class="inline-flex items-center px-4 py-2 rounded-full bg-secondary-container text-on-secondary-container text-xs font-bold mb-8 tracking-widest uppercase font-label fade-up">
+        Atendimento em toda São Paulo
+      </div>
+      <h1 class="fade-up-2 text-6xl md:text-7xl font-black text-on-surface tracking-tighter leading-[1.1] max-w-3xl mb-8 font-headline">
+        Soluções Digitais <br/><span class="text-primary">Curadas para o seu Sucesso.</span>
+      </h1>
+      <p class="fade-up-3 text-lg text-on-surface-variant max-w-2xl leading-relaxed">
+        Da identidade visual à presença digital estratégica. Selecionamos os melhores processos para transformar a sua marca no mercado paulistano.
+      </p>
     </div>
-    <h1 class="text-6xl font-bold text-on-surface tracking-tighter leading-[1.1] max-w-3xl mb-8">
-      Soluções Digitais <br/><span class="text-primary">Curadas para o seu Sucesso.</span>
-    </h1>
-    <p class="text-lg text-on-surface-variant max-w-2xl leading-relaxed">
-      Da identidade visual à presença digital estratégica. Selecionamos os melhores processos para transformar a sua marca no mercado paulistano.
-    </p>
-  </header>
+  </section>
 
-  <!-- Category 1: Impressos -->
-  <section class="mb-24">
-    <div class="flex items-end gap-4 mb-10 border-b border-outline-variant/15 pb-4">
-      <h2 class="text-3xl font-bold tracking-tight">Impressos e Materiais</h2>
-      <span class="text-on-surface-variant/60 font-medium mb-1">Qualidade 300g Premium</span>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="group bg-surface-container-lowest p-8 rounded-xl shadow-[0_40px_40px_rgba(0,28,59,0.04)] transition-all hover:-translate-y-1">
-        <span class="material-symbols-outlined text-primary text-4xl mb-4">style</span>
-        <h3 class="text-xl font-bold mb-2">Cartão de Visita 300g</h3>
-        <p class="text-on-surface-variant text-sm leading-relaxed mb-4">Impressão offset de alta definição com acabamento fosco ou brilho.</p>
-        <div class="text-xs font-bold text-secondary uppercase tracking-widest">SÃO PAULO PRONTO</div>
+  <!-- IMPRESSOS -->
+  <section id="impressos" class="px-6 md:px-8 pb-24">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex items-end gap-4 mb-10 border-b border-outline-variant/15 pb-4">
+        <h2 class="text-3xl font-bold tracking-tight font-headline">Impressos e Materiais</h2>
+        <span class="text-on-surface-variant/60 font-medium mb-1 text-sm">Qualidade 300g Premium</span>
       </div>
-      <div class="group bg-surface-container-lowest p-8 rounded-xl shadow-[0_40px_40px_rgba(0,28,59,0.04)] transition-all hover:-translate-y-1">
-        <span class="material-symbols-outlined text-primary text-4xl mb-4">sell</span>
-        <h3 class="text-xl font-bold mb-2">Tags com Furo 300g</h3>
-        <p class="text-on-surface-variant text-sm leading-relaxed mb-4">Ideal para roupas e acessórios, com furo de precisão industrial.</p>
-        <div class="text-xs font-bold text-secondary uppercase tracking-widest">PERSONALIZÁVEL</div>
-      </div>
-      <div class="group bg-surface-container-lowest p-8 rounded-xl shadow-[0_40px_40px_rgba(0,28,59,0.04)] transition-all hover:-translate-y-1">
-        <span class="material-symbols-outlined text-primary text-4xl mb-4">favorite</span>
-        <h3 class="text-xl font-bold mb-2">Cartão de Agradecimento</h3>
-        <p class="text-on-surface-variant text-sm leading-relaxed mb-4">Crie conexões emocionais com seus clientes através do unboxing.</p>
-        <div class="text-xs font-bold text-secondary uppercase tracking-widest">EXPERIÊNCIA DO CLIENTE</div>
-      </div>
-      <div class="group bg-surface-container-lowest p-8 rounded-xl shadow-[0_40px_40px_rgba(0,28,59,0.04)] transition-all hover:-translate-y-1">
-        <span class="material-symbols-outlined text-primary text-4xl mb-4">filter_vintage</span>
-        <h3 class="text-xl font-bold mb-2">Kit Adesivos Redondos</h3>
-        <p class="text-on-surface-variant text-sm leading-relaxed mb-4">Recorte digital preciso para selar embalagens e sacolas.</p>
-        <div class="text-xs font-bold text-secondary uppercase tracking-widest">COLEÇÃO HUB</div>
-      </div>
-      <div class="group bg-surface-container-lowest p-8 rounded-xl shadow-[0_40px_40px_rgba(0,28,59,0.04)] transition-all hover:-translate-y-1">
-        <span class="material-symbols-outlined text-primary text-4xl mb-4">lock</span>
-        <h3 class="text-xl font-bold mb-2">Kit Adesivos de Lacre</h3>
-        <p class="text-on-surface-variant text-sm leading-relaxed mb-4">Segurança e profissionalismo para entregas delivery e e-commerce.</p>
-        <div class="text-xs font-bold text-secondary uppercase tracking-widest">SEGURANÇA</div>
-      </div>
-      <div class="group bg-surface-container-lowest p-8 rounded-xl shadow-[0_40px_40px_rgba(0,28,59,0.04)] transition-all hover:-translate-y-1">
-        <span class="material-symbols-outlined text-primary text-4xl mb-4">description</span>
-        <h3 class="text-xl font-bold mb-2">Folha A4 Cheia</h3>
-        <p class="text-on-surface-variant text-sm leading-relaxed mb-4">Papéis timbrados e formulários padronizados com sua identidade.</p>
-        <div class="text-xs font-bold text-secondary uppercase tracking-widest">CORPORATIVO</div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="group bg-surface-container-lowest p-8 rounded-xl shadow-[0_40px_40px_rgba(0,28,59,0.04)] transition-all hover:-translate-y-1">
+          <span class="material-symbols-outlined text-primary text-4xl mb-4 block">style</span>
+          <h3 class="text-xl font-bold mb-2 font-headline">Cartão de Visita 300g</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed mb-4">Impressão offset de alta definição com acabamento fosco ou brilho.</p>
+          <a href="https://api.whatsapp.com/send?phone=5511939180038&text=Olá! Tenho interesse em Cartão de Visita 300g." target="_blank"
+             class="text-xs font-bold text-primary uppercase tracking-widest font-label hover:underline">Solicitar orçamento</a>
+        </div>
+        <div class="group bg-surface-container-lowest p-8 rounded-xl shadow-[0_40px_40px_rgba(0,28,59,0.04)] transition-all hover:-translate-y-1">
+          <span class="material-symbols-outlined text-primary text-4xl mb-4 block">sell</span>
+          <h3 class="text-xl font-bold mb-2 font-headline">Tags com Furo 300g</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed mb-4">Ideal para roupas e acessórios, com furo de precisão industrial.</p>
+          <a href="https://api.whatsapp.com/send?phone=5511939180038&text=Olá! Tenho interesse em Tags com Furo." target="_blank"
+             class="text-xs font-bold text-primary uppercase tracking-widest font-label hover:underline">Solicitar orçamento</a>
+        </div>
+        <div class="group bg-surface-container-lowest p-8 rounded-xl shadow-[0_40px_40px_rgba(0,28,59,0.04)] transition-all hover:-translate-y-1">
+          <span class="material-symbols-outlined text-primary text-4xl mb-4 block">favorite</span>
+          <h3 class="text-xl font-bold mb-2 font-headline">Cartão de Agradecimento</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed mb-4">Crie conexões emocionais com seus clientes através do unboxing.</p>
+          <a href="https://api.whatsapp.com/send?phone=5511939180038&text=Olá! Tenho interesse em Cartão de Agradecimento." target="_blank"
+             class="text-xs font-bold text-primary uppercase tracking-widest font-label hover:underline">Solicitar orçamento</a>
+        </div>
+        <div class="group bg-surface-container-lowest p-8 rounded-xl shadow-[0_40px_40px_rgba(0,28,59,0.04)] transition-all hover:-translate-y-1">
+          <span class="material-symbols-outlined text-primary text-4xl mb-4 block">filter_vintage</span>
+          <h3 class="text-xl font-bold mb-2 font-headline">Kit Adesivos Redondos</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed mb-4">Recorte digital preciso para selar embalagens e sacolas.</p>
+          <a href="https://api.whatsapp.com/send?phone=5511939180038&text=Olá! Tenho interesse em Kit Adesivos Redondos." target="_blank"
+             class="text-xs font-bold text-primary uppercase tracking-widest font-label hover:underline">Solicitar orçamento</a>
+        </div>
+        <div class="group bg-surface-container-lowest p-8 rounded-xl shadow-[0_40px_40px_rgba(0,28,59,0.04)] transition-all hover:-translate-y-1">
+          <span class="material-symbols-outlined text-primary text-4xl mb-4 block">lock</span>
+          <h3 class="text-xl font-bold mb-2 font-headline">Kit Adesivos de Lacre</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed mb-4">Segurança e profissionalismo para entregas delivery e e-commerce.</p>
+          <a href="https://api.whatsapp.com/send?phone=5511939180038&text=Olá! Tenho interesse em Adesivos de Lacre." target="_blank"
+             class="text-xs font-bold text-primary uppercase tracking-widest font-label hover:underline">Solicitar orçamento</a>
+        </div>
+        <div class="group bg-surface-container-lowest p-8 rounded-xl shadow-[0_40px_40px_rgba(0,28,59,0.04)] transition-all hover:-translate-y-1">
+          <span class="material-symbols-outlined text-primary text-4xl mb-4 block">description</span>
+          <h3 class="text-xl font-bold mb-2 font-headline">Folha A4 Cheia</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed mb-4">Papéis timbrados e formulários padronizados com sua identidade.</p>
+          <a href="https://api.whatsapp.com/send?phone=5511939180038&text=Olá! Tenho interesse em Folha A4 personalizada." target="_blank"
+             class="text-xs font-bold text-primary uppercase tracking-widest font-label hover:underline">Solicitar orçamento</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Category 2: Design e Identidade -->
-  <section class="mb-24 bg-surface-container-low -mx-8 px-8 py-20 rounded-3xl">
-    <div class="max-w-7xl mx-auto">
+  <!-- DESIGN E IDENTIDADE -->
+  <section id="design" class="bg-surface-container-low py-20">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
         <div>
-          <h2 class="text-3xl font-bold tracking-tight mb-2">Design e Identidade</h2>
+          <h2 class="text-3xl font-bold tracking-tight font-headline mb-2">Design e Identidade</h2>
           <p class="text-on-surface-variant">A base visual sólida para o seu crescimento.</p>
         </div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="bg-surface-container-lowest p-10 rounded-2xl transition-all hover:shadow-xl">
-          <span class="material-symbols-outlined text-primary-container text-5xl mb-6">draw</span>
-          <h3 class="text-2xl font-bold mb-3">Criação de Logotipo</h3>
-          <p class="text-on-surface-variant leading-relaxed">Desenvolvimento autoral focado no posicionamento estratégico da marca.</p>
+        <div class="bg-surface-container-lowest p-10 rounded-2xl transition-all hover:shadow-xl hover:-translate-y-1 duration-200">
+          <span class="material-symbols-outlined text-primary-container text-5xl mb-6 block">draw</span>
+          <h3 class="text-2xl font-bold mb-3 font-headline">Criação de Logotipo</h3>
+          <p class="text-on-surface-variant leading-relaxed mb-6">Desenvolvimento autoral focado no posicionamento estratégico da marca.</p>
+          <a href="https://api.whatsapp.com/send?phone=5511939180038&text=Olá! Tenho interesse em Criação de Logotipo." target="_blank"
+             class="text-sm font-bold text-primary font-label hover:underline">Solicitar orçamento →</a>
         </div>
-        <div class="bg-surface-container-lowest p-10 rounded-2xl transition-all hover:shadow-xl">
-          <span class="material-symbols-outlined text-primary-container text-5xl mb-6">photo_camera</span>
-          <h3 class="text-2xl font-bold mb-3">Fotografia Profissional</h3>
-          <p class="text-on-surface-variant leading-relaxed">Sessões em estúdio ou lifestyle para catálogo e redes sociais em SP.</p>
+        <div class="bg-surface-container-lowest p-10 rounded-2xl transition-all hover:shadow-xl hover:-translate-y-1 duration-200">
+          <span class="material-symbols-outlined text-primary-container text-5xl mb-6 block">photo_camera</span>
+          <h3 class="text-2xl font-bold mb-3 font-headline">Fotografia Profissional</h3>
+          <p class="text-on-surface-variant leading-relaxed mb-6">Sessões em estúdio ou lifestyle para catálogo e redes sociais em SP.</p>
+          <a href="https://api.whatsapp.com/send?phone=5511939180038&text=Olá! Tenho interesse em Fotografia Profissional." target="_blank"
+             class="text-sm font-bold text-primary font-label hover:underline">Solicitar orçamento →</a>
         </div>
-        <div class="bg-surface-container-lowest p-10 rounded-2xl transition-all hover:shadow-xl">
-          <span class="material-symbols-outlined text-primary-container text-5xl mb-6">auto_fix_high</span>
-          <h3 class="text-2xl font-bold mb-3">Ajuste de Logotipo</h3>
-          <p class="text-on-surface-variant leading-relaxed">Modernização e vetorização de identidades visuais existentes.</p>
+        <div class="bg-surface-container-lowest p-10 rounded-2xl transition-all hover:shadow-xl hover:-translate-y-1 duration-200">
+          <span class="material-symbols-outlined text-primary-container text-5xl mb-6 block">auto_fix_high</span>
+          <h3 class="text-2xl font-bold mb-3 font-headline">Ajuste de Logotipo</h3>
+          <p class="text-on-surface-variant leading-relaxed mb-6">Modernização e vetorização de identidades visuais existentes.</p>
+          <a href="https://api.whatsapp.com/send?phone=5511939180038&text=Olá! Tenho interesse em Ajuste de Logotipo." target="_blank"
+             class="text-sm font-bold text-primary font-label hover:underline">Solicitar orçamento →</a>
         </div>
         <div class="col-span-1 md:col-span-2 lg:col-span-1 grid grid-rows-2 gap-4">
-          <div class="flex items-center gap-4 bg-surface-container-lowest p-6 rounded-xl">
+          <a href="https://api.whatsapp.com/send?phone=5511939180038&text=Olá! Tenho interesse em Arte de Cartão/Tag." target="_blank"
+             class="flex items-center gap-4 bg-surface-container-lowest p-6 rounded-xl hover:bg-surface-container transition-colors">
             <span class="material-symbols-outlined text-primary">palette</span>
             <span class="font-bold">Arte de Cartão / Tag</span>
-          </div>
-          <div class="flex items-center gap-4 bg-surface-container-lowest p-6 rounded-xl">
+          </a>
+          <a href="https://api.whatsapp.com/send?phone=5511939180038&text=Olá! Tenho interesse em Arte de Adesivo/Rótulo." target="_blank"
+             class="flex items-center gap-4 bg-surface-container-lowest p-6 rounded-xl hover:bg-surface-container transition-colors">
             <span class="material-symbols-outlined text-primary">ink_highlighter</span>
             <span class="font-bold">Arte de Adesivo / Rótulo</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRESENÇA DIGITAL -->
+  <section id="trafego" class="py-24 px-6 md:px-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex items-end gap-4 mb-12">
+        <h2 class="text-3xl font-bold tracking-tight font-headline">Presença Digital e Performance</h2>
+        <div class="h-1 flex-grow bg-surface-container mb-2"></div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+
+        <!-- Destaque: Site -->
+        <div id="web" class="md:col-span-2 md:row-span-2 bg-gradient-to-br from-primary to-primary-container p-10 rounded-3xl text-white flex flex-col justify-between">
+          <span class="material-symbols-outlined text-5xl">language</span>
+          <div>
+            <h3 class="text-3xl font-bold mb-4 font-headline">Criação de Site Profissional</h3>
+            <p class="text-primary-fixed/80 leading-relaxed mb-6">Desenvolvemos Landing Pages e Institucionais otimizados para conversão e alta performance.</p>
+            <a href="https://api.whatsapp.com/send?phone=5511939180038&text=Olá! Quero saber mais sobre Criação de Site."
+               target="_blank"
+               class="inline-block bg-white text-primary px-6 py-3 rounded-xl font-bold text-sm hover:scale-105 transition-transform">
+              Solicitar proposta
+            </a>
           </div>
         </div>
+
+        <div class="md:col-span-2 bg-surface-container-lowest p-8 rounded-3xl flex items-center gap-6 shadow-[0_40px_40px_rgba(0,28,59,0.03)] hover:-translate-y-1 transition-transform duration-200">
+          <div class="bg-primary-container/10 p-4 rounded-2xl flex-shrink-0">
+            <span class="material-symbols-outlined text-primary text-3xl">ads_click</span>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold font-headline">Gestão de Tráfego Pago</h3>
+            <p class="text-sm text-on-surface-variant mb-2">Google e Meta Ads focado em ROI.</p>
+            <a href="https://api.whatsapp.com/send?phone=5511939180038&text=Olá! Quero saber sobre Gestão de Tráfego Pago." target="_blank"
+               class="text-xs font-bold text-primary font-label hover:underline">Solicitar orçamento →</a>
+          </div>
+        </div>
+
+        <div class="bg-surface-container-lowest p-8 rounded-3xl flex flex-col justify-between shadow-[0_40px_40px_rgba(0,28,59,0.03)] hover:-translate-y-1 transition-transform duration-200">
+          <span class="material-symbols-outlined text-primary text-3xl">location_on</span>
+          <div>
+            <h3 class="font-bold mt-4 font-headline">Google Meu Negócio</h3>
+            <a href="https://api.whatsapp.com/send?phone=5511939180038&text=Olá! Quero saber sobre Google Meu Negócio." target="_blank"
+               class="text-xs font-bold text-primary font-label hover:underline mt-2 block">Ver detalhes →</a>
+          </div>
+        </div>
+
+        <div class="bg-surface-container-lowest p-8 rounded-3xl flex flex-col justify-between shadow-[0_40px_40px_rgba(0,28,59,0.03)] hover:-translate-y-1 transition-transform duration-200">
+          <span class="material-symbols-outlined text-primary text-3xl">account_circle</span>
+          <div>
+            <h3 class="font-bold mt-4 font-headline">Consultoria de Perfil</h3>
+            <a href="https://api.whatsapp.com/send?phone=5511939180038&text=Olá! Quero Consultoria de Perfil Digital." target="_blank"
+               class="text-xs font-bold text-primary font-label hover:underline mt-2 block">Ver detalhes →</a>
+          </div>
+        </div>
+
+        <div class="bg-surface-container-lowest p-8 rounded-3xl shadow-[0_40px_40px_rgba(0,28,59,0.03)] hover:-translate-y-1 transition-transform duration-200">
+          <span class="material-symbols-outlined text-primary text-3xl mb-4 block">link</span>
+          <h3 class="font-bold font-headline">Cartão Digital Bio Link</h3>
+          <a href="https://api.whatsapp.com/send?phone=5511939180038&text=Olá! Quero um Cartão Digital Bio Link." target="_blank"
+             class="text-xs font-bold text-primary font-label hover:underline mt-2 block">Ver detalhes →</a>
+        </div>
+
+        <div class="bg-surface-container-lowest p-8 rounded-3xl shadow-[0_40px_40px_rgba(0,28,59,0.03)] hover:-translate-y-1 transition-transform duration-200">
+          <span class="material-symbols-outlined text-primary text-3xl mb-4 block">menu_book</span>
+          <h3 class="font-bold font-headline">Catálogo WhatsApp</h3>
+          <a href="https://api.whatsapp.com/send?phone=5511939180038&text=Olá! Quero um Catálogo para WhatsApp." target="_blank"
+             class="text-xs font-bold text-primary font-label hover:underline mt-2 block">Ver detalhes →</a>
+        </div>
+
+        <div class="md:col-span-2 bg-surface-container p-8 rounded-3xl flex justify-between items-center hover:-translate-y-1 transition-transform duration-200">
+          <div class="flex items-center gap-4">
+            <span class="material-symbols-outlined text-primary text-3xl">medical_services</span>
+            <h3 class="text-xl font-bold font-headline">Clínica de Redes Sociais</h3>
+          </div>
+          <a href="contato.html" class="text-primary font-bold text-sm hover:underline">Saber Mais</a>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- Category 3: Presença Digital -->
-  <section class="mb-24">
-    <div class="flex items-end gap-4 mb-12">
-      <h2 class="text-3xl font-bold tracking-tight">Presença Digital e Performance</h2>
-      <div class="h-1 flex-grow bg-surface-container mb-2"></div>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-      <div class="md:col-span-2 md:row-span-2 bg-gradient-to-br from-primary to-primary-container p-10 rounded-3xl text-white flex flex-col justify-between">
-        <span class="material-symbols-outlined text-5xl">language</span>
-        <div>
-          <h3 class="text-3xl font-bold mb-4">Criação de Site Profissional</h3>
-          <p class="text-primary-fixed/80 leading-relaxed mb-6">Desenvolvemos Landing Pages e Institucionais otimizados para conversão e alta performance.</p>
-          <a href="orcamento.html" class="inline-block bg-white text-primary px-6 py-2 rounded-xl font-bold text-sm">Ver Portfólio</a>
+  <!-- CTA FINAL -->
+  <section class="py-16 px-6 md:px-8 mb-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="relative overflow-hidden bg-on-surface text-white p-12 md:p-20 rounded-[3rem]">
+        <div class="relative z-10 text-center max-w-2xl mx-auto">
+          <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-6 font-headline">Não encontrou o que precisava?</h2>
+          <p class="text-white/70 text-lg mb-10">Nossa curadoria digital é flexível. Conte-nos o seu desafio e criaremos uma solução personalizada para o seu negócio em São Paulo.</p>
+          <div class="flex flex-col md:flex-row gap-4 justify-center">
+            <a href="contato.html"
+               class="bg-primary-container text-white px-10 py-4 rounded-xl font-bold text-lg hover:brightness-110 transition-all text-center">
+              Fale conosco agora
+            </a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdWKYXu30_4jYYQ_xXAV6XlnwPNNtrnmYZ8px_PX2SxrrYoBg/viewform" target="_blank"
+               class="bg-white/10 border border-white/20 text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-white/20 transition-colors text-center">
+              Solicitar Orçamento
+            </a>
+          </div>
         </div>
-      </div>
-      <div class="md:col-span-2 bg-surface-container-lowest p-8 rounded-3xl flex items-center gap-6 shadow-[0_40px_40px_rgba(0,28,59,0.03)]">
-        <div class="bg-primary-container/10 p-4 rounded-2xl">
-          <span class="material-symbols-outlined text-primary text-3xl">ads_click</span>
-        </div>
-        <div>
-          <h3 class="text-xl font-bold">Gestão de Tráfego Pago</h3>
-          <p class="text-sm text-on-surface-variant">Google e Meta Ads focado em ROI.</p>
-        </div>
-      </div>
-      <div class="bg-surface-container-lowest p-8 rounded-3xl flex flex-col justify-between shadow-[0_40px_40px_rgba(0,28,59,0.03)]">
-        <span class="material-symbols-outlined text-primary text-3xl">location_on</span>
-        <h3 class="font-bold mt-4">Google Meu Negócio</h3>
-      </div>
-      <div class="bg-surface-container-lowest p-8 rounded-3xl flex flex-col justify-between shadow-[0_40px_40px_rgba(0,28,59,0.03)]">
-        <span class="material-symbols-outlined text-primary text-3xl">account_circle</span>
-        <h3 class="font-bold mt-4">Consultoria de Perfil</h3>
-      </div>
-      <div class="bg-surface-container-lowest p-8 rounded-3xl shadow-[0_40px_40px_rgba(0,28,59,0.03)]">
-        <span class="material-symbols-outlined text-primary text-3xl mb-4">link</span>
-        <h3 class="font-bold">Cartão Digital Bio Link</h3>
-      </div>
-      <div class="bg-surface-container-lowest p-8 rounded-3xl shadow-[0_40px_40px_rgba(0,28,59,0.03)]">
-        <span class="material-symbols-outlined text-primary text-3xl mb-4">menu_book</span>
-        <h3 class="font-bold">Catálogo WhatsApp</h3>
-      </div>
-      <div class="md:col-span-2 bg-surface-container p-8 rounded-3xl flex justify-between items-center">
-        <div class="flex items-center gap-4">
-          <span class="material-symbols-outlined text-primary text-3xl">medical_services</span>
-          <h3 class="text-xl font-bold">Clínica de Redes Sociais</h3>
-        </div>
-        <a href="contato.html" class="text-primary font-bold text-sm">Saber Mais</a>
+        <div class="absolute -bottom-20 -right-20 w-80 h-80 bg-primary/20 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute -top-20 -left-20 w-80 h-80 bg-primary-container/20 rounded-full blur-[100px] pointer-events-none"></div>
       </div>
     </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="mt-32 mb-16 relative overflow-hidden bg-on-surface text-white p-12 md:p-20 rounded-[3rem]">
-    <div class="relative z-10 text-center max-w-2xl mx-auto">
-      <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-6">Não encontrou o que precisava?</h2>
-      <p class="text-white/70 text-lg mb-10">
-        Nossa curadoria digital é flexível. Conte-nos o seu desafio e criaremos uma solução personalizada para o seu negócio em São Paulo.
-      </p>
-      <div class="flex flex-col md:flex-row gap-4 justify-center">
-        <a href="contato.html" class="bg-primary-container text-white px-10 py-4 rounded-xl font-bold text-lg hover:brightness-110 transition-all text-center">
-          Fale conosco agora
-        </a>
-        <a href="orcamento.html" class="bg-white/10 backdrop-blur-md text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-white/20 transition-all text-center">
-          Solicitar Orçamento
-        </a>
-      </div>
-    </div>
-    <div class="absolute -bottom-20 -right-20 w-80 h-80 bg-primary/20 rounded-full blur-[100px]"></div>
-    <div class="absolute -top-20 -left-20 w-80 h-80 bg-primary-container/20 rounded-full blur-[100px]"></div>
   </section>
 
 </main>
 
-<!-- Footer -->
-<footer class="w-full py-12 px-8 bg-surface-container-low">
-  <div class="flex flex-col md:flex-row justify-between items-center gap-6 max-w-7xl mx-auto">
-    <a href="index.html" class="text-lg font-bold text-blue-900">HUB DIGITAL</a>
-    <p class="text-slate-500 text-sm text-center">© 2024 Hub Digital Horizon. Soluções Digitais para toda São Paulo.</p>
-    <div class="flex gap-6">
-      <a href="#" class="text-slate-500 text-sm hover:underline">Privacidade</a>
-      <a href="#" class="text-slate-500 text-sm hover:underline">Termos</a>
-      <a href="contato.html" class="text-slate-500 text-sm hover:underline">Trabalhe Conosco</a>
+<!-- FOOTER -->
+<footer class="w-full bg-slate-50">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-7xl mx-auto px-6 md:px-8 py-16">
+    <div class="space-y-4">
+      <div class="text-lg font-black text-blue-900 uppercase tracking-tighter font-headline">HUB DIGITAL</div>
+      <p class="text-slate-500 text-sm leading-relaxed">Especialistas em curadoria digital para o mercado de São Paulo.</p>
+    </div>
+    <div class="grid grid-cols-2 gap-8">
+      <div>
+        <h5 class="font-headline font-bold text-on-surface mb-6">Navegação</h5>
+        <ul class="space-y-4 text-sm text-slate-500">
+          <li><a class="hover:text-blue-800 transition-all" href="index.html">Início</a></li>
+          <li><a class="hover:text-blue-800 transition-all" href="servicos.html">Serviços</a></li>
+          <li><a class="hover:text-blue-800 transition-all" href="metodo.html">Método HUB</a></li>
+          <li><a class="hover:text-blue-800 transition-all" href="index.html#planos">Planos</a></li>
+          <li><a class="hover:text-blue-800 transition-all" href="sobre.html">Sobre</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5 class="font-headline font-bold text-on-surface mb-6">Jurídico</h5>
+        <ul class="space-y-4 text-sm text-slate-500">
+          <li><a class="hover:text-blue-800 transition-all" href="#">Privacidade</a></li>
+          <li><a class="hover:text-blue-800 transition-all" href="#">Termos de Uso</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bg-primary-container p-8 rounded-3xl text-white">
+      <h5 class="font-headline font-bold text-xl mb-4">Pronto para começar?</h5>
+      <p class="text-white/80 text-sm mb-8 leading-relaxed">Agende uma consultoria gratuita e transforme sua presença digital.</p>
+      <a class="w-full inline-flex items-center justify-center gap-3 bg-white text-primary py-4 rounded-2xl font-bold hover:scale-[1.02] transition-transform shadow-lg"
+         href="https://api.whatsapp.com/send?phone=5511939180038" target="_blank">
+        <span class="material-symbols-outlined">chat</span>WhatsApp HUB
+      </a>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto px-6 md:px-8 py-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-xs">
+    <p>© 2025 HUB Digital Curator. Soluções para toda São Paulo.</p>
+    <div class="flex gap-8">
+      <a class="hover:text-blue-800 transition-all" href="https://instagram.com/hubservicodigital" target="_blank">Instagram</a>
+      <a class="hover:text-blue-800 transition-all" href="https://linkedin.com/" target="_blank">LinkedIn</a>
     </div>
   </div>
 </footer>
 
+<!-- WhatsApp flutuante -->
+<a class="fixed bottom-8 right-8 z-50 bg-[#25D366] text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform"
+   href="https://api.whatsapp.com/send?phone=5511939180038" target="_blank" aria-label="Abrir WhatsApp HUB Digital">
+  <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M12.031 6.172c-2.32 0-4.518.892-6.193 2.512-3.418 3.3-3.418 8.666 0 11.967 1.133 1.096 2.525 1.842 4.022 2.152l.245.051.107 1.413 1.821-1.127.185-.114.283.041c.493.072.993.108 1.492.108 2.32 0 4.519-.892 6.194-2.512 3.418-3.3 3.418-8.666 0-11.967-1.675-1.62-3.874-2.512-6.157-2.512zm0-2.172c2.901 0 5.8 1.11 8.016 3.33 4.432 4.43 4.432 11.61 0 16.04-2.216 2.22-5.115 3.33-8.016 3.33-.82 0-1.644-.09-2.453-.27l-4.57 2.827-.271-3.567c-1.896-.51-3.642-1.55-5.066-3.01-4.432-4.43-4.432-11.61 0-16.04 2.216-2.22 5.115-3.33 8.016-3.33z"/>
+  </svg>
+</a>
+
+<script>
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIcon = menuBtn.querySelector('.material-symbols-outlined');
+  menuBtn.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    menuIcon.textContent = isOpen ? 'close' : 'menu';
+    menuBtn.setAttribute('aria-expanded', isOpen);
+  });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      menuIcon.textContent = 'menu';
+      menuBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
 </body>
 </html>
