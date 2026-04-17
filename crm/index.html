@@ -257,18 +257,19 @@
                 const twoDays = 2 * 24 * 60 * 60 * 1000;
                 if(l.lastUpdate && (new Date() - l.lastUpdate.toDate() > twoDays) && l.stage !== 'Perdido') card.classList.add('stale');
 
-                card.innerHTML = `
-                    <div class="card-name">${l.name}</div>
-                    <div class="card-val">R$ ${l.value.toLocaleString('pt-BR')}</div>
-                    <div class="card-footer">
-                        <span class="badge-svc">${l.service}</span>
-<a href="https://wa.me/${String(l.phone).replace(/\D/g, '')}" target="_blank" class="btn-zap-fast">⚡</a>
-</div>
-                `;
-                document.getElementById(stages[l.stage]).appendChild(card);
-                totals[stages[l.stage]] += l.value;
-            });
-
+              card.innerHTML = `
+    <div onclick="editLead('${l.id}')" style="cursor: pointer;">
+        <div class="card-name">${l.name}</div>
+        <div class="card-val">R$ ${l.value.toLocaleString('pt-BR')}</div>
+        <div class="card-footer">
+            <span class="badge-svc">${l.service}</span>
+            <a href="https://wa.me/${String(l.phone).replace(/\D/g, '')}" target="_blank" class="btn-zap-fast" onclick="event.stopPropagation()">⚡</a>
+        </div>
+    </div>
+`;
+document.getElementById(stages[l.stage]).appendChild(card);
+totals[stages[l.stage]] += l.value;
+                
             // Atualiza Totais
             Object.keys(totals).forEach(k => document.getElementById('tot-' + k.split('-')[1]).innerText = 'R$ ' + totals[k].toLocaleString('pt-BR'));
             updateDashboard();
@@ -338,10 +339,39 @@ window.exportCSV = () => {
         }});
     });
 
-    window.filterLeads = () => {
+  window.filterLeads = () => {
         const t = document.getElementById('searchInput').value.toLowerCase();
         document.querySelectorAll('.card').forEach(c => c.style.display = c.innerText.toLowerCase().includes(t) ? 'block' : 'none');
+    }; // <-- Essa chave é importante para fechar a função de busca
+
+    window.editLead = async (id) => {
+        const lead = allLeads.find(l => l.id === id);
+        if (!lead) return;
+
+        const novoNome = prompt("Editar Nome do Cliente:", lead.name);
+        if (novoNome === null) return; 
+
+        const novoValor = prompt("Editar Valor (R$):", lead.value);
+        const novoSvc = prompt("Editar Serviço:", lead.service);
+        const novoWhats = prompt("Editar WhatsApp (apenas números):", lead.phone);
+
+        const acao = confirm("Clique em OK para SALVAR as alterações ou CANCELAR para manter como está.");
+
+        if (acao) {
+            try {
+                await updateDoc(doc(db, "leads", id), {
+                    name: novoNome,
+                    value: parseFloat(novoValor) || 0,
+                    service: novoSvc,
+                    phone: novoWhats.replace(/\D/g, ''),
+                    lastUpdate: serverTimestamp()
+                });
+            } catch (e) {
+                alert("Erro ao atualizar!");
+            }
+        }
     };
+</script>
 </script>
 </body>
 </html>
