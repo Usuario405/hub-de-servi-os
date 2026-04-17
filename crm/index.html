@@ -220,3 +220,35 @@
 
     function calculateDashboard(snapshot) {
         let receitaTotal = 0; let leadsAtivos = 0; let fechadosCount = 0;
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            const valor = parseFloat(data.value) || 0;
+            if (data.stage === 'Fechamento') { receitaTotal += valor; fechadosCount++; }
+            else if (data.stage !== 'Perdido') { leadsAtivos++; }
+        });
+        document.getElementById('dash-receita').textContent = `R$ ${receitaTotal.toLocaleString('pt-BR')}`;
+        document.getElementById('dash-ativos').textContent = leadsAtivos;
+        document.getElementById('dash-ticket').textContent = `R$ ${(fechadosCount ? receitaTotal/fechadosCount : 0).toLocaleString('pt-BR')}`;
+    }
+
+    window.toggleModal = (show) => document.getElementById('modal-lead').classList.toggle('open', show);
+    window.filterLeads = () => {
+        const term = document.getElementById('searchInput').value.toLowerCase();
+        document.querySelectorAll('.card').forEach(c => c.style.display = c.innerText.toLowerCase().includes(term) ? 'block' : 'none');
+    };
+    window.generatePDF = () => {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        doc.text("HUB DE SERVIÇOS - RELATÓRIO", 20, 20);
+        let y = 40;
+        document.querySelectorAll('.card').forEach(c => { doc.text(c.innerText.trim(), 20, y); y += 10; });
+        doc.save("vendas.pdf");
+    };
+    function updateMetrics() {
+        ['contato', 'proposta', 'fechado', 'perdido'].forEach(s => {
+            document.getElementById(`count-${s}`).textContent = document.querySelectorAll(`#list-${s} .card`).length;
+        });
+    }
+</script>
+</body>
+</html>
