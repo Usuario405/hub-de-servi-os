@@ -20,7 +20,6 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'DM Sans', sans-serif; }
         body { background: var(--bg); color: var(--text); overflow-x: hidden; }
 
-        /* HEADER */
         header {
             background: var(--surface); border-bottom: 1px solid var(--border);
             padding: 0 32px; height: 70px; display: flex; align-items: center;
@@ -31,26 +30,22 @@
         
         .search-bar {
             background: var(--bg); border: 1px solid var(--border);
-            padding: 10px 20px; border-radius: 25px; color: #fff; width: 350px; outline: none;
+            padding: 10px 20px; border-radius: 25px; color: #fff; width: 250px; outline: none;
             transition: 0.3s;
         }
-        .search-bar:focus { border-color: var(--accent3); width: 400px; }
 
-        .btn { padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; border: none; transition: 0.2s; font-size: 13px; }
+        .btn { padding: 10px 15px; border-radius: 8px; font-weight: 700; cursor: pointer; border: none; transition: 0.2s; font-size: 12px; }
         .btn-primary { background: var(--accent); color: #0c0e14; }
-        .btn-pdf { background: var(--surface2); color: var(--text); border: 1px solid var(--border); margin-right: 10px; }
-        .btn-pdf:hover { background: var(--accent3); color: white; }
+        .btn-pdf { background: var(--surface2); color: var(--text); border: 1px solid var(--border); margin-right: 5px; }
 
-        /* FUNIL */
         main { padding: 30px; }
         .funnel-board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
         .column { background: var(--surface); border-radius: 12px; min-height: 80vh; border: 1px solid var(--border); display: flex; flex-direction: column; }
-        .col-header { padding: 15px; border-bottom: 1px solid var(--border); font-family: 'Syne'; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; display: flex; justify-content: space-between; align-items: center; }
+        .col-header { padding: 15px; border-bottom: 1px solid var(--border); font-family: 'Syne'; font-size: 14px; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center; }
         .col-count { background: var(--border); padding: 2px 8px; border-radius: 10px; font-size: 11px; }
 
         .body-list { padding: 10px; flex: 1; min-height: 100px; }
 
-        /* CARDS */
         .card { 
             background: var(--surface2); border: 1px solid var(--border); padding: 15px; 
             margin-bottom: 12px; border-radius: 10px; cursor: grab; transition: 0.2s;
@@ -58,29 +53,22 @@
         .card:hover { border-color: var(--accent3); transform: translateY(-3px); }
         .card-name { font-family: 'Syne'; font-size: 15px; margin-bottom: 5px; display: block; }
         .card-val { color: var(--accent); font-weight: 700; font-size: 14px; }
-        .card-tags { display: flex; justify-content: space-between; margin-top: 10px; align-items: center; }
         .whatsapp-icon { color: #25d366; text-decoration: none; font-size: 18px; }
 
-        /* MODAL */
         .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 200; display: none; align-items: center; justify-content: center; }
         .overlay.open { display: flex; }
         .modal { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; width: 400px; padding: 30px; }
         .form-group { margin-bottom: 15px; }
-        .form-label { font-size: 12px; color: var(--text2); display: block; margin-bottom: 5px; }
         .form-input { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px; color: #fff; outline: none; }
         
-        /* LOGIN */
         #login-screen { position: fixed; inset: 0; background: var(--bg); z-index: 1000; display: flex; flex-direction: column; align-items: center; justify-content: center; }
     </style>
 </head>
 <body>
 
 <div id="login-screen">
-    <div style="text-align:center; margin-bottom:30px;">
-        <h1 style="font-family: Syne; font-size: 32px; color: var(--accent);">NegoFunil PRO</h1>
-        <p style="color: var(--text2)">Hub de Serviços Digital</p>
-    </div>
-    <div style="width: 320px; display: flex; flex-direction: column; gap: 15px;">
+    <h1 style="font-family: Syne; font-size: 32px; color: var(--accent); margin-bottom: 20px;">NegoFunil PRO</h1>
+    <div style="width: 300px; display: flex; flex-direction: column; gap: 15px;">
         <input type="email" id="loginEmail" class="form-input" placeholder="Seu e-mail">
         <input type="password" id="loginPass" class="form-input" placeholder="Sua senha">
         <button class="btn btn-primary" onclick="appLogin()">Acessar Painel</button>
@@ -89,12 +77,33 @@
 
 <header id="main-header" style="display:none">
     <div class="logo">HUB CRM</div>
-    <input type="text" id="searchInput" class="search-bar" placeholder="Pesquisar cliente ou serviço..." onkeyup="filterLeads()">
+    <nav style="display: flex; gap: 10px;">
+        <button class="btn btn-pdf" onclick="showView('funil')">Funil</button>
+        <button class="btn btn-pdf" onclick="showView('dash')">Dashboard</button>
+    </nav>
+    <input type="text" id="searchInput" class="search-bar" placeholder="Buscar..." onkeyup="filterLeads()">
     <div>
-        <button class="btn btn-pdf" onclick="generatePDF()">Relatório PDF</button>
+        <button class="btn btn-pdf" onclick="generatePDF()">PDF</button>
         <button class="btn btn-primary" onclick="toggleModal(true)">+ Novo Lead</button>
     </div>
 </header>
+
+<div id="view-dashboard" style="display:none; padding: 30px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+        <div class="card" style="border-top: 4px solid var(--accent)">
+            <small style="color:var(--text2)">RECEITA TOTAL (FECHADOS)</small>
+            <h2 id="dash-receita" style="font-family: Syne; font-size: 28px; color: var(--accent); margin-top:10px">R$ 0,00</h2>
+        </div>
+        <div class="card" style="border-top: 4px solid var(--accent3)">
+            <small style="color:var(--text2)">LEADS EM NEGOCIAÇÃO</small>
+            <h2 id="dash-ativos" style="font-family: Syne; font-size: 28px; margin-top:10px">0</h2>
+        </div>
+        <div class="card" style="border-top: 4px solid var(--proposta)">
+            <small style="color:var(--text2)">TICKET MÉDIO</small>
+            <h2 id="dash-ticket" style="font-family: Syne; font-size: 28px; color: var(--proposta); margin-top:10px">R$ 0,00</h2>
+        </div>
+    </div>
+</div>
 
 <main id="main-content" style="display:none">
     <div class="funnel-board">
@@ -108,24 +117,22 @@
 <div class="overlay" id="modal-lead">
     <div class="modal">
         <h2 style="font-family: Syne; margin-bottom: 20px;">Novo Lead</h2>
-        <div class="form-group"><label class="form-label">Nome do Cliente</label><input id="lead-name" class="form-input"></div>
-        <div class="form-group"><label class="form-label">Valor do Projeto (R$)</label><input id="lead-value" type="number" class="form-input"></div>
-        <div class="form-group"><label class="form-label">Serviço (ex: Google Ads)</label><input id="lead-service" class="form-input"></div>
-        <div class="form-group"><label class="form-label">WhatsApp (DDI+DDD+Nº)</label><input id="lead-phone" class="form-input" placeholder="5511999999999"></div>
+        <div class="form-group"><label class="form-label">Nome</label><input id="lead-name" class="form-input"></div>
+        <div class="form-group"><label class="form-label">Valor (R$)</label><input id="lead-value" type="number" class="form-input"></div>
+        <div class="form-group"><label class="form-label">Serviço</label><input id="lead-service" class="form-input"></div>
+        <div class="form-group"><label class="form-label">WhatsApp (55...)</label><input id="lead-phone" class="form-input"></div>
         <div style="display:flex; gap:10px; margin-top:20px">
             <button class="btn btn-pdf" style="flex:1" onclick="toggleModal(false)">Cancelar</button>
-            <button class="btn btn-primary" style="flex:1" onclick="saveLead()">Salvar Lead</button>
+            <button class="btn btn-primary" style="flex:1" onclick="saveLead()">Salvar</button>
         </div>
     </div>
 </div>
 
 <script type="module">
-    // IMPORTANDO FIREBASE
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
-    import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
     import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
 
-    // CONFIGURAÇÃO QUE VOCÊ ME MANDOU
     const firebaseConfig = {
         apiKey: "AIzaSyDMiJmwgxep1USbcmWa8ck3eEI1_I13HRg",
         authDomain: "negofunil-9dda9.firebaseapp.com",
@@ -140,7 +147,6 @@
     const db = getFirestore(app);
     const auth = getAuth(app);
 
-    // LOGIN
     window.appLogin = () => {
         const email = document.getElementById('loginEmail').value;
         const pass = document.getElementById('loginPass').value;
@@ -156,7 +162,6 @@
         }
     });
 
-    // CRUD LEADS
     window.saveLead = async () => {
         const lead = {
             name: document.getElementById('lead-name').value,
@@ -175,6 +180,8 @@
             const lists = { 'Contato Inicial': 'list-contato', 'Proposta Enviada': 'list-proposta', 'Fechamento': 'list-fechado', 'Perdido': 'list-perdido' };
             Object.values(lists).forEach(id => document.getElementById(id).innerHTML = '');
             
+            calculateDashboard(snapshot);
+
             snapshot.forEach(doc => {
                 const l = doc.data();
                 const card = document.createElement('div');
@@ -190,11 +197,10 @@
                 `;
                 document.getElementById(lists[l.stage]).appendChild(card);
             });
-            updateMetrics(snapshot);
+            updateMetrics();
         });
     }
 
-    // ARRASTAR E SOLTAR
     document.querySelectorAll('.body-list').forEach(el => {
         new Sortable(el, {
             group: 'funnel',
@@ -207,37 +213,10 @@
         });
     });
 
-    // UTILITÁRIOS
-    window.toggleModal = (show) => document.getElementById('modal-lead').classList.toggle('open', show);
-    
-    window.filterLeads = () => {
-        const term = document.getElementById('searchInput').value.toLowerCase();
-        document.querySelectorAll('.card').forEach(c => {
-            c.style.display = c.innerText.toLowerCase().includes(term) ? 'block' : 'none';
-        });
+    window.showView = (view) => {
+        document.getElementById('main-content').style.display = view === 'funil' ? 'block' : 'none';
+        document.getElementById('view-dashboard').style.display = view === 'dash' ? 'block' : 'none';
     };
 
-    window.generatePDF = () => {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-        doc.setFont("helvetica", "bold");
-        doc.text("HUB DE SERVIÇOS - RELATÓRIO DE NEGOCIAÇÕES", 20, 20);
-        doc.setFontSize(10);
-        let y = 40;
-        document.querySelectorAll('.card').forEach(c => {
-            doc.text(c.innerText.replace('󰖣','').trim(), 20, y);
-            y += 10;
-        });
-        doc.save("vendas_hub.pdf");
-    };
-
-    function updateMetrics(snap) {
-        const stages = ['contato', 'proposta', 'fechado', 'perdido'];
-        stages.forEach(s => {
-            const count = document.querySelectorAll(`#list-${s} .card`).length;
-            document.getElementById(`count-${s}`).textContent = count;
-        });
-    }
-</script>
-</body>
-</html>
+    function calculateDashboard(snapshot) {
+        let receitaTotal = 0; let leadsAtivos = 0; let fechadosCount = 0;
