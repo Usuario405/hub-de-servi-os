@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NegoHub OS | Inteligência Financeira & ROI</title>
+    <title>NegoHub OS | Perfil & Gestão de Equipe</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
-    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
@@ -20,6 +19,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'DM Sans', sans-serif; }
         body { background: var(--bg); color: var(--text); display: flex; min-height: 100vh; overflow: hidden; }
 
+        /* Sidebar */
         aside { width: 80px; background: var(--sidebar); border-right: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; padding: 25px 0; position: fixed; height: 100vh; transition: 0.3s; z-index: 1000; }
         aside:hover { width: 220px; align-items: flex-start; padding-left: 15px; }
         .side-item { width: 100%; height: 55px; display: flex; align-items: center; cursor: pointer; color: var(--text2); transition: 0.2s; overflow: hidden; white-space: nowrap; margin-bottom: 5px; border-radius: 12px 0 0 12px; }
@@ -32,41 +32,42 @@
         header { height: 75px; background: var(--sidebar); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 30px; flex-shrink: 0; }
         .header-title { font-family: 'Syne'; font-weight: 800; font-size: 20px; color: var(--accent); letter-spacing: -1px; }
 
-        .view { display: none; flex: 1; overflow: hidden; flex-direction: column; }
-        .view.active { display: flex; }
+        .view { display: none; flex: 1; overflow-y: auto; padding: 30px; }
+        .view.active { display: flex; flex-direction: column; }
 
-        .funnel-wrap { padding: 20px; flex: 1; overflow-x: auto; overflow-y: hidden; }
-        .funnel-board { display: flex; gap: 20px; height: 100%; }
+        /* Funil */
+        .funnel-wrap { display: flex; gap: 20px; height: 100%; overflow-x: auto; padding-bottom: 20px; }
         .column { background: rgba(20, 22, 34, 0.4); border-radius: 16px; border: 1px solid var(--border); width: 310px; flex-shrink: 0; display: flex; flex-direction: column; }
         .col-header { padding: 18px; border-bottom: 1px solid var(--border); font-family: 'Syne'; font-size: 11px; text-transform: uppercase; color: var(--text2); display: flex; justify-content: space-between; }
-        .body-list { flex: 1; overflow-y: auto; padding: 10px; display: flex; flex-direction: column; gap: 10px; min-height: 100px; }
+        .body-list { flex: 1; overflow-y: auto; padding: 10px; display: flex; flex-direction: column; gap: 10px; }
 
         .card { background: var(--surface); border: 1px solid var(--border); padding: 16px; border-radius: 14px; cursor: pointer; transition: 0.3s; }
         .card:hover { border-color: var(--accent3); transform: translateY(-4px); }
         .card-name { font-family: 'Syne'; font-weight: 700; font-size: 14px; margin-bottom: 5px; }
         .card-val { color: var(--accent); font-weight: 700; font-size: 14px; }
-        .badge-svc { font-size: 10px; background: var(--surface2); border: 1px solid var(--border); padding: 3px 8px; border-radius: 6px; color: var(--text2); }
 
-        .dashboard-wrap { flex: 1; overflow-y: auto; padding: 30px; }
+        /* Dashboard e Perfil */
         .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 25px; }
-        .kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 20px; border-top: 4px solid var(--accent3); position: relative; }
-        .kpi-label { font-size: 10px; text-transform: uppercase; color: var(--text3); font-weight: 700; margin-bottom: 8px; }
+        .kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 20px; border-top: 4px solid var(--accent3); }
+        .kpi-label { font-size: 10px; text-transform: uppercase; color: var(--text3); margin-bottom: 8px; }
         .kpi-val { font-family: 'Syne'; font-size: 28px; font-weight: 800; }
         
         table { width: 100%; border-collapse: collapse; font-size: 13px; color: var(--text); }
         th { text-align: left; color: var(--text3); border-bottom: 1px solid var(--border); padding: 12px; text-transform: uppercase; font-size: 11px; }
         td { padding: 15px 12px; border-bottom: 1px solid var(--border); }
-        
+
         .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 2000; display: none; align-items: center; justify-content: center; }
         .overlay.open { display: flex; }
-        .modal { background: var(--sidebar); border: 1px solid var(--border); border-radius: 20px; width: 550px; padding: 35px; max-height: 90vh; overflow-y: auto; }
+        .modal { background: var(--sidebar); border: 1px solid var(--border); border-radius: 20px; width: 550px; padding: 35px; }
         .form-input { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 14px; color: #fff; margin-bottom: 15px; outline: none; }
-        .btn-primary { background: var(--accent); color: #000; border: none; padding: 14px 28px; border-radius: 12px; font-weight: 800; cursor: pointer; width: 100%; transition: 0.2s; }
+        .btn-primary { background: var(--accent); color: #000; border: none; padding: 14px 28px; border-radius: 12px; font-weight: 800; cursor: pointer; transition: 0.2s; }
         
         #login-screen { position: fixed; inset: 0; background: var(--bg); z-index: 3000; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         
-        /* Estilo para a caixa de investimento */
-        .invest-box { background: var(--surface2); padding: 20px; border-radius: 16px; border: 1px solid var(--border); margin-bottom: 25px; display: flex; align-items: center; justify-content: space-between; }
+        /* Grid de Perfil */
+        .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+        .profile-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 30px; }
+        .activity-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
     </style>
 </head>
 <body>
@@ -76,77 +77,76 @@
     <div style="width:320px; display:flex; flex-direction:column; gap:15px">
         <input type="email" id="loginEmail" class="form-input" placeholder="seu@email.com">
         <input type="password" id="loginPass" class="form-input" placeholder="Senha">
-        <button onclick="appLogin()" class="btn-primary">INICIAR SESSÃO</button>
+        <button onclick="appLogin()" class="btn-primary" style="width:100%">INICIAR SESSÃO</button>
     </div>
 </div>
 
 <aside id="sidebar" style="display:none">
-    <div class="side-item active" onclick="showView('funil')"><div class="icon-box">📊</div><span class="side-text">Funil de Vendas</span></div>
+    <div class="side-item active" onclick="showView('funil')"><div class="icon-box">📊</div><span class="side-text">Funil</span></div>
     <div class="side-item" onclick="showView('dashboard')"><div class="icon-box">📈</div><span class="side-text">Dashboard</span></div>
-    <div class="side-item" onclick="exportExcel()"><div class="icon-box">📂</div><span class="side-text">Exportar Excel</span></div>
+    <div class="side-item" onclick="showView('perfil')"><div class="icon-box">👤</div><span class="side-text">Perfil</span></div>
     <div style="margin-top: auto;" class="side-item" onclick="appLogout()"><div class="icon-box">🚪</div><span class="side-text">Sair</span></div>
 </aside>
 
 <div class="wrapper" id="main-wrapper" style="display:none">
     <header>
         <div class="header-title">HUB DE SERVIÇOS</div>
-        <button class="btn-primary" style="width:auto; padding: 10px 20px; font-size:12px" onclick="openM('modal-new')">+ NOVO LEAD</button>
+        <button class="btn-primary" style="padding: 10px 20px; font-size:12px" onclick="openM('modal-new')">+ NOVO LEAD</button>
     </header>
 
     <main id="view-funil" class="view active">
         <div class="funnel-wrap">
-            <div class="funnel-board">
-                <div class="column"><div class="col-header">Prospecção <span class="col-total" id="tot-contato">R$ 0</span></div><div class="body-list" id="list-contato" data-stage="Contato Inicial"></div></div>
-                <div class="column"><div class="col-header">Proposta <span class="col-total" id="tot-proposta">R$ 0</span></div><div class="body-list" id="list-proposta" data-stage="Proposta Enviada"></div></div>
-                <div class="column"><div class="col-header">Fechado <span class="col-total" id="tot-fechado">R$ 0</span></div><div class="body-list" id="list-fechado" data-stage="Fechamento"></div></div>
-                <div class="column"><div class="col-header">Perdido <span class="col-total" id="tot-perdido">R$ 0</span></div><div class="body-list" id="list-perdido" data-stage="Perdido"></div></div>
-            </div>
+            <div class="column"><div class="col-header">Prospecção <span id="tot-contato">R$ 0</span></div><div class="body-list" id="list-contato" data-stage="Contato Inicial"></div></div>
+            <div class="column"><div class="col-header">Proposta <span id="tot-proposta">R$ 0</span></div><div class="body-list" id="list-proposta" data-stage="Proposta Enviada"></div></div>
+            <div class="column"><div class="col-header">Fechado <span id="tot-fechado">R$ 0</span></div><div class="body-list" id="list-fechado" data-stage="Fechamento"></div></div>
+            <div class="column"><div class="col-header">Perdido <span id="tot-perdido">R$ 0</span></div><div class="body-list" id="list-perdido" data-stage="Perdido"></div></div>
         </div>
     </main>
 
     <div id="view-dashboard" class="view">
-        <div class="dashboard-wrap">
-            <div class="invest-box">
-                <div>
-                    <h4 style="font-family:Syne; font-size:14px">Investimento em Anúncios (Mês)</h4>
-                    <p style="font-size:11px; color:var(--text3)">Introduza o gasto total para calcular o ROI</p>
-                </div>
-                <div style="display:flex; gap:10px">
-                    <input type="number" id="input-invest" class="form-input" style="margin-bottom:0; width:150px" placeholder="R$ 0,00">
-                    <button class="btn-primary" style="width:auto; padding:0 20px" onclick="updateROI()">CALCULAR</button>
-                </div>
+        <div class="kpi-row">
+            <div class="kpi" style="border-top-color: var(--accent)"><div class="kpi-label">ROI Global</div><div class="kpi-val" id="dash-roi-global">0.0x</div></div>
+            <div class="kpi"><div class="kpi-label">Receita</div><div class="kpi-val" id="dash-receita">R$ 0</div></div>
+            <div class="kpi" style="border-top-color: var(--warm)"><div class="kpi-label">Ativos</div><div class="kpi-val" id="dash-ativos">0</div></div>
+            <div class="kpi" style="border-top-color: var(--perdido)"><div class="kpi-label">Gasto</div><div class="kpi-val" id="dash-gasto-total">R$ 0</div></div>
+        </div>
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 25px;">
+            <table>
+                <thead><tr><th>Cliente</th><th>Venda</th><th>Custo</th><th>ROI</th><th>Status</th><th>Ações</th></tr></thead>
+                <tbody id="tabela-leads-corpo"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="view-perfil" class="view">
+        <h2 style="font-family:Syne; margin-bottom:5px">Painel da Conta</h2>
+        <p style="color:var(--text2); margin-bottom:20px" id="profile-email-top">carregando...</p>
+        
+        <div class="profile-grid">
+            <div class="profile-card">
+                <h3 style="font-family:Syne; margin-bottom:20px; font-size:18px">Minha Atividade</h3>
+                <div class="activity-item"><span>Total de Leads:</span><b id="act-leads">0</b></div>
+                <div class="activity-item"><span>Vendas Fechadas:</span><b id="act-fechados">0</b></div>
+                <div class="activity-item"><span>Conversão:</span><b id="act-conv">0%</b></div>
+                <div class="activity-item" style="border:0"><span>Faturamento:</span><b id="act-faturado" style="color:var(--accent)">R$ 0</b></div>
             </div>
 
-            <div class="kpi-row">
-                <div class="kpi" style="border-top-color: var(--accent)">
-                    <div class="kpi-label">ROI (Retorno)</div>
-                    <div class="kpi-val" id="dash-roi" style="color:var(--accent)">0.0x</div>
-                </div>
-                <div class="kpi">
-                    <div class="kpi-label">Faturado</div>
-                    <div class="kpi-val" id="dash-receita">R$ 0</div>
-                </div>
-                <div class="kpi" style="border-top-color: var(--warm)">
-                    <div class="kpi-label">Leads Ativos</div>
-                    <div class="kpi-val" id="dash-ativos">0</div>
-                </div>
-                <div class="kpi" style="border-top-color: var(--contato)">
-                    <div class="kpi-label">Conversão</div>
-                    <div class="kpi-val" id="dash-conversao">0%</div>
-                </div>
+            <div class="profile-card">
+                <h3 style="font-family:Syne; margin-bottom:20px; font-size:18px">Segurança</h3>
+                <input type="password" id="new-password" class="form-input" placeholder="Nova Senha">
+                <button class="btn-primary" onclick="changePassword()" style="width:100%">ALTERAR SENHA</button>
+                <p id="password-msg" style="margin-top:10px; font-size:12px"></p>
             </div>
-            
-            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 20px;">
-                <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 25px;">
-                    <canvas id="chartOrigem"></canvas>
+
+            <div class="profile-card" style="grid-column: span 2;">
+                <h3 style="font-family:Syne; margin-bottom:15px; font-size:18px">Adicionar Usuário à Equipe</h3>
+                <p style="color:var(--text2); font-size:13px; margin-bottom:20px">Deseja cadastrar um novo vendedor ou parceiro? O novo usuário terá seu próprio espaço isolado.</p>
+                <div style="display:flex; gap:10px">
+                    <input type="email" id="new-user-email" class="form-input" style="margin-bottom:0" placeholder="E-mail do novo usuário">
+                    <input type="password" id="new-user-pass" class="form-input" style="margin-bottom:0" placeholder="Senha inicial">
+                    <button class="btn-primary" onclick="createNewUser()" style="white-space:nowrap">CRIAR CONTA</button>
                 </div>
-                <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 25px;">
-                    <h3 style="font-family: 'Syne'; font-size: 14px; margin-bottom: 20px;">Performance por Lead</h3>
-                    <table>
-                        <thead><tr><th>Origem</th><th>Cliente</th><th>Status</th><th>Valor</th><th>Ações</th></tr></thead>
-                        <tbody id="tabela-leads-corpo"></tbody>
-                    </table>
-                </div>
+                <p id="new-user-msg" style="margin-top:10px; font-size:12px"></p>
             </div>
         </div>
     </div>
@@ -154,30 +154,30 @@
 
 <div class="overlay" id="modal-new">
     <div class="modal">
-        <h2 style="font-family:Syne; margin-bottom:20px">Novo Negócio</h2>
+        <h2 style="font-family:Syne; margin-bottom:20px">Novo Lead</h2>
         <input id="new-name" class="form-input" placeholder="Nome do Cliente">
-        <input id="new-val" type="number" class="form-input" placeholder="Valor (R$)">
-        <select id="new-svc" class="form-input" style="background: var(--bg); color: #fff;">
+        <input id="new-val" type="number" class="form-input" placeholder="Valor Venda (R$)">
+        <input id="new-cost" type="number" class="form-input" placeholder="Custo Lead (R$)" value="0">
+        <select id="new-svc" class="form-input" style="background:var(--bg); color:#fff">
             <option value="Google Ads">Google Ads</option>
             <option value="Instagram Ads">Instagram Ads</option>
-            <option value="Landing Page">Landing Page</option>
-            <option value="Prospecção Ativa">Prospecção Ativa</option>
+            <option value="Prospecção">Prospecção</option>
         </select>
-        <input id="new-phone" class="form-input" placeholder="WhatsApp (5511...)">
-        <button class="btn-primary" onclick="saveLead()">CADASTRAR</button>
+        <button class="btn-primary" onclick="saveLead()" style="width:100%">CADASTRAR</button>
         <button onclick="closeM('modal-new')" style="background:none; border:none; color:var(--text2); width:100%; margin-top:10px; cursor:pointer">Cancelar</button>
     </div>
 </div>
 
 <div class="overlay" id="modal-edit">
     <div class="modal">
-        <h2 style="font-family:Syne; margin-bottom:20px">Editar Lead</h2>
+        <h2 style="font-family:Syne; margin-bottom:20px">Editar</h2>
         <input id="edit-id" type="hidden">
         <input id="edit-name" class="form-input">
         <input id="edit-val" type="number" class="form-input">
-        <textarea id="edit-notes" class="form-input" style="height:120px; resize:none;" placeholder="Anotações do histórico..."></textarea>
-        <button class="btn-primary" onclick="updateLead()">SALVAR</button>
-        <button class="btn-primary" style="background: var(--perdido); margin-top: 10px; color: white;" onclick="deleteLead()">EXCLUIR</button>
+        <input id="edit-cost" type="number" class="form-input">
+        <textarea id="edit-notes" class="form-input" style="height:120px; resize:none"></textarea>
+        <button class="btn-primary" onclick="updateLead()" style="width:100%">SALVAR</button>
+        <button class="btn-primary" style="background:var(--perdido); margin-top:10px; color:white; width:100%" onclick="deleteLead()">EXCLUIR</button>
         <button onclick="closeM('modal-edit')" style="background:none; border:none; color:var(--text2); width:100%; margin-top:10px; cursor:pointer">Cancelar</button>
     </div>
 </div>
@@ -185,7 +185,7 @@
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
     import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, serverTimestamp, query, where } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
-    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, updatePassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyDMiJmwgxep1USbcmWa8ck3eEI1_I13HRg",
@@ -200,13 +200,13 @@
     const db = getFirestore(app);
     const auth = getAuth(app);
     let allLeads = [];
-    let meuGrafico = null;
 
     onAuthStateChanged(auth, (user) => {
         if (user) {
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('sidebar').style.display = 'flex';
             document.getElementById('main-wrapper').style.display = 'flex';
+            document.getElementById('profile-email-top').innerText = user.email;
             loadData(user.uid);
         } else {
             document.getElementById('login-screen').style.display = 'flex';
@@ -216,10 +216,37 @@
     window.appLogin = () => {
         const e = document.getElementById('loginEmail').value;
         const p = document.getElementById('loginPass').value;
-        signInWithEmailAndPassword(auth, e, p).catch(() => alert("Erro no login."));
+        signInWithEmailAndPassword(auth, e, p).catch(() => alert("Erro ao entrar."));
     };
 
     window.appLogout = () => signOut(auth).then(() => location.reload());
+
+    window.changePassword = () => {
+        const pass = document.getElementById('new-password').value;
+        const msg = document.getElementById('password-msg');
+        if(pass.length < 6) return msg.innerText = "Mínimo 6 caracteres.";
+        updatePassword(auth.currentUser, pass).then(() => {
+            msg.style.color = 'var(--accent)';
+            msg.innerText = "Senha alterada!";
+        }).catch(() => msg.innerText = "Erro. Refaça o login.");
+    };
+
+    // FUNÇÃO PARA ADICIONAR NOVO USUÁRIO
+    window.createNewUser = () => {
+        const email = document.getElementById('new-user-email').value;
+        const pass = document.getElementById('new-user-pass').value;
+        const msg = document.getElementById('new-user-msg');
+
+        createUserWithEmailAndPassword(auth, email, pass).then(() => {
+            msg.style.color = 'var(--accent)';
+            msg.innerText = "Usuário cadastrado com sucesso!";
+            document.getElementById('new-user-email').value = "";
+            document.getElementById('new-user-pass').value = "";
+        }).catch((e) => {
+            msg.style.color = 'var(--perdido)';
+            msg.innerText = "Erro: " + e.message;
+        });
+    };
 
     function loadData(uid) {
         const q = query(collection(db, "leads"), where("ownerId", "==", uid));
@@ -239,65 +266,42 @@
                 document.getElementById(stages[l.stage]).appendChild(card);
                 totals[stages[l.stage]] += Number(l.value || 0);
             });
-            
-            Object.keys(totals).forEach(k => {
-                const el = document.getElementById('tot-' + k.split('-')[1]);
-                if(el) el.innerText = 'R$ ' + totals[k].toLocaleString('pt-BR');
-            });
             updateDashboard();
         });
     }
 
-    window.updateROI = () => updateDashboard();
-
     function updateDashboard() {
         const f = allLeads.filter(l => l.stage === 'Fechamento');
         const faturado = f.reduce((acc, l) => acc + Number(l.value || 0), 0);
-        const invest = parseFloat(document.getElementById('input-invest').value) || 0;
+        const gasto = allLeads.reduce((acc, l) => acc + Number(l.cost || 0), 0);
         
-        // Cálculo do ROI
-        const roi = invest > 0 ? (faturado / invest).toFixed(1) : 0;
-        document.getElementById('dash-roi').innerText = roi + 'x';
+        // Atualiza KPIs da Dashboard
+        document.getElementById('dash-roi-global').innerText = (gasto > 0 ? (faturado/gasto).toFixed(1) : 0) + 'x';
         document.getElementById('dash-receita').innerText = 'R$ ' + faturado.toLocaleString('pt-BR');
         document.getElementById('dash-ativos').innerText = allLeads.filter(l => l.stage !== 'Fechamento' && l.stage !== 'Perdido').length;
-        document.getElementById('dash-conversao').innerText = (allLeads.length > 0 ? ((f.length / allLeads.length) * 100).toFixed(1) : 0) + '%';
+        document.getElementById('dash-gasto-total').innerText = 'R$ ' + gasto.toLocaleString('pt-BR');
+
+        // Atualiza Aba Perfil (Atividade)
+        document.getElementById('act-leads').innerText = allLeads.length;
+        document.getElementById('act-fechados').innerText = f.length;
+        document.getElementById('act-conv').innerText = (allLeads.length > 0 ? ((f.length/allLeads.length)*100).toFixed(0) : 0) + '%';
+        document.getElementById('act-faturado').innerText = 'R$ ' + faturado.toLocaleString('pt-BR');
 
         const corpo = document.getElementById('tabela-leads-corpo');
         corpo.innerHTML = '';
         allLeads.forEach(l => {
-            let icon = '⚡';
-            if(l.service.includes('Google')) icon = '🔍';
-            if(l.service.includes('Instagram')) icon = '📸';
-            corpo.innerHTML += `<tr><td style="font-size:18px">${icon}</td><td style="font-weight:700">${l.name}</td><td><span class="badge-svc">${l.stage}</span></td><td style="color:var(--accent)">R$ ${Number(l.value || 0).toLocaleString('pt-BR')}</td><td><button class="btn-primary" style="padding:5px 10px; font-size:10px" onclick="editLead('${l.id}')">NOTAS</button></td></tr>`;
-        });
-        if (document.getElementById('view-dashboard').classList.contains('active')) renderizarGraficos();
-    }
-
-    function renderizarGraficos() {
-        const ctx = document.getElementById('chartOrigem').getContext('2d');
-        if (meuGrafico) meuGrafico.destroy();
-        const google = allLeads.filter(l => l.service.includes('Google')).length;
-        const insta = allLeads.filter(l => l.service.includes('Instagram')).length;
-        const outros = allLeads.length - (google + insta);
-
-        meuGrafico = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Google', 'Instagram', 'Outros'],
-                datasets: [{ data: [google || 1, insta || 1, outros || 1], backgroundColor: ['#00e5a0', '#7c5cfc', '#4a9eff'], borderWidth: 0 }]
-            },
-            options: { cutout: '70%', plugins: { legend: { position: 'bottom', labels: { color: '#fff' } } } }
+            const roi = (l.cost > 0 && l.stage === 'Fechamento') ? (l.value/l.cost).toFixed(1) + 'x' : '---';
+            corpo.innerHTML += `<tr><td>${l.name}</td><td>R$ ${Number(l.value).toLocaleString('pt-BR')}</td><td>R$ ${Number(l.cost).toLocaleString('pt-BR')}</td><td>${roi}</td><td>${l.stage}</td><td><button onclick="editLead('${l.id}')" style="background:none; border:1px solid var(--border); color:var(--text2); padding:3px 8px; border-radius:5px; cursor:pointer">Ver</button></td></tr>`;
         });
     }
 
     window.saveLead = async () => {
-        const user = auth.currentUser;
         await addDoc(collection(db, "leads"), {
-            ownerId: user.uid,
+            ownerId: auth.currentUser.uid,
             name: document.getElementById('new-name').value,
             value: parseFloat(document.getElementById('new-val').value) || 0,
+            cost: parseFloat(document.getElementById('new-cost').value) || 0,
             service: document.getElementById('new-svc').value,
-            phone: document.getElementById('new-phone').value,
             stage: 'Contato Inicial',
             notes: "",
             lastUpdate: serverTimestamp()
@@ -310,6 +314,7 @@
         document.getElementById('edit-id').value = l.id;
         document.getElementById('edit-name').value = l.name;
         document.getElementById('edit-val').value = l.value;
+        document.getElementById('edit-cost').value = l.cost || 0;
         document.getElementById('edit-notes').value = l.notes || "";
         openM('modal-edit');
     };
@@ -318,6 +323,7 @@
         await updateDoc(doc(db, "leads", document.getElementById('edit-id').value), {
             name: document.getElementById('edit-name').value,
             value: parseFloat(document.getElementById('edit-val').value) || 0,
+            cost: parseFloat(document.getElementById('edit-cost').value) || 0,
             notes: document.getElementById('edit-notes').value,
             lastUpdate: serverTimestamp()
         });
@@ -334,7 +340,8 @@
     window.showView = (v) => {
         document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
         document.getElementById('view-' + v).classList.add('active');
-        if(v === 'dashboard') setTimeout(renderizarGraficos, 100);
+        document.querySelectorAll('.side-item').forEach(el => el.classList.remove('active'));
+        event.currentTarget.classList.add('active');
     };
 
     window.openM = (id) => document.getElementById(id).classList.add('open');
