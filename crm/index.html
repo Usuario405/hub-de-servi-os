@@ -6,159 +6,160 @@
     <title>NegoHub OS | Central de Estratégia</title>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
-
     <style>
         :root {
-            --bg: #0c0e14; --sidebar: #13151e; --surface: #1a1d28; --border: #2a2e42;
-            --accent: #00e5a0; --accent3: #7c5cfc; --text: #e8eaf0;
-            --text2: #8b90a7; --perdido: #ff4757; --warm: #f5a623;
+            --bg: #0c0e14; --sidebar: #13151e; --surface: #1a1d28; --surface2: #222536;
+            --border: #2a2e42; --accent: #00e5a0; --accent3: #7c5cfc; --text: #e8eaf0;
+            --text2: #8b90a7; --text3: #555a72; --perdido: #ff4757; --warm: #f5a623;
+            --contato: #4a9eff; --radius: 12px;
         }
-
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'DM Sans', sans-serif; }
         body { background: var(--bg); color: var(--text); display: flex; min-height: 100vh; overflow: hidden; }
 
-        /* SIDEBAR DINÂMICA */
+        /* SIDEBAR AJUSTADA COM ICONSAX STYLE */
         aside {
-            width: 70px; background: var(--sidebar); border-right: 1px solid var(--border);
-            display: flex; flex-direction: column; align-items: center; padding: 20px 0;
-            position: fixed; height: 100vh; transition: 0.3s; z-index: 1000;
+            width: 80px; background: var(--sidebar); border-right: 1px solid var(--border);
+            display: flex; flex-direction: column; align-items: center; padding: 25px 0;
+            position: fixed; height: 100vh; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 1000;
         }
-        aside:hover { width: 220px; align-items: flex-start; padding-left: 20px; }
+        aside:hover { width: 220px; align-items: flex-start; padding-left: 15px; }
         .side-item { 
             width: 100%; height: 55px; display: flex; align-items: center; 
             cursor: pointer; color: var(--text2); transition: 0.2s; overflow: hidden; white-space: nowrap;
+            margin-bottom: 5px; border-radius: 12px 0 0 12px;
         }
-        .side-item span:first-child { min-width: 30px; text-align: center; margin-right: 15px; font-size: 20px; }
-        .side-item:hover { color: var(--accent); background: rgba(0, 229, 160, 0.05); }
+        .icon-box { min-width: 80px; display: flex; justify-content: center; align-items: center; font-size: 20px; }
+        aside:hover .icon-box { min-width: 40px; margin-right: 15px; }
+        .side-item:hover, .side-item.active { color: var(--accent); background: rgba(0, 229, 160, 0.05); }
+        .side-text { opacity: 0; font-size: 14px; font-weight: 600; transition: 0.2s; }
+        aside:hover .side-text { opacity: 1; }
+        .notif-badge { margin-left: auto; background: var(--perdido); color: #fff; border-radius: 10px; padding: 1px 7px; font-size: 10px; font-weight: 700; margin-right: 15px; display: none; }
+        aside:hover .notif-badge { display: block; }
 
-        /* ESTRUTURA PRINCIPAL */
-        .wrapper { margin-left: 70px; flex: 1; display: flex; flex-direction: column; height: 100vh; }
+        /* WRAPPER E LAYOUT */
+        .wrapper { margin-left: 80px; flex: 1; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
         header {
-            height: 70px; background: var(--sidebar); border-bottom: 1px solid var(--border);
-            display: flex; align-items: center; justify-content: space-between; padding: 0 30px;
+            height: 75px; background: var(--sidebar); border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: space-between; padding: 0 30px; flex-shrink: 0;
         }
+        .header-title { font-family: 'Syne'; font-weight: 800; font-size: 20px; color: var(--accent); letter-spacing: -1px; }
 
-        /* FUNIL */
-        main { padding: 20px; flex: 1; overflow-x: auto; }
-        .funnel-board { display: grid; grid-template-columns: repeat(4, 300px); gap: 20px; height: 100%; }
-        .column { background: rgba(20, 22, 34, 0.4); border-radius: 12px; border: 1px solid var(--border); display: flex; flex-direction: column; max-height: 85vh; }
-        .col-header { padding: 15px; border-bottom: 1px solid var(--border); font-family: 'Syne'; font-size: 12px; text-transform: uppercase; color: var(--text2); display: flex; justify-content: space-between; }
+        /* BUSCA E FILTROS RÁPIDOS */
+        .header-actions { display: flex; gap: 12px; align-items: center; }
+        .search-bar { background: var(--bg); border: 1px solid var(--border); padding: 8px 15px; border-radius: 10px; color: #fff; width: 200px; outline: none; font-size: 13px; }
 
-        /* CARDS COM ALERTA DE INATIVIDADE */
-        .card { 
-            background: var(--surface); border: 1px solid var(--border); padding: 15px; 
-            margin: 12px; border-radius: 10px; cursor: pointer; position: relative;
-            transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .card:hover { border-color: var(--accent3); transform: translateY(-3px); }
-        .card.stale { border: 1px solid var(--perdido); animation: pulse-red 2s infinite; }
-        @keyframes pulse-red { 0% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(255, 71, 87, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0); } }
+        /* VIEWS */
+        .view { display: none; flex: 1; overflow: hidden; flex-direction: column; }
+        .view.active { display: flex; }
 
-        .card-name { font-family: 'Syne'; font-weight: 700; font-size: 14px; margin-bottom: 5px; display: block; }
-        .card-val { color: var(--accent); font-weight: 700; font-size: 13px; }
-        .badge-task { font-size: 9px; background: var(--border); padding: 2px 6px; border-radius: 4px; margin-top: 8px; display: inline-block; }
+        /* FUNIL BOARD */
+        .funnel-wrap { padding: 20px; flex: 1; overflow-x: auto; overflow-y: hidden; }
+        .funnel-board { display: flex; gap: 20px; height: 100%; align-items: flex-start; }
+        .column { background: rgba(20, 22, 34, 0.4); border-radius: 16px; border: 1px solid var(--border); display: flex; flex-direction: column; width: 310px; flex-shrink: 0; max-height: 85vh; }
+        .col-header { padding: 18px; border-bottom: 1px solid var(--border); font-family: 'Syne'; font-size: 11px; text-transform: uppercase; color: var(--text2); display: flex; justify-content: space-between; letter-spacing: 1px; }
+        .col-total { font-weight: 800; color: var(--accent); }
+        .body-list { flex: 1; overflow-y: auto; padding: 10px; display: flex; flex-direction: column; gap: 10px; min-height: 100px; }
 
-        /* MODAL E CHECKLIST */
-        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 2000; display: none; align-items: center; justify-content: center; }
-        .modal { background: var(--sidebar); border: 1px solid var(--border); border-radius: 15px; width: 550px; padding: 30px; max-height: 90vh; overflow-y: auto; }
-        .form-input { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px; color: #fff; margin-bottom: 15px; }
+        /* CARDS */
+        .card { background: var(--surface); border: 1px solid var(--border); padding: 16px; border-radius: 14px; cursor: pointer; position: relative; transition: 0.3s; }
+        .card:hover { border-color: var(--accent3); transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .card.stale { border-color: var(--perdido); animation: pulse-red 2s infinite; }
+        @keyframes pulse-red { 0%{box-shadow:0 0 0 0 rgba(255,71,87,.4)} 70%{box-shadow:0 0 0 8px rgba(255,71,87,0)} 100%{box-shadow:0 0 0 0 rgba(255,71,87,0)} }
+        .card-name { font-family: 'Syne'; font-weight: 700; font-size: 14px; margin-bottom: 5px; }
+        .card-val { color: var(--accent); font-weight: 700; font-size: 14px; }
+        .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; }
+        .badge-svc { font-size: 10px; background: var(--surface2); border: 1px solid var(--border); padding: 3px 8px; border-radius: 6px; color: var(--text2); }
+        .btn-zap-fast { background: #25d366; color: #000; width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; text-decoration: none; font-weight: 800; }
+
+        /* DASHBOARD */
+        .dashboard-wrap { flex: 1; overflow-y: auto; padding: 30px; }
+        .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 30px; }
+        .kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 25px; border-top: 4px solid var(--accent3); }
+        .kpi-label { font-size: 11px; text-transform: uppercase; color: var(--text3); font-weight: 700; margin-bottom: 10px; }
+        .kpi-val { font-family: 'Syne'; font-size: 32px; font-weight: 800; }
+
+        /* MODAIS */
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 2000; display: none; align-items: center; justify-content: center; }
+        .overlay.open { display: flex; }
+        .modal { background: var(--sidebar); border: 1px solid var(--border); border-radius: 20px; width: 550px; padding: 35px; max-height: 90vh; overflow-y: auto; }
+        .form-input { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 14px; color: #fff; margin-bottom: 15px; outline: none; }
+        .btn-primary { background: var(--accent); color: #000; border: none; padding: 14px 28px; border-radius: 12px; font-weight: 800; cursor: pointer; width: 100%; }
         
-        .checklist-item { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; background: var(--surface); padding: 10px; border-radius: 6px; font-size: 13px; border: 1px solid var(--border); }
-        .checklist-item input { accent-color: var(--accent); scale: 1.2; }
-
-        /* BOTÕES DE SERVIÇOS RÁPIDOS */
-        .service-btn { padding: 5px 10px; font-size: 10px; border-radius: 20px; border: 1px solid var(--accent); background: transparent; color: var(--accent); cursor: pointer; margin-right: 5px; }
-        .service-btn:hover { background: var(--accent); color: #000; }
-
+        /* RADAR SEO */
+        .radar-box { background: var(--surface); padding: 40px; border-radius: 20px; border: 1px solid var(--border); max-width: 600px; margin: 40px auto; }
+        
         #login-screen { position: fixed; inset: 0; background: var(--bg); z-index: 3000; display: flex; flex-direction: column; align-items: center; justify-content: center; }
     </style>
 </head>
 <body>
 
 <div id="login-screen">
-    <h1 style="font-family: Syne; color: var(--accent); letter-spacing: -2px; font-size: 42px; margin-bottom: 10px;">NEGOHUB OS</h1>
-    <p style="color: var(--text2); margin-bottom: 30px;">Estrategista: Melina</p>
-    <div style="width: 320px; display: flex; flex-direction: column; gap: 15px;">
+    <h1 style="font-family:Syne; color:var(--accent); font-size:48px; letter-spacing:-2px; margin-bottom:10px">NEGOHUB OS</h1>
+    <div style="width:320px; display:flex; flex-direction:column; gap:15px">
         <input type="email" id="loginEmail" class="form-input" placeholder="seu@email.com">
-        <input type="password" id="loginPass" class="form-input" placeholder="Senha de Acesso">
-        <button onclick="appLogin()" style="padding: 15px; background: var(--accent); border: none; border-radius: 8px; cursor: pointer; font-weight: 800; font-size: 14px;">INICIAR SESSÃO</button>
+        <input type="password" id="loginPass" class="form-input" placeholder="Senha">
+        <button onclick="appLogin()" class="btn-primary">INICIAR SESSÃO</button>
     </div>
 </div>
 
-<aside>
-    <div class="side-item" onclick="showView('funil')"><span>📊</span><span class="side-text">Funil de Vendas</span></div>
-    <div class="side-item" onclick="showView('radar')"><span>🎯</span><span class="side-text">Radar SEO</span></div>
-    <div class="side-item" onclick="alert('Relatórios em breve!')"><span>📈</span><span class="side-text">Indicadores</span></div>
-    <div style="margin-top: auto;" class="side-item" onclick="location.reload()"><span>🚪</span><span class="side-text">Sair</span></div>
+<aside id="sidebar" style="display:none">
+    <div class="side-item active" onclick="showView('funil')"><div class="icon-box">📊</div><span class="side-text">Funil de Vendas</span></div>
+    <div class="side-item" onclick="showView('dashboard')"><div class="icon-box">📈</div><span class="side-text">Dashboard</span></div>
+    <div class="side-item" onclick="showView('radar')"><div class="icon-box">🎯</div><span class="side-text">Radar SEO</span></div>
+    <div class="side-item" onclick="exportCSV()"><div class="icon-box">📥</div><span class="side-text">Exportar Leads</span></div>
+    <div style="margin-top: auto;" class="side-item" onclick="location.reload()"><div class="icon-box">🚪</div><span class="side-text">Sair</span></div>
 </aside>
 
-<div class="wrapper">
-    <header id="main-header" style="display:none">
-        <div style="font-family: Syne; font-weight: 800; font-size: 20px; color: var(--accent);">HUB DE SERVIÇOS</div>
-        <div style="display: flex; gap: 15px; align-items: center;">
-            <button onclick="toggleModal('modal-new', true)" style="background:var(--accent); border:none; padding:10px 20px; border-radius:8px; font-weight:800; cursor:pointer; font-size: 12px;">+ NOVO NEGÓCIO</button>
+<div class="wrapper" id="main-wrapper" style="display:none">
+    <header>
+        <div class="header-title">HUB DE SERVIÇOS</div>
+        <div class="header-actions">
+            <input type="text" id="searchInput" class="search-bar" placeholder="Buscar cliente..." onkeyup="filterLeads()">
+            <button class="btn-primary" style="width:auto; padding: 10px 20px; font-size:12px" onclick="openM('modal-new')">+ NOVO LEAD</button>
         </div>
     </header>
 
-    <main id="view-funil" style="display:none">
-        <div class="funnel-board">
-            <div class="column"><div class="col-header">Prospecção <span id="tot-contato">R$ 0</span></div><div class="body-list" id="list-contato" data-stage="Contato Inicial"></div></div>
-            <div class="column"><div class="col-header">Em Negociação <span id="tot-proposta">R$ 0</span></div><div class="body-list" id="list-proposta" data-stage="Proposta Enviada"></div></div>
-            <div class="column"><div class="col-header">Implementação <span id="tot-fechado">R$ 0</span></div><div class="body-list" id="list-fechado" data-stage="Fechamento"></div></div>
-            <div class="column"><div class="col-header">Perdido <span id="tot-perdido">R$ 0</span></div><div class="body-list" id="list-perdido" data-stage="Perdido"></div></div>
+    <main id="view-funil" class="view active">
+        <div class="funnel-wrap">
+            <div class="funnel-board">
+                <div class="column" id="col-contato"><div class="col-header">Prospecção <span class="col-total" id="tot-contato">R$ 0</span></div><div class="body-list" id="list-contato" data-stage="Contato Inicial"></div></div>
+                <div class="column" id="col-proposta"><div class="col-header">Negociação <span class="col-total" id="tot-proposta">R$ 0</span></div><div class="body-list" id="list-proposta" data-stage="Proposta Enviada"></div></div>
+                <div class="column" id="col-fechado"><div class="col-header">Implementação <span class="col-total" id="tot-fechado">R$ 0</span></div><div class="body-list" id="list-fechado" data-stage="Fechamento"></div></div>
+                <div class="column" id="col-perdido"><div class="col-header">Perdido <span class="col-total" id="tot-perdido">R$ 0</span></div><div class="body-list" id="list-perdido" data-stage="Perdido"></div></div>
+            </div>
         </div>
     </main>
 
-    <div id="view-radar" style="display:none; padding: 40px;">
-        <h2 style="font-family: Syne; margin-bottom: 20px;">Análise Radar SEO</h2>
-        <div style="background: var(--surface); padding: 30px; border-radius: 15px; border: 1px solid var(--border);">
-            <input id="radar-url" class="form-input" placeholder="Colar URL do cliente aqui...">
-            <button class="service-btn" style="padding: 15px 30px; font-size: 14px;" onclick="window.open('https://pagespeed.web.dev/report?url=' + document.getElementById('radar-url').value)">Gerar Diagnóstico de Performance</button>
+    <div id="view-dashboard" class="view">
+        <div class="dashboard-wrap">
+            <div class="kpi-row">
+                <div class="kpi"><div class="kpi-label">Faturamento Fechado</div><div class="kpi-val" id="dash-receita" style="color:var(--accent)">R$ 0</div></div>
+                <div class="kpi"><div class="kpi-label">Oportunidades Ativas</div><div class="kpi-val" id="dash-ativos">0</div></div>
+                <div class="kpi" style="border-top-color: var(--perdido)"><div class="kpi-label">Leads Frios</div><div class="kpi-val" id="dash-frios" style="color:var(--perdido)">0</div></div>
+                <div class="kpi" style="border-top-color: var(--contato)"><div class="kpi-label">Ticket Médio</div><div class="kpi-val" id="dash-ticket" style="color:var(--contato)">R$ 0</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="view-radar" class="view">
+        <div class="radar-box">
+            <h2 style="font-family:Syne; margin-bottom:10px">Radar de Performance SEO</h2>
+            <p style="color:var(--text2); font-size:13px; margin-bottom:25px">Analise o site do prospecto antes da reunião para dominar a negociação.</p>
+            <input id="radar-url" class="form-input" placeholder="https://sitecliente.com.br">
+            <button class="btn-primary" onclick="window.open('https://pagespeed.web.dev/report?url=' + document.getElementById('radar-url').value)">Analisar no Google PageSpeed</button>
         </div>
     </div>
 </div>
 
 <div class="overlay" id="modal-new">
     <div class="modal">
-        <h2 style="font-family: Syne; margin-bottom: 20px;">Abrir Oportunidade</h2>
+        <h2 style="font-family:Syne; margin-bottom:20px">Novo Negócio</h2>
         <input id="new-name" class="form-input" placeholder="Nome do Cliente">
-        
-        <div style="margin-bottom: 15px;">
-            <p style="font-size: 11px; color: var(--text2); margin-bottom: 8px;">Sugestões de Serviço:</p>
-            <button class="service-btn" onclick="setService('Google Ads', 1200)">Google Ads</button>
-            <button class="service-btn" onclick="setService('Social Media', 800)">Social Media</button>
-            <button class="service-btn" onclick="setService('Site/LP', 2500)">Site/LP</button>
-        </div>
-        
-        <input id="new-service" class="form-input" placeholder="Serviço Selecionado">
-        <input id="new-value" type="number" class="form-input" placeholder="Valor (R$)">
+        <input id="new-val" type="number" class="form-input" placeholder="Valor (R$)">
+        <input id="new-svc" class="form-input" placeholder="Serviço (ex: Meta Ads)">
         <input id="new-phone" class="form-input" placeholder="WhatsApp (5511...)">
-        
-        <button onclick="saveLead()" style="width:100%; background:var(--accent); border:none; padding:15px; border-radius:8px; cursor:pointer; font-weight:800">CADASTRAR NO FUNIL</button>
-        <button onclick="toggleModal('modal-new', false)" style="width:100%; background:transparent; border:none; color:var(--text2); margin-top:10px; cursor:pointer">Cancelar</button>
-    </div>
-</div>
-
-<div class="overlay" id="modal-details">
-    <div class="modal">
-        <h2 id="det-name" style="font-family: Syne; margin-bottom: 5px;">-</h2>
-        <p id="det-info" style="color:var(--accent); font-weight:700; margin-bottom: 25px;">-</p>
-        
-        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-            <button id="btn-briefing" style="flex:1; background:#25d366; color:#000; border:none; padding:10px; border-radius:6px; font-weight:800; cursor:pointer">ENVIAR BRIEFING</button>
-            <button onclick="deleteLead()" style="flex:1; background:var(--perdido); color:#fff; border:none; padding:10px; border-radius:6px; font-weight:800; cursor:pointer">PERDER NEGÓCIO</button>
-        </div>
-
-        <h3 style="font-size: 14px; margin-bottom: 15px; color: var(--text2);">Checklist de Implementação:</h3>
-        <div id="checklist-area">
-            <div class="checklist-item"><input type="checkbox"> <span>Reunião de Alinhamento</span></div>
-            <div class="checklist-item"><input type="checkbox"> <span>Acesso ao Gerenciador de Negócios</span></div>
-            <div class="checklist-item"><input type="checkbox"> <span>Instalação de Pixel/Tags</span></div>
-            <div class="checklist-item"><input type="checkbox"> <span>Criação de Criativos/Artes</span></div>
-            <div class="checklist-item"><input type="checkbox"> <span>Campanha no Ar</span></div>
-        </div>
-
-        <button onclick="toggleModal('modal-details', false)" style="width:100%; background:var(--border); border:none; color:#fff; padding:15px; border-radius:8px; margin-top:20px; cursor:pointer; font-weight:800">FECHAR E SALVAR</button>
+        <button class="btn-primary" onclick="saveLead()">CADASTRAR</button>
+        <button onclick="closeM('modal-new')" style="background:none; border:none; color:var(--text2); width:100%; margin-top:10px; cursor:pointer">Cancelar</button>
     </div>
 </div>
 
@@ -179,108 +180,106 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
     const auth = getAuth(app);
-    let currentId = null;
+    let allLeads = [];
 
     window.appLogin = () => {
-        const e = document.getElementById('loginEmail').value;
-        const p = document.getElementById('loginPass').value;
-        signInWithEmailAndPassword(auth, e, p).catch(() => alert("Credenciais Inválidas"));
+        signInWithEmailAndPassword(auth, document.getElementById('loginEmail').value, document.getElementById('loginPass').value)
+        .catch(() => alert("Acesso negado."));
     };
 
     onAuthStateChanged(auth, user => {
         if (user) {
             document.getElementById('login-screen').style.display = 'none';
-            document.getElementById('main-header').style.display = 'flex';
-            showView('funil');
-            loadLeads();
+            document.getElementById('sidebar').style.display = 'flex';
+            document.getElementById('main-wrapper').style.display = 'flex';
+            loadData();
         }
     });
 
-    window.setService = (name, val) => {
-        document.getElementById('new-service').value = name;
-        document.getElementById('new-value').value = val;
-    };
-
-    window.saveLead = async () => {
-        const lead = {
-            name: document.getElementById('new-name').value,
-            value: parseFloat(document.getElementById('new-value').value),
-            service: document.getElementById('new-service').value,
-            phone: document.getElementById('new-phone').value,
-            stage: 'Contato Inicial',
-            lastUpdate: serverTimestamp()
-        };
-        await addDoc(collection(db, "leads"), lead);
-        toggleModal('modal-new', false);
-    };
-
-    function loadLeads() {
-        onSnapshot(collection(db, "leads"), (snapshot) => {
+    function loadData() {
+        onSnapshot(collection(db, "leads"), (snap) => {
             const stages = { 'Contato Inicial': 'list-contato', 'Proposta Enviada': 'list-proposta', 'Fechamento': 'list-fechado', 'Perdido': 'list-perdido' };
             const totals = { 'list-contato': 0, 'list-proposta': 0, 'list-fechado': 0, 'list-perdido': 0 };
             Object.values(stages).forEach(id => document.getElementById(id).innerHTML = '');
-            
-            snapshot.forEach(docSnap => {
-                const l = docSnap.data();
+            allLeads = [];
+
+            snap.forEach(d => {
+                const l = { id: d.id, ...d.data() };
+                allLeads.push(l);
                 const card = document.createElement('div');
                 card.className = 'card';
-                card.dataset.id = docSnap.id;
+                card.dataset.id = l.id;
                 
-                // Lógica de Lead Frio (mais de 2 dias sem mexer)
+                // Lead Frio (48h)
                 const twoDays = 2 * 24 * 60 * 60 * 1000;
-                if(l.lastUpdate && (new Date() - l.lastUpdate.toDate() > twoDays)) {
-                    card.classList.add('stale');
-                }
+                if(l.lastUpdate && (new Date() - l.lastUpdate.toDate() > twoDays) && l.stage !== 'Perdido') card.classList.add('stale');
 
                 card.innerHTML = `
-                    <span class="card-name">${l.name}</span>
-                    <span class="card-val">R$ ${l.value.toLocaleString('pt-BR')}</span>
-                    <div class="badge-task">${l.service}</div>
+                    <div class="card-name">${l.name}</div>
+                    <div class="card-val">R$ ${l.value.toLocaleString('pt-BR')}</div>
+                    <div class="card-footer">
+                        <span class="badge-svc">${l.service}</span>
+                        <a href="https://wa.me/${l.phone}?text=Olá%20${l.name}!" target="_blank" class="btn-zap-fast">⚡</a>
+                    </div>
                 `;
-                card.onclick = () => openDetails(docSnap.id, l);
                 document.getElementById(stages[l.stage]).appendChild(card);
                 totals[stages[l.stage]] += l.value;
             });
 
-            document.getElementById('tot-contato').innerText = `R$ ${totals['list-contato'].toLocaleString('pt-BR')}`;
-            document.getElementById('tot-proposta').innerText = `R$ ${totals['list-proposta'].toLocaleString('pt-BR')}`;
-            document.getElementById('tot-fechado').innerText = `R$ ${totals['list-fechado'].toLocaleString('pt-BR')}`;
-            document.getElementById('tot-perdido').innerText = `R$ ${totals['list-perdido'].toLocaleString('pt-BR')}`;
+            // Atualiza Totais
+            Object.keys(totals).forEach(k => document.getElementById('tot-' + k.split('-')[1]).innerText = 'R$ ' + totals[k].toLocaleString('pt-BR'));
+            updateDashboard();
         });
     }
 
-    window.openDetails = (id, l) => {
-        currentId = id;
-        document.getElementById('det-name').innerText = l.name;
-        document.getElementById('det-info').innerText = `${l.service} | R$ ${l.value.toLocaleString('pt-BR')}`;
-        document.getElementById('btn-briefing').onclick = () => window.open(`https://wa.me/${l.phone}?text=Olá! Acabamos de iniciar seu projeto. Por favor, preencha este briefing para começarmos: [LINK-DO-SEU-FORMULARIO]`);
-        toggleModal('modal-details', true);
+    window.saveLead = async () => {
+        await addDoc(collection(db, "leads"), {
+            name: document.getElementById('new-name').value,
+            value: parseFloat(document.getElementById('new-val').value),
+            service: document.getElementById('new-svc').value,
+            phone: document.getElementById('new-phone').value,
+            stage: 'Contato Inicial',
+            lastUpdate: serverTimestamp()
+        });
+        closeM('modal-new');
     };
 
-    window.deleteLead = async () => {
-        if(confirm("Deseja marcar como perdido e remover?")) {
-            await deleteDoc(doc(db, "leads", currentId));
-            toggleModal('modal-details', false);
-        }
+    window.exportCSV = () => {
+        let csv = "Nome,Valor,Servico,WhatsApp,Etapa\n";
+        allLeads.forEach(l => { csv += `${l.name},${l.value},${l.service},${l.phone},${l.stage}\n`; });
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url; a.download = 'leads_hub.csv'; a.click();
     };
 
     window.showView = (v) => {
-        document.getElementById('view-funil').style.display = v === 'funil' ? 'block' : 'none';
-        document.getElementById('view-radar').style.display = v === 'radar' ? 'block' : 'none';
+        document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
+        document.getElementById('view-' + v).classList.add('active');
     };
 
-    window.toggleModal = (id, show) => document.getElementById(id).style.display = show ? 'flex' : 'none';
+    function updateDashboard() {
+        const fechados = allLeads.filter(l => l.stage === 'Fechamento');
+        const receita = fechados.reduce((acc, l) => acc + l.value, 0);
+        const ativos = allLeads.filter(l => l.stage !== 'Fechamento' && l.stage !== 'Perdido').length;
+        document.getElementById('dash-receita').innerText = 'R$ ' + receita.toLocaleString('pt-BR');
+        document.getElementById('dash-ativos').innerText = ativos;
+        document.getElementById('dash-ticket').innerText = 'R$ ' + (fechados.length ? (receita/fechados.length) : 0).toLocaleString('pt-BR');
+    }
+
+    window.openM = (id) => document.getElementById(id).classList.add('open');
+    window.closeM = (id) => document.getElementById(id).classList.remove('open');
 
     document.querySelectorAll('.body-list').forEach(el => {
-        new Sortable(el, {
-            group: 'funnel', animation: 150,
-            onEnd: async (evt) => {
-                const id = evt.item.dataset.id;
-                const newStage = evt.to.dataset.stage;
-                await updateDoc(doc(db, "leads", id), { stage: newStage, lastUpdate: serverTimestamp() });
-            }
-        });
+        new Sortable(el, { group: 'funnel', animation: 150, onEnd: async (e) => {
+            await updateDoc(doc(db, "leads", e.item.dataset.id), { stage: e.to.dataset.stage, lastUpdate: serverTimestamp() });
+        }});
     });
+
+    window.filterLeads = () => {
+        const t = document.getElementById('searchInput').value.toLowerCase();
+        document.querySelectorAll('.card').forEach(c => c.style.display = c.innerText.toLowerCase().includes(t) ? 'block' : 'none');
+    };
 </script>
 </body>
 </html>
