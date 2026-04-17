@@ -243,16 +243,30 @@
         });
         closeM('modal-new');
     };
+window.exportCSV = () => {
+    // Cabeçalho com ponto e vírgula para o Excel Brasil separar colunas
+    let csv = "Nome;Valor;Serviço;WhatsApp;Etapa\n";
+    
+    allLeads.forEach(l => { 
+        // Converte o ponto do valor para vírgula para o Excel entender como dinheiro
+        const valorExcel = l.value ? l.value.toString().replace('.', ',') : '0';
+        csv += `${l.name};${valorExcel};${l.service};${l.phone};${l.stage}\n`; 
+    });
 
-    window.exportCSV = () => {
-        let csv = "Nome,Valor,Servico,WhatsApp,Etapa\n";
-        allLeads.forEach(l => { csv += `${l.name},${l.value},${l.service},${l.phone},${l.stage}\n`; });
-        const blob = new Blob([csv], { type: 'text/csv' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url; a.download = 'leads_hub.csv'; a.click();
-    };
-
+    // O prefixo \uFEFF é o segredo para o Excel abrir com acentos corretos (UTF-8 BOM)
+    const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    
+    a.href = url; 
+    a.download = 'leads_hub_servicos.csv'; 
+    document.body.appendChild(a);
+    a.click();
+    
+    // Limpeza
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+};
     window.showView = (v) => {
         document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
         document.getElementById('view-' + v).classList.add('active');
