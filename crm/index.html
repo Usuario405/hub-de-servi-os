@@ -283,17 +283,44 @@
         closeM('modal-new');
     };
 
-    window.editLead = async (id) => {
+window.editLead = (id) => {
         const l = allLeads.find(x => x.id === id);
-        const nN = prompt("Nome:", l.name); if(!nN) return;
-        const nV = prompt("Valor:", l.value);
-        const nS = prompt("Serviço:", l.service);
-        const nP = prompt("WhatsApp:", l.phone);
+        if (!l) return;
 
-        if(confirm("Salvar alterações?")) {
-            await updateDoc(doc(db, "leads", id), {
-                name: nN, value: parseFloat(nV) || 0, service: nS, phone: nP, lastUpdate: serverTimestamp()
-            });
+        document.getElementById('edit-id').value = l.id;
+        document.getElementById('edit-name').value = l.name;
+        document.getElementById('edit-val').value = l.value;
+        document.getElementById('edit-svc').value = l.service;
+        document.getElementById('edit-phone').value = l.phone;
+
+        openM('modal-edit');
+    };
+
+    window.updateLead = async () => {
+        const id = document.getElementById('edit-id').value;
+        const dados = {
+            name: document.getElementById('edit-name').value,
+            value: parseFloat(document.getElementById('edit-val').value) || 0,
+            service: document.getElementById('edit-svc').value,
+            phone: document.getElementById('edit-phone').value,
+            lastUpdate: serverTimestamp()
+        };
+
+        try {
+            await updateDoc(doc(db, "leads", id), dados);
+            closeM('modal-edit');
+            // Alerta discreto de sucesso
+            console.log("Lead atualizado!");
+        } catch (e) {
+            alert("Erro ao atualizar os dados.");
+        }
+    };
+
+    window.deleteLead = async () => {
+        const id = document.getElementById('edit-id').value;
+        if (confirm("Tem certeza que deseja excluir permanentemente este lead da HUB?")) {
+            await deleteDoc(doc(db, "leads", id));
+            closeM('modal-edit');
         }
     };
 
