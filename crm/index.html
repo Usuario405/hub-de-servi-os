@@ -16,7 +16,6 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'DM Sans', sans-serif; }
         body { background: var(--bg); color: var(--text); display: flex; min-height: 100vh; overflow: hidden; }
 
-        /* SIDEBAR AJUSTADA COM ICONSAX STYLE */
         aside {
             width: 80px; background: var(--sidebar); border-right: 1px solid var(--border);
             display: flex; flex-direction: column; align-items: center; padding: 25px 0;
@@ -33,10 +32,7 @@
         .side-item:hover, .side-item.active { color: var(--accent); background: rgba(0, 229, 160, 0.05); }
         .side-text { opacity: 0; font-size: 14px; font-weight: 600; transition: 0.2s; }
         aside:hover .side-text { opacity: 1; }
-        .notif-badge { margin-left: auto; background: var(--perdido); color: #fff; border-radius: 10px; padding: 1px 7px; font-size: 10px; font-weight: 700; margin-right: 15px; display: none; }
-        aside:hover .notif-badge { display: block; }
 
-        /* WRAPPER E LAYOUT */
         .wrapper { margin-left: 80px; flex: 1; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
         header {
             height: 75px; background: var(--sidebar); border-bottom: 1px solid var(--border);
@@ -44,15 +40,12 @@
         }
         .header-title { font-family: 'Syne'; font-weight: 800; font-size: 20px; color: var(--accent); letter-spacing: -1px; }
 
-        /* BUSCA E FILTROS RÁPIDOS */
         .header-actions { display: flex; gap: 12px; align-items: center; }
         .search-bar { background: var(--bg); border: 1px solid var(--border); padding: 8px 15px; border-radius: 10px; color: #fff; width: 200px; outline: none; font-size: 13px; }
 
-        /* VIEWS */
         .view { display: none; flex: 1; overflow: hidden; flex-direction: column; }
         .view.active { display: flex; }
 
-        /* FUNIL BOARD */
         .funnel-wrap { padding: 20px; flex: 1; overflow-x: auto; overflow-y: hidden; }
         .funnel-board { display: flex; gap: 20px; height: 100%; align-items: flex-start; }
         .column { background: rgba(20, 22, 34, 0.4); border-radius: 16px; border: 1px solid var(--border); display: flex; flex-direction: column; width: 310px; flex-shrink: 0; max-height: 85vh; }
@@ -60,7 +53,6 @@
         .col-total { font-weight: 800; color: var(--accent); }
         .body-list { flex: 1; overflow-y: auto; padding: 10px; display: flex; flex-direction: column; gap: 10px; min-height: 100px; }
 
-        /* CARDS */
         .card { background: var(--surface); border: 1px solid var(--border); padding: 16px; border-radius: 14px; cursor: pointer; position: relative; transition: 0.3s; }
         .card:hover { border-color: var(--accent3); transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
         .card.stale { border-color: var(--perdido); animation: pulse-red 2s infinite; }
@@ -71,22 +63,17 @@
         .badge-svc { font-size: 10px; background: var(--surface2); border: 1px solid var(--border); padding: 3px 8px; border-radius: 6px; color: var(--text2); }
         .btn-zap-fast { background: #25d366; color: #000; width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; text-decoration: none; font-weight: 800; }
 
-        /* DASHBOARD */
         .dashboard-wrap { flex: 1; overflow-y: auto; padding: 30px; }
         .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 30px; }
         .kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 25px; border-top: 4px solid var(--accent3); }
         .kpi-label { font-size: 11px; text-transform: uppercase; color: var(--text3); font-weight: 700; margin-bottom: 10px; }
         .kpi-val { font-family: 'Syne'; font-size: 32px; font-weight: 800; }
 
-        /* MODAIS */
         .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 2000; display: none; align-items: center; justify-content: center; }
         .overlay.open { display: flex; }
         .modal { background: var(--sidebar); border: 1px solid var(--border); border-radius: 20px; width: 550px; padding: 35px; max-height: 90vh; overflow-y: auto; }
         .form-input { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 14px; color: #fff; margin-bottom: 15px; outline: none; }
         .btn-primary { background: var(--accent); color: #000; border: none; padding: 14px 28px; border-radius: 12px; font-weight: 800; cursor: pointer; width: 100%; }
-        
-        /* RADAR SEO */
-        .radar-box { background: var(--surface); padding: 40px; border-radius: 20px; border: 1px solid var(--border); max-width: 600px; margin: 40px auto; }
         
         #login-screen { position: fixed; inset: 0; background: var(--bg); z-index: 3000; display: flex; flex-direction: column; align-items: center; justify-content: center; }
     </style>
@@ -142,9 +129,9 @@
     </div>
 
     <div id="view-radar" class="view">
-        <div class="radar-box">
+        <div class="radar-box" style="background: var(--surface); padding: 40px; border-radius: 20px; border: 1px solid var(--border); max-width: 600px; margin: 40px auto; text-align:center;">
             <h2 style="font-family:Syne; margin-bottom:10px">Radar de Performance SEO</h2>
-            <p style="color:var(--text2); font-size:13px; margin-bottom:25px">Analise o site do prospecto antes da reunião para dominar a negociação.</p>
+            <p style="color:var(--text2); font-size:13px; margin-bottom:25px">Analise o site do prospecto antes da reunião.</p>
             <input id="radar-url" class="form-input" placeholder="https://sitecliente.com.br">
             <button class="btn-primary" onclick="window.open('https://pagespeed.web.dev/report?url=' + document.getElementById('radar-url').value)">Analisar no Google PageSpeed</button>
         </div>
@@ -162,11 +149,11 @@
         <button onclick="closeM('modal-new')" style="background:none; border:none; color:var(--text2); width:100%; margin-top:10px; cursor:pointer">Cancelar</button>
     </div>
 </div>
+
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
     import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
-    // IMPORTANTE: Deixamos todos os imports juntos no topo
-    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, sendEmailVerification } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signOut } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyDMiJmwgxep1USbcmWa8ck3eEI1_I13HRg",
@@ -182,7 +169,7 @@
     const auth = getAuth(app);
     let allLeads = [];
 
-    // Esta função agora está correta e vai disparar o e-mail pra você
+    // TRAVA DE SEGURANÇA E MONITORAMENTO
     onAuthStateChanged(auth, async (user) => {
         if (user) {
             if (user.emailVerified) {
@@ -191,108 +178,61 @@
                 document.getElementById('main-wrapper').style.display = 'flex';
                 loadData();
             } else {
-                alert("⚠️ Quase lá! Enviamos um link de confirmação para o seu e-mail. Verifique sua caixa de entrada e spam.");
-                
-                try {
-                    // Agora sim o sistema consegue enviar o e-mail
-                    await sendEmailVerification(user);
-                } catch (e) {
-                    console.log("Aguarde um momento para reenviar o link.");
-                }
-
-                await auth.signOut();
-            }
-        }
-    });
-    
-    onAuthStateChanged(auth, async (user) => {
-        if (user) {
-            if (user.emailVerified) {
-                // E-mail confirmado: Libera o sistema
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('sidebar').style.display = 'flex';
-                document.getElementById('main-wrapper').style.display = 'flex';
-                loadData();
-            } else {
-                // E-mail NÃO confirmado: Avisa, envia link e expulsa
-                alert("⚠️ Acesso Bloqueado: Por favor, verifique sua caixa de e-mail (e o spam) para confirmar seu cadastro antes de acessar o Hub.");
-                
-                try {
-                    await sendEmailVerification(user);
-                } catch (e) {
-                    console.log("Link já enviado recentemente.");
-                }
-
-                await auth.signOut();
-                location.reload(); // Recarrega para garantir que a tela de login apareça limpa
+                alert("⚠️ Verifique seu e-mail para acessar o Hub.");
+                try { await sendEmailVerification(user); } catch(e) {}
+                await signOut(auth);
+                location.reload();
             }
         }
     });
 
     window.appLogin = () => {
-        signInWithEmailAndPassword(auth, document.getElementById('loginEmail').value, document.getElementById('loginPass').value)
-        .catch(() => alert("E-mail ou senha incorretos ou acesso negado."));
+        const e = document.getElementById('loginEmail').value;
+        const p = document.getElementById('loginPass').value;
+        signInWithEmailAndPassword(auth, e, p).catch(() => alert("Acesso negado."));
     };
 
-    window.appLogin = () => {
-        signInWithEmailAndPassword(auth, document.getElementById('loginEmail').value, document.getElementById('loginPass').value)
-        .catch(() => alert("Acesso negado."));
-    };
     window.appLogout = () => {
-    const auth = getAuth();
-    auth.signOut().then(() => {
-        document.getElementById('main-wrapper').style.display = 'none';
-        document.getElementById('sidebar').style.display = 'none';
-        document.getElementById('login-screen').style.display = 'flex';
-        document.getElementById('loginEmail').value = '';
-        document.getElementById('loginPass').value = '';
-    }).catch((error) => {
-        alert("Erro ao sair: " + error.message);
-    });
-};
-
-    onAuthStateChanged(auth, user => {
-        if (user) {
-            document.getElementById('login-screen').style.display = 'none';
-            document.getElementById('sidebar').style.display = 'flex';
-            document.getElementById('main-wrapper').style.display = 'flex';
-            loadData();
-        }
-    });
+        signOut(auth).then(() => location.reload());
+    };
 
     function loadData() {
         onSnapshot(collection(db, "leads"), (snap) => {
             const stages = { 'Contato Inicial': 'list-contato', 'Proposta Enviada': 'list-proposta', 'Fechamento': 'list-fechado', 'Perdido': 'list-perdido' };
             const totals = { 'list-contato': 0, 'list-proposta': 0, 'list-fechado': 0, 'list-perdido': 0 };
+            
             Object.values(stages).forEach(id => document.getElementById(id).innerHTML = '');
             allLeads = [];
 
             snap.forEach(d => {
                 const l = { id: d.id, ...d.data() };
                 allLeads.push(l);
+                
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.dataset.id = l.id;
-                
-                // Lead Frio (48h)
+
                 const twoDays = 2 * 24 * 60 * 60 * 1000;
                 if(l.lastUpdate && (new Date() - l.lastUpdate.toDate() > twoDays) && l.stage !== 'Perdido') card.classList.add('stale');
 
-              card.innerHTML = `
-    <div onclick="editLead('${l.id}')" style="cursor: pointer;">
-        <div class="card-name">${l.name}</div>
-        <div class="card-val">R$ ${l.value.toLocaleString('pt-BR')}</div>
-        <div class="card-footer">
-            <span class="badge-svc">${l.service}</span>
-            <a href="https://wa.me/${String(l.phone).replace(/\D/g, '')}" target="_blank" class="btn-zap-fast" onclick="event.stopPropagation()">⚡</a>
-        </div>
-    </div>
-`;
-document.getElementById(stages[l.stage]).appendChild(card);
-totals[stages[l.stage]] += l.value;
-                
-            // Atualiza Totais
-            Object.keys(totals).forEach(k => document.getElementById('tot-' + k.split('-')[1]).innerText = 'R$ ' + totals[k].toLocaleString('pt-BR'));
+                card.innerHTML = `
+                    <div onclick="editLead('${l.id}')">
+                        <div class="card-name">${l.name}</div>
+                        <div class="card-val">R$ ${Number(l.value).toLocaleString('pt-BR')}</div>
+                        <div class="card-footer">
+                            <span class="badge-svc">${l.service}</span>
+                            <a href="https://wa.me/${String(l.phone).replace(/\D/g, '')}" target="_blank" class="btn-zap-fast" onclick="event.stopPropagation()">⚡</a>
+                        </div>
+                    </div>
+                `;
+                document.getElementById(stages[l.stage]).appendChild(card);
+                totals[stages[l.stage]] += Number(l.value);
+            });
+
+            Object.keys(totals).forEach(k => {
+                const el = document.getElementById('tot-' + k.split('-')[1]);
+                if(el) el.innerText = 'R$ ' + totals[k].toLocaleString('pt-BR');
+            });
             updateDashboard();
         });
     }
@@ -300,7 +240,7 @@ totals[stages[l.stage]] += l.value;
     window.saveLead = async () => {
         await addDoc(collection(db, "leads"), {
             name: document.getElementById('new-name').value,
-            value: parseFloat(document.getElementById('new-val').value),
+            value: parseFloat(document.getElementById('new-val').value) || 0,
             service: document.getElementById('new-svc').value,
             phone: document.getElementById('new-phone').value,
             stage: 'Contato Inicial',
@@ -308,91 +248,7 @@ totals[stages[l.stage]] += l.value;
         });
         closeM('modal-new');
     };
-window.exportCSV = () => {
-    if (allLeads.length === 0) {
-        alert("Não há dados para exportar.");
-        return;
-    }
-
-    // Cabeçalho com ponto e vírgula (Padrão Excel Brasil)
-    let csv = "Nome;Valor;Serviço;WhatsApp;Etapa\n";
-    
-    allLeads.forEach(l => { 
-        // Troca ponto por vírgula no valor para o Excel entender como dinheiro
-        const valorExcel = l.value ? l.value.toString().replace('.', ',') : '0';
-        csv += `${l.name};${valorExcel};${l.service};${l.phone};${l.stage}\n`; 
-    });
-
-    // Criamos o arquivo garantindo que o Excel entenda que é CSV e tem acentos
-    const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    
-    a.style.display = 'none';
-    a.href = url; 
-    a.download = 'leads_hub_negohub.csv'; // Extensão .csv força a abertura no Excel
-    document.body.appendChild(a);
-    a.click();
-    
-    window.URL.revokeObjectURL(url);
-    document.body.removeChild(a);
-};
-    window.showView = (v) => {
-        document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
-        document.getElementById('view-' + v).classList.add('active');
-    };
-
-    function updateDashboard() {
-        const fechados = allLeads.filter(l => l.stage === 'Fechamento');
-        const receita = fechados.reduce((acc, l) => acc + l.value, 0);
-        const ativos = allLeads.filter(l => l.stage !== 'Fechamento' && l.stage !== 'Perdido').length;
-        document.getElementById('dash-receita').innerText = 'R$ ' + receita.toLocaleString('pt-BR');
-        document.getElementById('dash-ativos').innerText = ativos;
-        document.getElementById('dash-ticket').innerText = 'R$ ' + (fechados.length ? (receita/fechados.length) : 0).toLocaleString('pt-BR');
-    }
-
-    window.openM = (id) => document.getElementById(id).classList.add('open');
-    window.closeM = (id) => document.getElementById(id).classList.remove('open');
-
-    document.querySelectorAll('.body-list').forEach(el => {
-        new Sortable(el, { group: 'funnel', animation: 150, onEnd: async (e) => {
-            await updateDoc(doc(db, "leads", e.item.dataset.id), { stage: e.to.dataset.stage, lastUpdate: serverTimestamp() });
-        }});
-    });
-
-  window.filterLeads = () => {
-        const t = document.getElementById('searchInput').value.toLowerCase();
-        document.querySelectorAll('.card').forEach(c => c.style.display = c.innerText.toLowerCase().includes(t) ? 'block' : 'none');
-    }; // <-- Essa chave é importante para fechar a função de busca
 
     window.editLead = async (id) => {
-        const lead = allLeads.find(l => l.id === id);
-        if (!lead) return;
-
-        const novoNome = prompt("Editar Nome do Cliente:", lead.name);
-        if (novoNome === null) return; 
-
-        const novoValor = prompt("Editar Valor (R$):", lead.value);
-        const novoSvc = prompt("Editar Serviço:", lead.service);
-        const novoWhats = prompt("Editar WhatsApp (apenas números):", lead.phone);
-
-        const acao = confirm("Clique em OK para SALVAR as alterações ou CANCELAR para manter como está.");
-
-        if (acao) {
-            try {
-                await updateDoc(doc(db, "leads", id), {
-                    name: novoNome,
-                    value: parseFloat(novoValor) || 0,
-                    service: novoSvc,
-                    phone: novoWhats.replace(/\D/g, ''),
-                    lastUpdate: serverTimestamp()
-                });
-            } catch (e) {
-                alert("Erro ao atualizar!");
-            }
-        }
-    };
-</script>
-</script>
-</body>
-</html>
+        const l = allLeads.find(x => x.id === id);
+        const nN = prompt("Nome:",
