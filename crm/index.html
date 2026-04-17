@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NegoHub OS | Gestão Avançada</title>
+    <title>NegoHub OS | Gestão Estratégica</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
@@ -36,7 +36,7 @@
         .view { display: none; flex: 1; overflow-y: auto; padding: 30px; }
         .view.active { display: flex; flex-direction: column; }
 
-        /* Layouts */
+        /* Funil */
         .funnel-wrap { display: flex; gap: 20px; height: 100%; overflow-x: auto; padding-bottom: 20px; }
         .column { background: rgba(20, 22, 34, 0.4); border-radius: 16px; border: 1px solid var(--border); width: 310px; flex-shrink: 0; display: flex; flex-direction: column; }
         .col-header { padding: 18px; border-bottom: 1px solid var(--border); font-family: 'Syne'; font-size: 11px; text-transform: uppercase; color: var(--text2); display: flex; justify-content: space-between; }
@@ -44,9 +44,8 @@
 
         .card { background: var(--surface); border: 1px solid var(--border); padding: 16px; border-radius: 14px; cursor: pointer; transition: 0.3s; }
         .card:hover { border-color: var(--accent3); transform: translateY(-4px); }
-        .card-name { font-family: 'Syne'; font-weight: 700; font-size: 14px; margin-bottom: 5px; }
-        .card-val { color: var(--accent); font-weight: 700; font-size: 14px; }
 
+        /* Dash & Perfil */
         .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 25px; }
         .kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 20px; border-top: 4px solid var(--accent3); }
         .kpi-label { font-size: 10px; text-transform: uppercase; color: var(--text3); margin-bottom: 8px; }
@@ -63,8 +62,9 @@
         .btn-primary { background: var(--accent); color: #000; border: none; padding: 12px 24px; border-radius: 10px; font-weight: 800; cursor: pointer; transition: 0.2s; }
         
         #login-screen { position: fixed; inset: 0; background: var(--bg); z-index: 3000; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        
-        .chart-container { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 25px; margin-top: 20px; }
+
+        .profile-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 25px; margin-bottom: 20px; }
+        .activity-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
     </style>
 </head>
 <body>
@@ -74,15 +74,15 @@
     <div style="width:320px; display:flex; flex-direction:column; gap:15px">
         <input type="email" id="loginEmail" class="form-input" placeholder="seu@email.com">
         <input type="password" id="loginPass" class="form-input" placeholder="Senha">
-        <button onclick="appLogin()" class="btn-primary" style="width:100%">ENTRAR</button>
+        <button onclick="appLogin()" class="btn-primary" style="width:100%">ENTRAR NO HUB</button>
     </div>
 </div>
 
 <aside id="sidebar" style="display:none">
     <div class="side-item active" onclick="showView('funil')"><div class="icon-box">📊</div><span class="side-text">Funil</span></div>
     <div class="side-item" onclick="showView('dashboard')"><div class="icon-box">📈</div><span class="side-text">Dashboard</span></div>
-    <div class="side-item" onclick="showView('leads')"><div class="icon-box">👥</div><span class="side-text">Clientes/Leads</span></div>
-    <div class="side-item" onclick="showView('perfil')"><div class="icon-box">👤</div><span class="side-text">Perfil</span></div>
+    <div class="side-item" onclick="showView('leads')"><div class="icon-box">👥</div><span class="side-text">Clientes</span></div>
+    <div class="side-item" onclick="showView('perfil')"><div class="icon-box">👤</div><span class="side-text">Minha Conta</span></div>
     <div style="margin-top: auto;" class="side-item" onclick="appLogout()"><div class="icon-box">🚪</div><span class="side-text">Sair</span></div>
 </aside>
 
@@ -103,49 +103,50 @@
 
     <div id="view-dashboard" class="view">
         <div class="kpi-row">
-            <div class="kpi" style="border-top-color: var(--accent)"><div class="kpi-label">ROI Global</div><div class="kpi-val" id="dash-roi-global">0.0x</div></div>
-            <div class="kpi"><div class="kpi-label">Receita Acumulada</div><div class="kpi-val" id="dash-receita">R$ 0</div></div>
+            <div class="kpi" style="border-top-color: var(--accent)"><div class="kpi-label">ROI Médio</div><div class="kpi-val" id="dash-roi-global">0.0x</div></div>
+            <div class="kpi"><div class="kpi-label">Faturado</div><div class="kpi-val" id="dash-receita">R$ 0</div></div>
             <div class="kpi" style="border-top-color: var(--warm)"><div class="kpi-label">Leads Ativos</div><div class="kpi-val" id="dash-ativos">0</div></div>
             <div class="kpi" style="border-top-color: var(--perdido)"><div class="kpi-label">Investimento</div><div class="kpi-val" id="dash-gasto-total">R$ 0</div></div>
         </div>
-        <div class="chart-container">
-            <h3 style="font-family:Syne; margin-bottom:20px; font-size:14px">Performance Comercial</h3>
-            <canvas id="myChart" height="100"></canvas>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px">
+            <div class="profile-card">
+                <h3 style="font-family:Syne; margin-bottom:20px; font-size:14px">Origem dos Clientes</h3>
+                <canvas id="chartOrigem" height="200"></canvas>
+            </div>
+            <div class="profile-card">
+                <h3 style="font-family:Syne; margin-bottom:20px; font-size:14px">Performance Semanal</h3>
+                <canvas id="chartBarra" height="200"></canvas>
+            </div>
         </div>
     </div>
 
     <div id="view-leads" class="view">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px">
-            <div>
-                <h2 style="font-family:Syne">Gestão de Clientes</h2>
-                <p style="color:var(--text2); font-size:13px">Lista completa e exportação de dados.</p>
-            </div>
-            <button class="btn-primary" style="background:#2ecc71; color:white" onclick="exportToExcel()">📥 BAIXAR EXCEL</button>
+        <div style="display:flex; justify-content:space-between; margin-bottom:20px">
+            <h2 style="font-family:Syne">Base de Clientes</h2>
+            <button class="btn-primary" style="background:#2ecc71; color:white; font-size:12px" onclick="exportToExcel()">BAIXAR RELATÓRIO EXCEL</button>
         </div>
-        
         <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 25px;">
-            <table id="leads-table">
-                <thead>
-                    <tr><th>Cliente</th><th>Valor Venda</th><th>Investimento</th><th>ROI</th><th>Origem</th><th>Status</th><th>Ações</th></tr>
-                </thead>
+            <table id="table-leads">
+                <thead><tr><th>Cliente</th><th>Venda</th><th>Investimento</th><th>ROI</th><th>Origem</th><th>Status</th><th>Ações</th></tr></thead>
                 <tbody id="tabela-leads-corpo"></tbody>
             </table>
         </div>
     </div>
 
     <div id="view-perfil" class="view">
-        <h2 style="font-family:Syne; margin-bottom:20px">Minha Conta</h2>
+        <h2 style="font-family:Syne; margin-bottom:20px">Configurações e Atividade</h2>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px">
-            <div style="background:var(--surface); padding:30px; border-radius:20px; border:1px solid var(--border)">
-                <h3 style="margin-bottom:15px">Alterar Senha</h3>
-                <input type="password" id="new-password" class="form-input" placeholder="Nova Senha">
-                <button class="btn-primary" onclick="changePassword()" style="width:100%">ATUALIZAR</button>
+            <div class="profile-card">
+                <h3 style="font-family:Syne; margin-bottom:15px; font-size:16px">Minha Atividade</h3>
+                <div class="activity-item"><span>Total de Leads</span><b id="act-leads">0</b></div>
+                <div class="activity-item"><span>Vendas Fechadas</span><b id="act-fechados">0</b></div>
+                <div class="activity-item"><span>Taxa de Conversão</span><b id="act-conv">0%</b></div>
+                <div class="activity-item" style="border:0"><span>Faturamento Total</span><b id="act-faturado" style="color:var(--accent)">R$ 0</b></div>
             </div>
-            <div style="background:var(--surface); padding:30px; border-radius:20px; border:1px solid var(--border)">
-                <h3 style="margin-bottom:15px">Novo Usuário</h3>
-                <input type="email" id="new-user-email" class="form-input" placeholder="E-mail">
-                <input type="password" id="new-user-pass" class="form-input" placeholder="Senha">
-                <button class="btn-primary" onclick="createNewUser()" style="width:100%">CRIAR ACESSO</button>
+            <div class="profile-card">
+                <h3 style="font-family:Syne; margin-bottom:15px; font-size:16px">Segurança</h3>
+                <input type="password" id="new-password" class="form-input" placeholder="Nova Senha">
+                <button class="btn-primary" onclick="changePassword()" style="width:100%">ALTERAR MINHA SENHA</button>
             </div>
         </div>
     </div>
@@ -153,10 +154,10 @@
 
 <div class="overlay" id="modal-new">
     <div class="modal">
-        <h2 style="font-family:Syne; margin-bottom:20px">Novo Lead</h2>
+        <h2 style="font-family:Syne; margin-bottom:20px">Cadastrar Lead</h2>
         <input id="new-name" class="form-input" placeholder="Nome do Cliente">
-        <input id="new-val" type="number" class="form-input" placeholder="Valor Venda (R$)">
-        <input id="new-cost" type="number" class="form-input" placeholder="Custo Lead (R$)" value="0">
+        <input id="new-val" type="number" class="form-input" placeholder="Valor Estimado da Venda (R$)">
+        <input id="new-cost" type="number" class="form-input" placeholder="Custo p/ adquirir este lead (R$)" value="0">
         <select id="new-svc" class="form-input" style="background:var(--bg); color:#fff">
             <option value="Google Ads">Google Ads</option>
             <option value="Instagram Ads">Instagram Ads</option>
@@ -169,22 +170,32 @@
 
 <div class="overlay" id="modal-edit">
     <div class="modal">
-        <h2 style="font-family:Syne; margin-bottom:20px">Editar Lead</h2>
+        <h2 style="font-family:Syne; margin-bottom:10px">Perfil do Lead</h2>
+        <div id="edit-roi-display" style="font-size:12px; margin-bottom:20px; color:var(--accent)">ROI deste cliente: ---</div>
+        
         <input id="edit-id" type="hidden">
+        <label style="font-size:10px; color:var(--text3)">NOME DO CLIENTE</label>
         <input id="edit-name" class="form-input">
+        
+        <label style="font-size:10px; color:var(--text3)">VALOR DA VENDA (R$)</label>
         <input id="edit-val" type="number" class="form-input">
+        
+        <label style="font-size:10px; color:var(--text3)">INVESTIMENTO NESTE LEAD (R$)</label>
         <input id="edit-cost" type="number" class="form-input">
-        <textarea id="edit-notes" class="form-input" style="height:120px; resize:none" placeholder="Notas do atendimento..."></textarea>
+        
+        <label style="font-size:10px; color:var(--text3)">HISTÓRICO E NOTAS</label>
+        <textarea id="edit-notes" class="form-input" style="height:100px; resize:none"></textarea>
+        
         <button class="btn-primary" onclick="updateLead()" style="width:100%">SALVAR ALTERAÇÕES</button>
-        <button class="btn-primary" style="background:var(--perdido); margin-top:10px; color:white; width:100%" onclick="deleteLead()">EXCLUIR</button>
-        <button onclick="closeM('modal-edit')" style="background:none; border:none; color:var(--text2); width:100%; margin-top:10px; cursor:pointer">Cancelar</button>
+        <button class="btn-primary" style="background:var(--perdido); margin-top:10px; color:white; width:100%" onclick="deleteLead()">EXCLUIR LEAD</button>
+        <button onclick="closeM('modal-edit')" style="background:none; border:none; color:var(--text2); width:100%; margin-top:10px; cursor:pointer">Voltar</button>
     </div>
 </div>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
     import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, serverTimestamp, query, where } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
-    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, updatePassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, updatePassword } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyDMiJmwgxep1USbcmWa8ck3eEI1_I13HRg",
@@ -199,7 +210,7 @@
     const db = getFirestore(app);
     const auth = getAuth(app);
     let allLeads = [];
-    let myChart = null;
+    let chart1 = null, chart2 = null;
 
     onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -215,7 +226,7 @@
     window.appLogin = () => {
         const e = document.getElementById('loginEmail').value;
         const p = document.getElementById('loginPass').value;
-        signInWithEmailAndPassword(auth, e, p).catch(() => alert("Acesso Negado."));
+        signInWithEmailAndPassword(auth, e, p).catch(() => alert("Acesso negado."));
     };
 
     window.appLogout = () => signOut(auth).then(() => location.reload());
@@ -227,88 +238,89 @@
             const totals = { 'list-contato': 0, 'list-proposta': 0, 'list-fechado': 0, 'list-perdido': 0 };
             document.querySelectorAll('.body-list').forEach(el => el.innerHTML = '');
             allLeads = [];
-            
             snap.forEach(d => {
                 const l = { id: d.id, ...d.data() };
                 allLeads.push(l);
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.dataset.id = l.id;
-                card.innerHTML = `<div onclick="editLead('${l.id}')"><div class="card-name">${l.name}</div><div class="card-val">R$ ${Number(l.value || 0).toLocaleString('pt-BR')}</div><div style="font-size:10px; color:var(--text3)">${l.service}</div></div>`;
+                card.innerHTML = `<div onclick="editLead('${l.id}')"><div class="card-name">${l.name}</div><div class="card-val">R$ ${Number(l.value || 0).toLocaleString('pt-BR')}</div></div>`;
                 document.getElementById(stages[l.stage]).appendChild(card);
                 totals[stages[l.stage]] += Number(l.value || 0);
             });
-            
             Object.keys(totals).forEach(k => {
                 const el = document.getElementById('tot-' + k.split('-')[1]);
                 if(el) el.innerText = 'R$ ' + totals[k].toLocaleString('pt-BR');
             });
-            updateMetrics();
+            updateAllViews();
         });
     }
 
-    function updateMetrics() {
-        const fechados = allLeads.filter(l => l.stage === 'Fechamento');
-        const receita = fechados.reduce((acc, l) => acc + Number(l.value || 0), 0);
+    function updateAllViews() {
+        const f = allLeads.filter(l => l.stage === 'Fechamento');
+        const receita = f.reduce((acc, l) => acc + Number(l.value || 0), 0);
         const gasto = allLeads.reduce((acc, l) => acc + Number(l.cost || 0), 0);
         
+        // Dashboard KPIs
         document.getElementById('dash-roi-global').innerText = (gasto > 0 ? (receita/gasto).toFixed(1) : 0) + 'x';
         document.getElementById('dash-receita').innerText = 'R$ ' + receita.toLocaleString('pt-BR');
         document.getElementById('dash-ativos').innerText = allLeads.filter(l => l.stage !== 'Fechamento' && l.stage !== 'Perdido').length;
         document.getElementById('dash-gasto-total').innerText = 'R$ ' + gasto.toLocaleString('pt-BR');
 
-        // Tabela de Leads
+        // Atividade Perfil
+        document.getElementById('act-leads').innerText = allLeads.length;
+        document.getElementById('act-fechados').innerText = f.length;
+        document.getElementById('act-conv').innerText = (allLeads.length > 0 ? ((f.length/allLeads.length)*100).toFixed(0) : 0) + '%';
+        document.getElementById('act-faturado').innerText = 'R$ ' + receita.toLocaleString('pt-BR');
+
+        // Tabela Clientes
         const corpo = document.getElementById('tabela-leads-corpo');
         corpo.innerHTML = '';
         allLeads.forEach(l => {
             const roi = (l.cost > 0 && l.stage === 'Fechamento') ? (l.value/l.cost).toFixed(1) + 'x' : '---';
-            corpo.innerHTML += `<tr>
-                <td style="font-weight:700">${l.name}</td>
-                <td>R$ ${Number(l.value).toLocaleString('pt-BR')}</td>
-                <td>R$ ${Number(l.cost).toLocaleString('pt-BR')}</td>
-                <td>${roi}</td>
-                <td>${l.service}</td>
-                <td><span style="font-size:10px; background:var(--surface2); padding:4px 8px; border-radius:5px">${l.stage}</span></td>
-                <td><button onclick="editLead('${l.id}')" style="background:none; border:1px solid var(--border); color:var(--accent); padding:4px 8px; border-radius:5px; cursor:pointer">EDITAR</button></td>
-            </tr>`;
+            corpo.innerHTML += `<tr><td>${l.name}</td><td>R$ ${Number(l.value).toLocaleString('pt-BR')}</td><td>R$ ${Number(l.cost).toLocaleString('pt-BR')}</td><td>${roi}</td><td>${l.service}</td><td>${l.stage}</td><td><button onclick="editLead('${l.id}')" style="background:none; border:1px solid var(--border); color:var(--accent); padding:4px 8px; border-radius:5px; cursor:pointer">VER</button></td></tr>`;
         });
 
-        renderChart(fechados.length, allLeads.length - fechados.length);
+        renderCharts();
     }
 
-    function renderChart(win, loss) {
-        const ctx = document.getElementById('myChart').getContext('2d');
-        if(myChart) myChart.destroy();
-        myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Vendas Fechadas', 'Leads em Aberto/Perdidos'],
-                datasets: [{
-                    label: 'Quantidade de Leads',
-                    data: [win, loss],
-                    backgroundColor: ['#00e5a0', '#7c5cfc']
-                }]
-            },
-            options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, grid: { color: '#2a2e42' } } } }
+    function renderCharts() {
+        const ctxO = document.getElementById('chartOrigem').getContext('2d');
+        const google = allLeads.filter(l => l.service === 'Google Ads').length;
+        const insta = allLeads.filter(l => l.service === 'Instagram Ads').length;
+        const outros = allLeads.length - (google + insta);
+
+        if(chart1) chart1.destroy();
+        chart1 = new Chart(ctxO, {
+            type: 'doughnut',
+            data: { labels: ['Google', 'Instagram', 'Outros'], datasets: [{ data: [google||1, insta||1, outros||1], backgroundColor: ['#00e5a0', '#7c5cfc', '#4a9eff'], borderWidth: 0 }] },
+            options: { cutout: '70%', plugins: { legend: { position: 'bottom', labels: { color: '#fff' } } } }
         });
     }
 
-    window.exportToExcel = () => {
-        const data = allLeads.map(l => ({
-            Cliente: l.name,
-            Valor_Venda: l.value,
-            Investimento: l.cost,
-            Origem: l.service,
-            Status: l.stage,
-            Notas: l.notes
-        }));
-        const ws = XLSX.utils.json_to_sheet(data);
-        const wb = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, ws, "Leads");
-        XLSX.writeFile(wb, "NegoHub_Relatorio_Leads.xlsx");
+    window.editLead = (id) => {
+        const l = allLeads.find(x => x.id === id);
+        document.getElementById('edit-id').value = l.id;
+        document.getElementById('edit-name').value = l.name;
+        document.getElementById('edit-val').value = l.value;
+        document.getElementById('edit-cost').value = l.cost || 0;
+        document.getElementById('edit-notes').value = l.notes || "";
+        
+        // Cálculo de ROI no Perfil do Lead
+        const roi = (l.cost > 0 && l.stage === 'Fechamento') ? (l.value / l.cost).toFixed(1) + 'x' : 'Não calculado (Lead não fechado)';
+        document.getElementById('edit-roi-display').innerText = "ROI deste cliente: " + roi;
+        
+        openM('modal-edit');
     };
 
-    // Funções de CRUD e Auth (mesma lógica)
+    window.exportToExcel = () => {
+        const ws = XLSX.utils.json_to_sheet(allLeads.map(l => ({ Nome: l.name, Valor: l.value, Custo: l.cost, Status: l.stage, Origem: l.service })));
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "Clientes");
+        XLSX.writeFile(wb, "Relatorio_NegoHub.xlsx");
+    };
+
+    // Funções Padrão
     window.saveLead = async () => {
         await addDoc(collection(db, "leads"), {
             ownerId: auth.currentUser.uid,
@@ -323,16 +335,6 @@
         closeM('modal-new');
     };
 
-    window.editLead = (id) => {
-        const l = allLeads.find(x => x.id === id);
-        document.getElementById('edit-id').value = l.id;
-        document.getElementById('edit-name').value = l.name;
-        document.getElementById('edit-val').value = l.value;
-        document.getElementById('edit-cost').value = l.cost || 0;
-        document.getElementById('edit-notes').value = l.notes || "";
-        openM('modal-edit');
-    };
-
     window.updateLead = async () => {
         await updateDoc(doc(db, "leads", document.getElementById('edit-id').value), {
             name: document.getElementById('edit-name').value,
@@ -344,28 +346,11 @@
         closeM('modal-edit');
     };
 
-    window.deleteLead = async () => {
-        if(confirm("Excluir lead permanentemente?")) {
-            await deleteDoc(doc(db, "leads", document.getElementById('edit-id').value));
-            closeM('modal-edit');
-        }
-    }
-
-    window.showView = (v) => {
-        document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
-        document.getElementById('view-' + v).classList.add('active');
-        document.querySelectorAll('.side-item').forEach(el => el.classList.remove('active'));
-        event.currentTarget.classList.add('active');
-    };
-
+    window.deleteLead = async () => { if(confirm("Excluir?")) { await deleteDoc(doc(db, "leads", document.getElementById('edit-id').value)); closeM('modal-edit'); } };
+    window.showView = (v) => { document.querySelectorAll('.view').forEach(el => el.classList.remove('active')); document.getElementById('view-' + v).classList.add('active'); document.querySelectorAll('.side-item').forEach(el => el.classList.remove('active')); event.currentTarget.classList.add('active'); };
     window.openM = (id) => document.getElementById(id).classList.add('open');
     window.closeM = (id) => document.getElementById(id).classList.remove('open');
-
-    document.querySelectorAll('.body-list').forEach(el => {
-        new Sortable(el, { group: 'funnel', onEnd: async (e) => {
-            await updateDoc(doc(db, "leads", e.item.dataset.id), { stage: e.to.dataset.stage, lastUpdate: serverTimestamp() });
-        }});
-    });
+    document.querySelectorAll('.body-list').forEach(el => { new Sortable(el, { group: 'funnel', onEnd: async (e) => { await updateDoc(doc(db, "leads", e.item.dataset.id), { stage: e.to.dataset.stage, lastUpdate: serverTimestamp() }); } }); });
 </script>
 </body>
 </html>
