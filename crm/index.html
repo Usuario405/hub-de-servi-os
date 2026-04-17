@@ -162,11 +162,10 @@
         <button onclick="closeM('modal-new')" style="background:none; border:none; color:var(--text2); width:100%; margin-top:10px; cursor:pointer">Cancelar</button>
     </div>
 </div>
-
 <script type="module">
-    // 1. Adicionamos o sendEmailVerification aqui na lista de importação
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
     import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
+    // IMPORTANTE: Deixamos todos os imports juntos no topo
     import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, sendEmailVerification } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
 
     const firebaseConfig = {
@@ -183,7 +182,29 @@
     const auth = getAuth(app);
     let allLeads = [];
 
-    // 2. Esta é a função que bloqueia o acesso se não tiver verificado o e-mail
+    // Esta função agora está correta e vai disparar o e-mail pra você
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            if (user.emailVerified) {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('sidebar').style.display = 'flex';
+                document.getElementById('main-wrapper').style.display = 'flex';
+                loadData();
+            } else {
+                alert("⚠️ Quase lá! Enviamos um link de confirmação para o seu e-mail. Verifique sua caixa de entrada e spam.");
+                
+                try {
+                    // Agora sim o sistema consegue enviar o e-mail
+                    await sendEmailVerification(user);
+                } catch (e) {
+                    console.log("Aguarde um momento para reenviar o link.");
+                }
+
+                await auth.signOut();
+            }
+        }
+    });
+    
     onAuthStateChanged(auth, async (user) => {
         if (user) {
             if (user.emailVerified) {
