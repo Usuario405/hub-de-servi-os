@@ -169,8 +169,24 @@
     let allLeads = [];
     let meuGrafico = null;
 
-    onAuthStateChanged(auth, (user) => { if (!user) window.location.href = "../index.html"; else loadData(); });
+onAuthStateChanged(auth, (user) => {
+    const loginScreen = document.getElementById('login-screen');
+    const sidebar = document.getElementById('sidebar');
+    const mainWrapper = document.getElementById('main-wrapper');
 
+    if (user) {
+        // Se estiver logada, mostra o sistema e esconde o login
+        if(loginScreen) loginScreen.style.display = 'none';
+        if(sidebar) sidebar.style.display = 'flex';
+        if(mainWrapper) mainWrapper.style.display = 'flex';
+        loadData();
+    } else {
+        // Se NÃO estiver logada, mostra apenas a tela de login dentro do NegoHub
+        if(loginScreen) loginScreen.style.display = 'flex';
+        if(sidebar) sidebar.style.display = 'none';
+        if(mainWrapper) mainWrapper.style.display = 'none';
+    }
+});
     function loadData() {
         onSnapshot(collection(db, "leads"), (snap) => {
             const stages = { 'Contato Inicial': 'list-contato', 'Proposta Enviada': 'list-proposta', 'Fechamento': 'list-fechado', 'Perdido': 'list-perdido' };
