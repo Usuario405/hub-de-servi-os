@@ -164,9 +164,10 @@
 </div>
 
 <script type="module">
+    // 1. Adicionamos o sendEmailVerification aqui na lista de importação
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
     import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
-    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, sendEmailVerification } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyDMiJmwgxep1USbcmWa8ck3eEI1_I13HRg",
@@ -181,6 +182,36 @@
     const db = getFirestore(app);
     const auth = getAuth(app);
     let allLeads = [];
+
+    // 2. Esta é a função que bloqueia o acesso se não tiver verificado o e-mail
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            if (user.emailVerified) {
+                // E-mail confirmado: Libera o sistema
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('sidebar').style.display = 'flex';
+                document.getElementById('main-wrapper').style.display = 'flex';
+                loadData();
+            } else {
+                // E-mail NÃO confirmado: Avisa, envia link e expulsa
+                alert("⚠️ Acesso Bloqueado: Por favor, verifique sua caixa de e-mail (e o spam) para confirmar seu cadastro antes de acessar o Hub.");
+                
+                try {
+                    await sendEmailVerification(user);
+                } catch (e) {
+                    console.log("Link já enviado recentemente.");
+                }
+
+                await auth.signOut();
+                location.reload(); // Recarrega para garantir que a tela de login apareça limpa
+            }
+        }
+    });
+
+    window.appLogin = () => {
+        signInWithEmailAndPassword(auth, document.getElementById('loginEmail').value, document.getElementById('loginPass').value)
+        .catch(() => alert("E-mail ou senha incorretos ou acesso negado."));
+    };
 
     window.appLogin = () => {
         signInWithEmailAndPassword(auth, document.getElementById('loginEmail').value, document.getElementById('loginPass').value)
