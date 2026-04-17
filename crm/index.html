@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NegoHub OS | Central de Estratégia</title>
-  
+ <meta name="google-site-verification" content="Nj60n_sOIVMKqlAEULrdJ3BVdM9qgqcO2cnFme-LAiE" />
 <meta property="og:title" content="NegoHub OS | Hub de Serviços">
     <meta property="og:description" content="Central de Estratégia e Gestão de Leads da Melina.">
     <meta property="og:type" content="website">
@@ -361,6 +361,24 @@
             await updateDoc(doc(db, "leads", e.item.dataset.id), { stage: e.to.dataset.stage, lastUpdate: serverTimestamp() });
         }});
     });
+</script>
+<div id="lgpd-banner" style="position: fixed; bottom: 20px; left: 20px; right: 20px; background: var(--surface); border: 1px solid var(--accent); padding: 20px; border-radius: 16px; z-index: 5000; display: none; align-items: center; justify-content: space-between; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+    <p style="font-size: 13px; color: var(--text2); margin-right: 20px;">
+        A <strong>Hub de Serviços</strong> utiliza cookies e armazena dados para melhorar sua experiência e gerenciar leads de acordo com a LGPD. Ao continuar, você concorda com nossa política de privacidade.
+    </p>
+    <button onclick="aceitarLGPD()" class="btn-primary" style="width: auto; padding: 10px 20px;">ACEITAR</button>
+</div>
+
+<script>
+    // Lógica para mostrar o banner só se o usuário ainda não aceitou
+    if (!localStorage.getItem('lgpd_aceito')) {
+        document.getElementById('lgpd-banner').style.display = 'flex';
+    }
+
+    function aceitarLGPD() {
+        localStorage.setItem('lgpd_aceito', 'true');
+        document.getElementById('lgpd-banner').style.display = 'none';
+    }
 </script>
 </body>
 </html>
