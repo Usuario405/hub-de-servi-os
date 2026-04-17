@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NegoHub OS | Inteligência CRM</title>
+    <title>NegoHub OS | Inteligência CRM White Label</title>
     
     <meta name="google-site-verification" content="Nj60n_sOIVMKqlAEULrdJ3BVdM9qgqcO2cnFme-LAiE" />
     <meta property="og:title" content="NegoHub OS | Hub de Serviços">
@@ -121,7 +121,7 @@
                     <canvas id="chartOrigem"></canvas>
                 </div>
                 <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 20px;">
-                    <h3 style="font-family: 'Syne'; font-size: 14px; margin-bottom: 15px;">Lista de Leads Detalhada</h3>
+                    <h3 style="font-family: 'Syne'; font-size: 14px; margin-bottom: 15px;">Lista Detalhada</h3>
                     <table>
                         <thead><tr><th>Cliente</th><th>Status</th><th>Valor</th><th>Serviço</th></tr></thead>
                         <tbody id="tabela-leads-corpo"></tbody>
@@ -154,7 +154,7 @@
         <input id="edit-id" type="hidden">
         <input id="edit-name" class="form-input">
         <input id="edit-val" type="number" class="form-input">
-        <label style="font-size:12px; color:var(--accent)">Anotações / Histórico </label>
+        <label style="font-size:12px; color:var(--accent)">Anotações / Histórico</label>
         <textarea id="edit-notes" class="form-input" style="height:100px; resize:none;"></textarea>
         <button class="btn-primary" onclick="updateLead()">SALVAR</button>
         <button class="btn-primary" style="background: var(--perdido); margin-top: 10px; color: white;" onclick="deleteLead()">EXCLUIR</button>
@@ -164,7 +164,7 @@
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
-    import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, serverTimestamp, query, where } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
     import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
 
     const firebaseConfig = {
@@ -190,7 +190,7 @@
             loginScreen.style.display = 'none';
             sidebar.style.display = 'flex';
             mainWrapper.style.display = 'flex';
-            loadData();
+            loadData(user.uid);
         } else {
             loginScreen.style.display = 'flex';
             sidebar.style.display = 'none';
@@ -206,8 +206,11 @@
 
     window.appLogout = () => signOut(auth).then(() => location.reload());
 
-    function loadData() {
-        onSnapshot(collection(db, "leads"), (snap) => {
+    function loadData(uid) {
+        // FILTRO DE SEGURANÇA: Só carrega leads onde ownerId == ID do usuário logado
+        const q = query(collection(db, "leads"), where("ownerId", "==", uid));
+        
+        onSnapshot(q, (snap) => {
             const stages = { 'Contato Inicial': 'list-contato', 'Proposta Enviada': 'list-proposta', 'Fechamento': 'list-fechado', 'Perdido': 'list-perdido' };
             const totals = { 'list-contato': 0, 'list-proposta': 0, 'list-fechado': 0, 'list-perdido': 0 };
             document.querySelectorAll('.body-list').forEach(el => el.innerHTML = '');
@@ -254,7 +257,7 @@
         meuGrafico = new Chart(ctx, {
             type: 'doughnut',
             data: {
-                labels: ['Google', 'Insta', 'Prospecção'],
+                labels: ['Google Ads', 'Instagram', 'Prospecção'],
                 datasets: [{ data: [40, 35, 25], backgroundColor: ['#00e5a0', '#7c5cfc', '#4a9eff'], borderWidth: 0 }]
             },
             options: { plugins: { legend: { position: 'bottom', labels: { color: '#fff' } } } }
@@ -262,7 +265,11 @@
     }
 
     window.saveLead = async () => {
+        const user = auth.currentUser;
+        if (!user) return alert("Sessão expirada.");
+
         await addDoc(collection(db, "leads"), {
+            ownerId: user.uid, // GRAVA O ID DO USUÁRIO NO LEAD
             name: document.getElementById('new-name').value,
             value: parseFloat(document.getElementById('new-val').value) || 0,
             service: document.getElementById('new-svc').value,
