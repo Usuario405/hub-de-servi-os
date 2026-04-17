@@ -73,7 +73,7 @@
         .overlay.open { display: flex; }
         .modal { background: var(--sidebar); border: 1px solid var(--border); border-radius: 20px; width: 550px; padding: 35px; max-height: 90vh; overflow-y: auto; }
         .form-input { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 14px; color: #fff; margin-bottom: 15px; outline: none; }
-        .btn-primary { background: var(--accent); color: #000; border: none; padding: 14px 28px; border-radius: 12px; font-weight: 800; cursor: pointer; width: 100%; }
+        .btn-primary { background: var(--accent); color: #000; border: none; padding: 14px 28px; border-radius: 12px; font-weight: 800; cursor: pointer; width: 100%; transition: 0.2s; }
         
         #login-screen { position: fixed; inset: 0; background: var(--bg); z-index: 3000; display: flex; flex-direction: column; align-items: center; justify-content: center; }
     </style>
@@ -143,7 +143,6 @@
         <h2 style="font-family:Syne; margin-bottom:20px">Novo Negócio</h2>
         <input id="new-name" class="form-input" placeholder="Nome do Cliente">
         <input id="new-val" type="number" class="form-input" placeholder="Valor (R$)">
-        
         <select id="new-svc" class="form-input" style="background: var(--bg); color: #fff;">
             <option value="">Selecione o Serviço...</option>
             <option value="Gestão de Tráfego">Gestão de Tráfego</option>
@@ -152,7 +151,6 @@
             <option value="Landing Page">Landing Page</option>
             <option value="Consultoria Digital">Consultoria Digital</option>
         </select>
-
         <input id="new-phone" class="form-input" placeholder="WhatsApp (5511...)">
         <button class="btn-primary" onclick="saveLead()">CADASTRAR</button>
         <button onclick="closeM('modal-new')" style="background:none; border:none; color:var(--text2); width:100%; margin-top:10px; cursor:pointer">Cancelar</button>
@@ -162,9 +160,9 @@
 <div class="overlay" id="modal-edit">
     <div class="modal">
         <h2 style="font-family:Syne; margin-bottom:20px">Editar Negócio</h2>
-        <input id="edit-id" type="hidden"> <input id="edit-name" class="form-input" placeholder="Nome do Cliente">
+        <input id="edit-id" type="hidden">
+        <input id="edit-name" class="form-input" placeholder="Nome do Cliente">
         <input id="edit-val" type="number" class="form-input" placeholder="Valor (R$)">
-        
         <select id="edit-svc" class="form-input" style="background: var(--bg); color: #fff;">
             <option value="">Selecione o Serviço...</option>
             <option value="Gestão de Tráfego">Gestão de Tráfego</option>
@@ -173,13 +171,9 @@
             <option value="Landing Page">Landing Page</option>
             <option value="Consultoria Digital">Consultoria Digital</option>
         </select>
-
         <input id="edit-phone" class="form-input" placeholder="WhatsApp (5511...)">
-        
         <button class="btn-primary" onclick="updateLead()">SALVAR ALTERAÇÕES</button>
-        
         <button class="btn-primary" style="background: var(--perdido); margin-top: 10px; color: white;" onclick="deleteLead()">EXCLUIR LEAD</button>
-        
         <button onclick="closeM('modal-edit')" style="background:none; border:none; color:var(--text2); width:100%; margin-top:10px; cursor:pointer">Cancelar</button>
     </div>
 </div>
@@ -187,7 +181,7 @@
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
     import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
-    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signOut } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendEmailVerification } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyDMiJmwgxep1USbcmWa8ck3eEI1_I13HRg",
@@ -203,7 +197,7 @@
     const auth = getAuth(app);
     let allLeads = [];
 
-    // TRAVA DE SEGURANÇA E MONITORAMENTO
+    // TRAVA DE SEGURANÇA ATIVA
     onAuthStateChanged(auth, async (user) => {
         if (user) {
             if (user.emailVerified) {
@@ -217,13 +211,17 @@
                 await signOut(auth);
                 location.reload();
             }
+        } else {
+            document.getElementById('login-screen').style.display = 'flex';
+            document.getElementById('sidebar').style.display = 'none';
+            document.getElementById('main-wrapper').style.display = 'none';
         }
     });
 
     window.appLogin = () => {
         const e = document.getElementById('loginEmail').value;
         const p = document.getElementById('loginPass').value;
-        signInWithEmailAndPassword(auth, e, p).catch(() => alert("Acesso negado."));
+        signInWithEmailAndPassword(auth, e, p).catch(() => alert("E-mail ou senha incorretos."));
     };
 
     window.appLogout = () => {
@@ -234,25 +232,20 @@
         onSnapshot(collection(db, "leads"), (snap) => {
             const stages = { 'Contato Inicial': 'list-contato', 'Proposta Enviada': 'list-proposta', 'Fechamento': 'list-fechado', 'Perdido': 'list-perdido' };
             const totals = { 'list-contato': 0, 'list-proposta': 0, 'list-fechado': 0, 'list-perdido': 0 };
-            
             Object.values(stages).forEach(id => document.getElementById(id).innerHTML = '');
             allLeads = [];
-
             snap.forEach(d => {
                 const l = { id: d.id, ...d.data() };
                 allLeads.push(l);
-                
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.dataset.id = l.id;
-
                 const twoDays = 2 * 24 * 60 * 60 * 1000;
                 if(l.lastUpdate && (new Date() - l.lastUpdate.toDate() > twoDays) && l.stage !== 'Perdido') card.classList.add('stale');
-
                 card.innerHTML = `
                     <div onclick="editLead('${l.id}')">
                         <div class="card-name">${l.name}</div>
-                        <div class="card-val">R$ ${Number(l.value).toLocaleString('pt-BR')}</div>
+                        <div class="card-val">R$ ${Number(l.value || 0).toLocaleString('pt-BR')}</div>
                         <div class="card-footer">
                             <span class="badge-svc">${l.service}</span>
                             <a href="https://wa.me/${String(l.phone).replace(/\D/g, '')}" target="_blank" class="btn-zap-fast" onclick="event.stopPropagation()">⚡</a>
@@ -260,9 +253,8 @@
                     </div>
                 `;
                 document.getElementById(stages[l.stage]).appendChild(card);
-                totals[stages[l.stage]] += Number(l.value);
+                totals[stages[l.stage]] += Number(l.value || 0);
             });
-
             Object.keys(totals).forEach(k => {
                 const el = document.getElementById('tot-' + k.split('-')[1]);
                 if(el) el.innerText = 'R$ ' + totals[k].toLocaleString('pt-BR');
@@ -281,18 +273,19 @@
             lastUpdate: serverTimestamp()
         });
         closeM('modal-new');
+        document.getElementById('new-name').value = '';
+        document.getElementById('new-val').value = '';
+        document.getElementById('new-phone').value = '';
     };
 
-window.editLead = (id) => {
+    window.editLead = (id) => {
         const l = allLeads.find(x => x.id === id);
         if (!l) return;
-
         document.getElementById('edit-id').value = l.id;
         document.getElementById('edit-name').value = l.name;
         document.getElementById('edit-val').value = l.value;
         document.getElementById('edit-svc').value = l.service;
         document.getElementById('edit-phone').value = l.phone;
-
         openM('modal-edit');
     };
 
@@ -305,20 +298,13 @@ window.editLead = (id) => {
             phone: document.getElementById('edit-phone').value,
             lastUpdate: serverTimestamp()
         };
-
-        try {
-            await updateDoc(doc(db, "leads", id), dados);
-            closeM('modal-edit');
-            // Alerta discreto de sucesso
-            console.log("Lead atualizado!");
-        } catch (e) {
-            alert("Erro ao atualizar os dados.");
-        }
+        await updateDoc(doc(db, "leads", id), dados);
+        closeM('modal-edit');
     };
 
     window.deleteLead = async () => {
-        const id = document.getElementById('edit-id').value;
-        if (confirm("Tem certeza que deseja excluir permanentemente este lead da HUB?")) {
+        if (confirm("Excluir este lead permanentemente?")) {
+            const id = document.getElementById('edit-id').value;
             await deleteDoc(doc(db, "leads", id));
             closeM('modal-edit');
         }
@@ -341,7 +327,7 @@ window.editLead = (id) => {
 
     function updateDashboard() {
         const f = allLeads.filter(l => l.stage === 'Fechamento');
-        const r = f.reduce((acc, l) => acc + Number(l.value), 0);
+        const r = f.reduce((acc, l) => acc + Number(l.value || 0), 0);
         document.getElementById('dash-receita').innerText = 'R$ ' + r.toLocaleString('pt-BR');
         document.getElementById('dash-ativos').innerText = allLeads.filter(l => l.stage !== 'Fechamento' && l.stage !== 'Perdido').length;
         document.getElementById('dash-ticket').innerText = 'R$ ' + (f.length ? (r/f.length) : 0).toLocaleString('pt-BR');
