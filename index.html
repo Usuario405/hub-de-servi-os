@@ -86,6 +86,51 @@
         }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+      /* Seção de Planos do Hub */
+.pricing-section { padding: 80px 20px; text-align: center; }
+.pricing-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 30px; 
+    max-width: 1200px; 
+    margin: 40px auto; 
+}
+.plan-card { 
+    background: #ffffff;
+    border: 1px solid #e2e8f0; 
+    padding: 40px; 
+    border-radius: 24px; 
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.plan-card:hover { 
+    transform: translateY(-10px); 
+    shadow-lg shadow-primary/20;
+    border-color: #005da6;
+}
+.plan-card.pro { 
+    border: 2px solid #005da6; 
+    background: #f0f7ff; 
+    position: relative; 
+}
+.plan-price { font-size: 42px; font-weight: 800; color: #001c3b; margin: 20px 0; font-family: 'Space Grotesk', sans-serif; }
+.plan-price span { font-size: 16px; color: #414752; font-weight: 400; }
+.plan-features { text-align: left; width: 100%; margin-bottom: 30px; }
+.plan-features li { margin-bottom: 12px; font-size: 14px; color: #414752; display: flex; align-items: center; gap: 10px; }
+.btn-plan { 
+    width: 100%;
+    background: #005da6; 
+    color: #fff; 
+    padding: 16px; 
+    border-radius: 16px; 
+    text-decoration: none; 
+    font-weight: 700; 
+    transition: 0.2s;
+}
+.btn-plan:hover { opacity: 0.9; transform: scale(1.02); }
     </style>
 </head>
 <body class="bg-surface font-body text-on-surface">
