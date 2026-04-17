@@ -219,8 +219,8 @@
                     <div class="card-val">R$ ${l.value.toLocaleString('pt-BR')}</div>
                     <div class="card-footer">
                         <span class="badge-svc">${l.service}</span>
-                        <a href="https://wa.me/${l.phone}?text=Olá%20${l.name}!" target="_blank" class="btn-zap-fast">⚡</a>
-                    </div>
+<a href="https://wa.me/${String(l.phone).replace(/\D/g, '')}" target="_blank" class="btn-zap-fast">⚡</a>
+</div>
                 `;
                 document.getElementById(stages[l.stage]).appendChild(card);
                 totals[stages[l.stage]] += l.value;
@@ -244,28 +244,33 @@
         closeM('modal-new');
     };
 window.exportCSV = () => {
-    // Cabeçalho com ponto e vírgula para o Excel Brasil separar colunas
+    if (allLeads.length === 0) {
+        alert("Não há dados para exportar.");
+        return;
+    }
+
+    // Cabeçalho com ponto e vírgula (Padrão Excel Brasil)
     let csv = "Nome;Valor;Serviço;WhatsApp;Etapa\n";
     
     allLeads.forEach(l => { 
-        // Converte o ponto do valor para vírgula para o Excel entender como dinheiro
+        // Troca ponto por vírgula no valor para o Excel entender como dinheiro
         const valorExcel = l.value ? l.value.toString().replace('.', ',') : '0';
         csv += `${l.name};${valorExcel};${l.service};${l.phone};${l.stage}\n`; 
     });
 
-    // O prefixo \uFEFF é o segredo para o Excel abrir com acentos corretos (UTF-8 BOM)
+    // Criamos o arquivo garantindo que o Excel entenda que é CSV e tem acentos
     const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     
+    a.style.display = 'none';
     a.href = url; 
-    a.download = 'leads_hub_servicos.csv'; 
+    a.download = 'leads_hub_negohub.csv'; // Extensão .csv força a abertura no Excel
     document.body.appendChild(a);
     a.click();
     
-    // Limpeza
-    document.body.removeChild(a);
     window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
 };
     window.showView = (v) => {
         document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
