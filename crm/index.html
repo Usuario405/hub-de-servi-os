@@ -251,4 +251,56 @@
 
     window.editLead = async (id) => {
         const l = allLeads.find(x => x.id === id);
-        const nN = prompt("Nome:",
+        const nN = prompt("Nome:", l.name); if(!nN) return;
+        const nV = prompt("Valor:", l.value);
+        const nS = prompt("Serviço:", l.service);
+        const nP = prompt("WhatsApp:", l.phone);
+
+        if(confirm("Salvar alterações?")) {
+            await updateDoc(doc(db, "leads", id), {
+                name: nN, value: parseFloat(nV) || 0, service: nS, phone: nP, lastUpdate: serverTimestamp()
+            });
+        }
+    };
+
+    window.exportCSV = () => {
+        let csv = "\uFEFFNome;Valor;Serviço;WhatsApp;Etapa\n";
+        allLeads.forEach(l => csv += `${l.name};${String(l.value).replace('.',',')};${l.service};${l.phone};${l.stage}\n`);
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'leads_hub.csv';
+        a.click();
+    };
+
+    window.filterLeads = () => {
+        const t = document.getElementById('searchInput').value.toLowerCase();
+        document.querySelectorAll('.card').forEach(c => c.style.display = c.innerText.toLowerCase().includes(t) ? 'block' : 'none');
+    };
+
+    function updateDashboard() {
+        const f = allLeads.filter(l => l.stage === 'Fechamento');
+        const r = f.reduce((acc, l) => acc + Number(l.value), 0);
+        document.getElementById('dash-receita').innerText = 'R$ ' + r.toLocaleString('pt-BR');
+        document.getElementById('dash-ativos').innerText = allLeads.filter(l => l.stage !== 'Fechamento' && l.stage !== 'Perdido').length;
+        document.getElementById('dash-ticket').innerText = 'R$ ' + (f.length ? (r/f.length) : 0).toLocaleString('pt-BR');
+    }
+
+    window.showView = (v) => {
+        document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
+        document.getElementById('view-' + v).classList.add('active');
+        document.querySelectorAll('.side-item').forEach(el => el.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+    };
+
+    window.openM = (id) => document.getElementById(id).classList.add('open');
+    window.closeM = (id) => document.getElementById(id).classList.remove('open');
+
+    document.querySelectorAll('.body-list').forEach(el => {
+        new Sortable(el, { group: 'funnel', animation: 150, onEnd: async (e) => {
+            await updateDoc(doc(db, "leads", e.item.dataset.id), { stage: e.to.dataset.stage, lastUpdate: serverTimestamp() });
+        }});
+    });
+</script>
+</body>
+</html>
