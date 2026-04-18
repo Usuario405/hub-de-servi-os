@@ -36,18 +36,19 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);disp
 .login-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:32px;color:var(--accent);margin-bottom:6px;letter-spacing:-1px;}
 .login-sub{font-size:13px;color:var(--ink3);margin-bottom:36px;}
 .field{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:13px 16px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--ink);outline:none;transition:.2s;margin-bottom:12px;}
-.field:focus{border-color:var(--accent);background:var(--surface2);}
+.field:focus{border-color:var(--accent);}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;border-radius:8px;font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;border:none;transition:.15s;letter-spacing:.01em;}
 .btn-dark{background:var(--accent);color:#000;}
 .btn-dark:hover{background:#00c98e;}
-.btn-lime{background:var(--accent2);color:var(--accent);}
-.btn-lime:hover{background:#d4f040;}
 .btn-ghost{background:transparent;color:var(--ink2);border:1px solid var(--border2);}
 .btn-ghost:hover{border-color:var(--ink2);}
 .btn-danger{background:rgba(255,71,87,0.12);color:var(--lost);border:1px solid rgba(255,71,87,0.3);}
 .btn-danger:hover{background:rgba(255,71,87,0.2);}
+.btn-upgrade{background:linear-gradient(135deg,#7c5cfc,#00e5a0);color:#fff;border:none;}
+.btn-upgrade:hover{opacity:.9;}
 .btn-full{width:100%;}
 .btn-sm{padding:7px 14px;font-size:12px;}
+.btn:disabled{opacity:.4;cursor:not-allowed;}
 
 /* LAYOUT */
 aside{width:var(--sidebar-w);background:#13151e;display:flex;flex-direction:column;align-items:center;padding:20px 0;position:fixed;height:100vh;z-index:500;transition:.3s ease;}
@@ -67,10 +68,23 @@ header{height:64px;background:#13151e;border-bottom:1px solid var(--border);disp
 .page-title{font-size:15px;font-weight:600;color:var(--ink);}
 .header-right{display:flex;align-items:center;gap:10px;}
 
+/* PLAN BADGE no header */
+.plan-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.04em;}
+.plan-badge.starter{background:rgba(139,144,167,0.12);color:var(--ink2);border:1px solid var(--border2);}
+.plan-badge.pro{background:rgba(124,92,252,0.12);color:#a78bfa;border:1px solid rgba(124,92,252,0.3);}
+.plan-badge.business{background:rgba(0,229,160,0.1);color:var(--accent);border:1px solid rgba(0,229,160,0.3);}
+
+/* PLAN LIMIT BAR */
+.limit-bar-wrap{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--ink3);}
+.limit-bar{width:80px;height:5px;background:var(--surface2);border-radius:10px;overflow:hidden;}
+.limit-fill{height:100%;border-radius:10px;background:var(--accent);transition:.4s;}
+.limit-fill.warn{background:var(--warm);}
+.limit-fill.full{background:var(--lost);}
+
 /* SEARCH BAR */
 .search-wrap{position:relative;}
 .search-wrap input{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 14px 8px 36px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--ink);outline:none;width:220px;transition:.2s;}
-.search-wrap input:focus{border-color:var(--accent);background:var(--surface);width:280px;}
+.search-wrap input:focus{border-color:var(--accent);width:280px;}
 .search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--ink3);}
 
 /* VIEWS */
@@ -94,7 +108,7 @@ header{height:64px;background:#13151e;border-bottom:1px solid var(--border);disp
 .card-name{font-size:13px;font-weight:600;color:var(--ink);line-height:1.3;}
 .card-service{font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;}
 .card-val{font-size:18px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;}
-.card-meta{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:11px;color:var(--ink3);}
+.card-meta{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:11px;color:var(--ink3);flex-wrap:wrap;}
 .card-task-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;background:rgba(245,166,35,0.12);color:var(--warm);}
 .card-task-badge.overdue{background:rgba(255,71,87,0.12);color:var(--lost);}
 .card-whatsapp{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;padding:3px 8px;border-radius:20px;background:rgba(0,229,160,0.1);color:var(--accent);cursor:pointer;text-decoration:none;}
@@ -137,7 +151,7 @@ header{height:64px;background:#13151e;border-bottom:1px solid var(--border);disp
 
 /* TABLE */
 .table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
-.table-filters{display:flex;align-items:center;gap:10px;padding:16px 20px;border-bottom:1px solid var(--border);}
+.table-filters{display:flex;align-items:center;gap:10px;padding:16px 20px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
 select.filter-sel{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:7px 12px;font-size:12px;font-family:'DM Sans',sans-serif;color:var(--ink);outline:none;cursor:pointer;}
 select.filter-sel:focus{border-color:var(--accent);}
 table{width:100%;border-collapse:collapse;font-size:13px;}
@@ -173,8 +187,8 @@ label.lbl{display:block;font-size:10px;font-weight:600;text-transform:uppercase;
 .task-date.overdue{color:var(--lost);font-weight:600;}
 .task-del{background:none;border:none;color:var(--ink3);cursor:pointer;font-size:14px;padding:0 4px;}
 .task-del:hover{color:var(--lost);}
-.task-add{display:flex;gap:8px;margin-top:10px;}
-.task-add input{flex:1;}
+.task-add{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
+.task-add input{flex:1;min-width:120px;}
 .task-add input[type=date]{width:140px;}
 
 /* HISTORY */
@@ -195,14 +209,49 @@ label.lbl{display:block;font-size:10px;font-weight:600;text-transform:uppercase;
 .stat-row:last-child{border:none;}
 .stat-val{font-weight:600;}
 
+/* PLANOS VIEW */
+.plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:24px;}
+.plan-card-crm{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px 24px;display:flex;flex-direction:column;gap:0;position:relative;transition:.2s;}
+.plan-card-crm.current{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent);}
+.plan-card-crm.pro-plan{border-color:#7c5cfc;box-shadow:0 0 0 1px #7c5cfc;}
+.plan-current-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:800;letter-spacing:.08em;padding:4px 14px;border-radius:20px;white-space:nowrap;}
+.badge-starter{background:var(--surface2);color:var(--ink2);}
+.badge-pro{background:#7c5cfc;color:#fff;}
+.badge-business{background:var(--accent);color:#000;}
+.plan-name{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;margin-bottom:4px;}
+.plan-price-crm{font-size:32px;font-weight:700;margin:14px 0 6px;}
+.plan-price-crm span{font-size:14px;font-weight:400;color:var(--ink3);}
+.plan-features-crm{list-style:none;padding:0;margin:16px 0 24px;display:flex;flex-direction:column;gap:10px;font-size:13px;color:var(--ink2);}
+.plan-features-crm li{display:flex;align-items:center;gap:8px;}
+.plan-features-crm li::before{content:'✓';color:var(--accent);font-weight:700;font-size:12px;}
+.plan-features-crm li.no::before{content:'✕';color:var(--lost);}
+.plan-features-crm li.no{color:var(--ink3);}
+.usage-section{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px;margin-bottom:24px;}
+.usage-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);gap:16px;}
+.usage-row:last-child{border:none;}
+.usage-label{font-size:13px;}
+.usage-right{display:flex;align-items:center;gap:10px;}
+.usage-count{font-size:12px;color:var(--ink3);white-space:nowrap;}
+.usage-bar{width:120px;height:6px;background:var(--surface2);border-radius:10px;overflow:hidden;}
+.usage-bar-fill{height:100%;border-radius:10px;transition:.4s;}
+.green{background:var(--accent);}
+.orange{background:var(--warm);}
+.red{background:var(--lost);}
+
 /* TEMPLATES PANEL */
 .tmpl-list{display:flex;flex-direction:column;gap:8px;}
 .tmpl-item{background:var(--surface2);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--ink2);display:flex;align-items:flex-start;justify-content:space-between;gap:10px;line-height:1.5;}
 .tmpl-copy{background:none;border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-size:11px;font-weight:600;cursor:pointer;color:var(--ink2);white-space:nowrap;}
 .tmpl-copy:hover{border-color:var(--ink2);}
 
+/* LOCKED FEATURE */
+.locked-feature{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;padding:40px;background:rgba(124,92,252,0.05);border:1px dashed rgba(124,92,252,0.3);border-radius:14px;text-align:center;}
+.locked-icon{font-size:32px;}
+.locked-title{font-size:15px;font-weight:600;color:var(--ink);}
+.locked-sub{font-size:13px;color:var(--ink3);max-width:320px;}
+
 /* TOAST */
-.toast{position:fixed;bottom:28px;right:28px;background:var(--accent);color:#fff;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:500;z-index:9999;transform:translateY(80px);opacity:0;transition:.3s;display:flex;align-items:center;gap:8px;}
+.toast{position:fixed;bottom:28px;right:28px;background:var(--accent);color:#000;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:600;z-index:9999;transform:translateY(80px);opacity:0;transition:.3s;display:flex;align-items:center;gap:8px;}
 .toast.show{transform:translateY(0);opacity:1;}
 
 /* EMPTY */
@@ -235,29 +284,29 @@ label.lbl{display:block;font-size:10px;font-weight:600;text-transform:uppercase;
 <!-- SIDEBAR -->
 <aside id="sidebar" style="display:none">
   <div class="logo-mark">N.</div>
-  <!-- Funil -->
-  <div class="nav-item active" onclick="showView('funil',this)" title="">
+  <div class="nav-item active" onclick="showView('funil',this)">
     <svg viewBox="0 0 24 24"><path d="M3 4h18v2.5l-7 7V20l-4-2v-6.5L3 6.5V4z"/></svg>
     <span class="nav-tip">Funil</span>
   </div>
-  <!-- Dashboard -->
   <div class="nav-item" onclick="showView('dashboard',this)">
     <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
     <span class="nav-tip">Dashboard</span>
   </div>
-  <!-- Clientes -->
   <div class="nav-item" onclick="showView('leads',this)">
     <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
     <span class="nav-tip">Clientes</span>
   </div>
-  <!-- Templates -->
   <div class="nav-item" onclick="showView('templates',this)">
     <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
     <span class="nav-tip">Templates</span>
   </div>
   <div class="nav-sep"></div>
-  <!-- Perfil -->
   <div class="nav-bottom">
+    <!-- Planos -->
+    <div class="nav-item" onclick="showView('planos',this)" title="Planos">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+      <span class="nav-tip">Meu Plano</span>
+    </div>
     <div class="nav-item" onclick="showView('perfil',this)">
       <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
       <span class="nav-tip">Minha Conta</span>
@@ -274,13 +323,19 @@ label.lbl{display:block;font-size:10px;font-weight:600;text-transform:uppercase;
   <header>
     <div class="header-left">
       <div class="page-title" id="page-title">Funil de Vendas</div>
+      <span class="plan-badge starter" id="header-plan-badge">STARTER</span>
     </div>
     <div class="header-right">
+      <!-- Barra de uso de leads no header -->
+      <div class="limit-bar-wrap" id="header-limit-bar" style="display:none">
+        <span id="header-limit-text">0/500 leads</span>
+        <div class="limit-bar"><div class="limit-fill" id="header-limit-fill"></div></div>
+      </div>
       <div class="search-wrap">
         <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
         <input type="text" id="global-search" placeholder="Buscar cliente..." oninput="globalSearch(this.value)">
       </div>
-      <button class="btn btn-dark btn-sm" onclick="openM('modal-new')">+ Novo lead</button>
+      <button class="btn btn-dark btn-sm" id="btn-new-lead" onclick="openNewLead()">+ Novo lead</button>
     </div>
   </header>
 
@@ -288,46 +343,31 @@ label.lbl{display:block;font-size:10px;font-weight:600;text-transform:uppercase;
   <div id="view-funil" class="view active">
     <div class="funnel-wrap">
       <div class="column">
-        <div class="col-header">
-          <span class="col-name">Prospecção</span>
-          <span class="col-count" id="cnt-contato">0</span>
-        </div>
+        <div class="col-header"><span class="col-name">Prospecção</span><span class="col-count" id="cnt-contato">0</span></div>
         <div class="col-total" id="tot-contato">R$ 0</div>
         <div class="col-bar" style="background:linear-gradient(90deg,#818cf8,#c4b5fd);"></div>
         <div class="body-list" id="list-contato" data-stage="Contato Inicial"></div>
       </div>
       <div class="column">
-        <div class="col-header">
-          <span class="col-name">Proposta</span>
-          <span class="col-count" id="cnt-proposta">0</span>
-        </div>
+        <div class="col-header"><span class="col-name">Proposta</span><span class="col-count" id="cnt-proposta">0</span></div>
         <div class="col-total" id="tot-proposta">R$ 0</div>
         <div class="col-bar" style="background:linear-gradient(90deg,#fb923c,#fbbf24);"></div>
         <div class="body-list" id="list-proposta" data-stage="Proposta Enviada"></div>
       </div>
       <div class="column">
-        <div class="col-header">
-          <span class="col-name">Negociação</span>
-          <span class="col-count" id="cnt-negociacao">0</span>
-        </div>
+        <div class="col-header"><span class="col-name">Negociação</span><span class="col-count" id="cnt-negociacao">0</span></div>
         <div class="col-total" id="tot-negociacao">R$ 0</div>
         <div class="col-bar" style="background:linear-gradient(90deg,#38bdf8,#818cf8);"></div>
         <div class="body-list" id="list-negociacao" data-stage="Negociação"></div>
       </div>
       <div class="column">
-        <div class="col-header">
-          <span class="col-name">Fechado</span>
-          <span class="col-count" id="cnt-fechado">0</span>
-        </div>
+        <div class="col-header"><span class="col-name">Fechado</span><span class="col-count" id="cnt-fechado">0</span></div>
         <div class="col-total" id="tot-fechado">R$ 0</div>
         <div class="col-bar" style="background:linear-gradient(90deg,#4ade80,#a3e635);"></div>
         <div class="body-list" id="list-fechado" data-stage="Fechamento"></div>
       </div>
       <div class="column">
-        <div class="col-header">
-          <span class="col-name">Perdido</span>
-          <span class="col-count" id="cnt-perdido">0</span>
-        </div>
+        <div class="col-header"><span class="col-name">Perdido</span><span class="col-count" id="cnt-perdido">0</span></div>
         <div class="col-total" id="tot-perdido">R$ 0</div>
         <div class="col-bar" style="background:linear-gradient(90deg,#f87171,#fb7185);"></div>
         <div class="body-list" id="list-perdido" data-stage="Perdido"></div>
@@ -338,34 +378,14 @@ label.lbl{display:block;font-size:10px;font-weight:600;text-transform:uppercase;
   <!-- DASHBOARD -->
   <div id="view-dashboard" class="view">
     <div class="kpi-row">
-      <div class="kpi">
-        <div class="kpi-label">ROI Global</div>
-        <div class="kpi-val" id="dash-roi">0.0x</div>
-        <div class="kpi-sub">retorno sobre investimento</div>
-      </div>
-      <div class="kpi">
-        <div class="kpi-label">Faturado</div>
-        <div class="kpi-val" id="dash-receita">R$ 0</div>
-        <div class="kpi-sub">leads fechados</div>
-      </div>
-      <div class="kpi">
-        <div class="kpi-label">Leads Ativos</div>
-        <div class="kpi-val" id="dash-ativos">0</div>
-        <div class="kpi-sub">em andamento</div>
-      </div>
-      <div class="kpi">
-        <div class="kpi-label">Taxa de Conversão</div>
-        <div class="kpi-val" id="dash-conv">0%</div>
-        <div class="kpi-sub">do total de leads</div>
-      </div>
+      <div class="kpi"><div class="kpi-label">ROI Global</div><div class="kpi-val" id="dash-roi">0.0x</div><div class="kpi-sub">retorno sobre investimento</div></div>
+      <div class="kpi"><div class="kpi-label">Faturado</div><div class="kpi-val" id="dash-receita">R$ 0</div><div class="kpi-sub">leads fechados</div></div>
+      <div class="kpi"><div class="kpi-label">Leads Ativos</div><div class="kpi-val" id="dash-ativos">0</div><div class="kpi-sub">em andamento</div></div>
+      <div class="kpi"><div class="kpi-label">Taxa de Conversão</div><div class="kpi-val" id="dash-conv">0%</div><div class="kpi-sub">do total de leads</div></div>
     </div>
-    <!-- META -->
     <div class="meta-goal">
       <div class="meta-top">
-        <div>
-          <div style="font-size:13px;font-weight:600;margin-bottom:2px">Meta do Mês</div>
-          <div class="meta-numbers" id="meta-numbers">R$ 0 / R$ 0</div>
-        </div>
+        <div><div style="font-size:13px;font-weight:600;margin-bottom:2px">Meta do Mês</div><div class="meta-numbers" id="meta-numbers">R$ 0 / R$ 0</div></div>
         <div class="meta-set">
           <input type="number" id="meta-input" class="field" style="margin:0;padding:7px 12px;width:150px;" placeholder="Definir meta (R$)">
           <button class="btn btn-dark btn-sm" onclick="saveMeta()">Salvar</button>
@@ -374,14 +394,8 @@ label.lbl{display:block;font-size:10px;font-weight:600;text-transform:uppercase;
       <div class="progress-bar"><div class="progress-fill" id="meta-fill" style="width:0%"></div></div>
     </div>
     <div class="charts-grid">
-      <div class="chart-card">
-        <div class="chart-title">Origem dos Leads</div>
-        <canvas id="chartOrigem" height="200"></canvas>
-      </div>
-      <div class="chart-card">
-        <div class="chart-title">Distribuição por Etapa</div>
-        <canvas id="chartEtapas" height="200"></canvas>
-      </div>
+      <div class="chart-card"><div class="chart-title">Origem dos Leads</div><canvas id="chartOrigem" height="200"></canvas></div>
+      <div class="chart-card"><div class="chart-title">Distribuição por Etapa</div><canvas id="chartEtapas" height="200"></canvas></div>
     </div>
   </div>
 
@@ -407,13 +421,11 @@ label.lbl{display:block;font-size:10px;font-weight:600;text-transform:uppercase;
         </select>
         <input type="text" id="table-search" class="field" style="margin:0;padding:7px 12px;width:180px;" placeholder="Buscar por nome..." oninput="renderTable()">
         <div style="margin-left:auto;display:flex;gap:8px;">
-          <button class="btn btn-ghost btn-sm" onclick="exportToExcel()">↓ Excel</button>
+          <button class="btn btn-ghost btn-sm" id="btn-export" onclick="exportToExcel()">↓ Excel</button>
         </div>
       </div>
       <table>
-        <thead><tr>
-          <th>Cliente</th><th>Valor</th><th>Investimento</th><th>ROI</th><th>Origem</th><th>Status</th><th>Ações</th>
-        </tr></thead>
+        <thead><tr><th>Cliente</th><th>Valor</th><th>Investimento</th><th>ROI</th><th>Origem</th><th>Status</th><th>Ações</th></tr></thead>
         <tbody id="tabela-leads-corpo"></tbody>
       </table>
     </div>
@@ -421,23 +433,107 @@ label.lbl{display:block;font-size:10px;font-weight:600;text-transform:uppercase;
 
   <!-- TEMPLATES -->
   <div id="view-templates" class="view">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-      <div class="section-card">
-        <h3>Templates de Mensagem WhatsApp</h3>
-        <div class="tmpl-list" id="tmpl-whatsapp"></div>
-        <div style="margin-top:16px;display:flex;flex-direction:column;gap:8px;">
-          <input id="tmpl-new-text" class="field" style="margin:0" placeholder="Novo template de mensagem...">
-          <button class="btn btn-dark btn-sm" onclick="addTemplate()">+ Adicionar</button>
+    <div id="templates-content"></div>
+  </div>
+
+  <!-- PLANOS -->
+  <div id="view-planos" class="view">
+    <div style="margin-bottom:8px;">
+      <div style="font-size:22px;font-weight:700;margin-bottom:4px;">Meu Plano & Uso</div>
+      <div style="font-size:13px;color:var(--ink3);">Acompanhe seu consumo e faça upgrade quando precisar crescer mais.</div>
+    </div>
+
+    <!-- Uso atual -->
+    <div class="usage-section">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">Uso Atual</div>
+      <div class="usage-row">
+        <span class="usage-label">Leads cadastrados</span>
+        <div class="usage-right">
+          <span class="usage-count" id="usage-leads-count">0 / 500</span>
+          <div class="usage-bar"><div class="usage-bar-fill green" id="usage-leads-bar"></div></div>
         </div>
       </div>
-      <div class="section-card">
-        <h3>Como usar</h3>
-        <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:16px;">No perfil de qualquer lead, clique em <b>Abrir no WhatsApp</b> para abrir o chat direto.<br><br>Use as variáveis abaixo nos templates:</p>
-        <div style="background:var(--bg);border-radius:8px;padding:14px;font-size:12px;color:var(--ink2);line-height:2;">
-          <code>{nome}</code> → Nome do cliente<br>
-          <code>{valor}</code> → Valor do lead<br>
-          <code>{empresa}</code> → Sua empresa
+      <div class="usage-row">
+        <span class="usage-label">Usuários ativos</span>
+        <div class="usage-right">
+          <span class="usage-count" id="usage-users-count">1 / 1</span>
+          <div class="usage-bar"><div class="usage-bar-fill green" id="usage-users-bar"></div></div>
         </div>
+      </div>
+      <div class="usage-row">
+        <span class="usage-label">White-label (sua marca)</span>
+        <div class="usage-right"><span id="usage-whitelabel" style="font-size:12px;color:var(--lost)">✕ Não disponível</span></div>
+      </div>
+      <div class="usage-row">
+        <span class="usage-label">Templates WhatsApp</span>
+        <div class="usage-right"><span id="usage-templates" style="font-size:12px;color:var(--lost)">✕ Não disponível</span></div>
+      </div>
+      <div class="usage-row">
+        <span class="usage-label">Export para Excel</span>
+        <div class="usage-right"><span id="usage-excel" style="font-size:12px;color:var(--lost)">✕ Não disponível</span></div>
+      </div>
+      <div class="usage-row">
+        <span class="usage-label">Gestor de conta dedicado</span>
+        <div class="usage-right"><span id="usage-gestor" style="font-size:12px;color:var(--lost)">✕ Não disponível</span></div>
+      </div>
+    </div>
+
+    <!-- Cards de planos -->
+    <div class="plans-grid">
+      <!-- Starter -->
+      <div class="plan-card-crm" id="plan-card-starter">
+        <div class="plan-name">Starter</div>
+        <div style="font-size:12px;color:var(--ink3);">Para quem está começando</div>
+        <div class="plan-price-crm">R$ 197<span>/mês</span></div>
+        <ul class="plan-features-crm">
+          <li>Até 500 leads</li>
+          <li>1 usuário administrador</li>
+          <li>Funil de vendas Kanban</li>
+          <li>Tarefas e follow-ups</li>
+          <li>Histórico de atividades</li>
+          <li class="no">Templates WhatsApp</li>
+          <li class="no">White-label</li>
+          <li class="no">Export Excel</li>
+          <li class="no">Gestor de conta</li>
+        </ul>
+        <button class="btn btn-ghost btn-full btn-sm" id="btn-plan-starter" onclick="requestPlan('Starter')">Plano atual</button>
+      </div>
+      <!-- Pro -->
+      <div class="plan-card-crm pro-plan" id="plan-card-pro">
+        <div class="plan-current-badge badge-pro" id="badge-pro" style="display:none">ESCOLHA PROFISSIONAL</div>
+        <div class="plan-name" style="color:#a78bfa">Pro</div>
+        <div style="font-size:12px;color:var(--ink3);">Para equipes em crescimento</div>
+        <div class="plan-price-crm">R$ 697<span>/mês</span></div>
+        <ul class="plan-features-crm">
+          <li>Leads ilimitados</li>
+          <li>Até 10 usuários</li>
+          <li>Funil de vendas Kanban</li>
+          <li>Tarefas e follow-ups</li>
+          <li>Histórico de atividades</li>
+          <li>Templates WhatsApp</li>
+          <li>White-label (sua marca)</li>
+          <li>Export Excel</li>
+          <li class="no">Gestor de conta</li>
+        </ul>
+        <button class="btn btn-upgrade btn-full btn-sm" id="btn-plan-pro" onclick="requestPlan('Pro')">Fazer upgrade → Pro</button>
+      </div>
+      <!-- Business -->
+      <div class="plan-card-crm" id="plan-card-business">
+        <div class="plan-name">Business</div>
+        <div style="font-size:12px;color:var(--ink3);">Para grandes operações</div>
+        <div class="plan-price-crm">R$ 1.897<span>/mês</span></div>
+        <ul class="plan-features-crm">
+          <li>Leads ilimitados</li>
+          <li>Usuários ilimitados</li>
+          <li>Funil de vendas Kanban</li>
+          <li>Tarefas e follow-ups</li>
+          <li>Histórico de atividades</li>
+          <li>Templates WhatsApp</li>
+          <li>White-label (sua marca)</li>
+          <li>Export Excel</li>
+          <li>Gestor de conta dedicado</li>
+        </ul>
+        <button class="btn btn-upgrade btn-full btn-sm" id="btn-plan-business" onclick="requestPlan('Business')">Fazer upgrade → Business</button>
       </div>
     </div>
   </div>
@@ -452,12 +548,18 @@ label.lbl{display:block;font-size:10px;font-weight:600;text-transform:uppercase;
         <div class="stat-row"><span>Taxa de Conversão</span><span class="stat-val" id="act-conv">0%</span></div>
         <div class="stat-row"><span>Investimento Total</span><span class="stat-val" id="act-gasto">R$ 0</span></div>
         <div class="stat-row"><span style="color:var(--won);font-weight:600">Faturamento Total</span><span class="stat-val" id="act-faturado" style="color:var(--won)">R$ 0</span></div>
+        <div class="stat-row"><span>Plano Atual</span><span class="stat-val" id="act-plano">—</span></div>
       </div>
       <div class="section-card">
         <h3>Segurança</h3>
         <label class="lbl">Nova Senha</label>
         <input type="password" id="new-password" class="field" placeholder="Mínimo 6 caracteres">
         <button class="btn btn-dark btn-full" onclick="changePassword()">Alterar senha</button>
+        <div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--border);">
+          <h3 style="margin-bottom:12px;">Upgrade de Plano</h3>
+          <p style="font-size:12px;color:var(--ink3);margin-bottom:12px;">Para alterar seu plano, entre em contato com a equipe HUB Digital.</p>
+          <a href="https://api.whatsapp.com/send?phone=5511939180038&text=Olá! Quero fazer upgrade do meu plano NegoHub." target="_blank" class="btn btn-upgrade btn-full" style="text-decoration:none;">💬 Falar com HUB Digital</a>
+        </div>
       </div>
     </div>
   </div>
@@ -468,6 +570,8 @@ label.lbl{display:block;font-size:10px;font-weight:600;text-transform:uppercase;
   <div class="modal">
     <div class="modal-title">Novo Lead</div>
     <div class="modal-sub">Cadastre um novo cliente no funil</div>
+    <!-- Aviso de limite -->
+    <div id="modal-limit-warn" style="display:none;background:rgba(255,71,87,0.08);border:1px solid rgba(255,71,87,0.3);border-radius:10px;padding:14px 16px;margin-bottom:16px;font-size:13px;color:var(--lost);"></div>
     <label class="lbl">Nome do cliente *</label>
     <input id="new-name" class="field" placeholder="Ex: Empresa XPTO Ltda">
     <div class="form-row">
@@ -497,7 +601,7 @@ label.lbl{display:block;font-size:10px;font-weight:600;text-transform:uppercase;
       </div>
     </div>
     <div style="display:flex;gap:10px;margin-top:8px;">
-      <button class="btn btn-dark" style="flex:1" onclick="saveLead()">Cadastrar lead</button>
+      <button class="btn btn-dark" style="flex:1" id="btn-save-lead" onclick="saveLead()">Cadastrar lead</button>
       <button class="btn btn-ghost" onclick="closeM('modal-new')">Cancelar</button>
     </div>
   </div>
@@ -508,34 +612,16 @@ label.lbl{display:block;font-size:10px;font-weight:600;text-transform:uppercase;
   <div class="modal">
     <div class="modal-title" id="edit-modal-title">Perfil do Lead</div>
     <input id="edit-id" type="hidden">
-    
-    <!-- ROI chip -->
     <div class="roi-chip" id="edit-roi-chip">ROI: —</div>
-
-    <!-- WhatsApp -->
     <div id="edit-whatsapp-wrap" style="margin-bottom:16px;"></div>
-
     <div class="form-row">
-      <div>
-        <label class="lbl">Nome</label>
-        <input id="edit-name" class="field">
-      </div>
-      <div>
-        <label class="lbl">Telefone WhatsApp</label>
-        <input id="edit-phone" class="field" placeholder="5511999999999">
-      </div>
+      <div><label class="lbl">Nome</label><input id="edit-name" class="field"></div>
+      <div><label class="lbl">Telefone WhatsApp</label><input id="edit-phone" class="field" placeholder="5511999999999"></div>
     </div>
     <div class="form-row">
-      <div>
-        <label class="lbl">Valor da venda (R$)</label>
-        <input id="edit-val" type="number" class="field">
-      </div>
-      <div>
-        <label class="lbl">Custo de aquisição (R$)</label>
-        <input id="edit-cost" type="number" class="field">
-      </div>
+      <div><label class="lbl">Valor da venda (R$)</label><input id="edit-val" type="number" class="field"></div>
+      <div><label class="lbl">Custo de aquisição (R$)</label><input id="edit-cost" type="number" class="field"></div>
     </div>
-
     <label class="lbl">Etapa</label>
     <select id="edit-stage" class="field" style="background:var(--bg);color:var(--ink);">
       <option value="Contato Inicial">Prospecção</option>
@@ -544,11 +630,8 @@ label.lbl{display:block;font-size:10px;font-weight:600;text-transform:uppercase;
       <option value="Fechamento">Fechado</option>
       <option value="Perdido">Perdido</option>
     </select>
-
     <label class="lbl">Notas</label>
     <textarea id="edit-notes" class="field field-area"></textarea>
-
-    <!-- TAREFAS -->
     <label class="lbl">Tarefas / Follow-ups</label>
     <div class="task-list" id="edit-tasks"></div>
     <div class="task-add">
@@ -556,11 +639,8 @@ label.lbl{display:block;font-size:10px;font-weight:600;text-transform:uppercase;
       <input type="date" id="new-task-date" class="field" style="margin:0;width:140px;">
       <button class="btn btn-ghost btn-sm" onclick="addTask()">+ Add</button>
     </div>
-
-    <!-- HISTÓRICO -->
     <label class="lbl" style="margin-top:20px;">Histórico</label>
     <div class="hist-list" id="edit-history"></div>
-
     <div style="display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;">
       <button class="btn btn-dark" style="flex:1" onclick="updateLead()">Salvar</button>
       <button class="btn btn-danger btn-sm" onclick="deleteLead()">Excluir</button>
@@ -574,9 +654,16 @@ label.lbl{display:block;font-size:10px;font-weight:600;text-transform:uppercase;
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
-import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, serverTimestamp, query, where } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, updatePassword as fbUpdatePassword } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
+import {
+  getFirestore, collection, addDoc, onSnapshot,
+  doc, updateDoc, deleteDoc, serverTimestamp, query, where, getDoc, setDoc
+} from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
+import {
+  getAuth, signInWithEmailAndPassword, onAuthStateChanged,
+  signOut, updatePassword as fbUpdatePassword
+} from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
 
+// ─── FIREBASE CONFIG ───────────────────────────────────────────────────────
 const firebaseConfig = {
   apiKey: "AIzaSyDMiJmwgxep1USbcmWa8ck3eEI1_I13HRg",
   authDomain: "negofunil-9dda9.firebaseapp.com",
@@ -587,31 +674,58 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+const db  = getFirestore(app);
 const auth = getAuth(app);
-let allLeads = [], chart1 = null, chart2 = null;
-let goalAmount = parseFloat(localStorage.getItem('negohub-goal') || '0');
 
-// --- AUTH ---
-onAuthStateChanged(auth, (user) => {
+// ─── DEFINIÇÃO DE PLANOS ───────────────────────────────────────────────────
+/*
+  Planos são gerenciados no Firestore na coleção "users/{uid}"
+  com o campo "plan": "starter" | "pro" | "business"
+  
+  Para ativar um plano manualmente (como admin), basta ir no
+  Firestore Console → coleção "users" → documento do uid do usuário
+  e setar o campo "plan" com o valor desejado.
+*/
+const PLANS = {
+  starter:  { name: 'Starter',  maxLeads: 500,       maxUsers: 1,         whatsappTemplates: false, whitelabel: false, exportExcel: false, gestor: false },
+  pro:      { name: 'Pro',      maxLeads: Infinity,   maxUsers: 10,        whatsappTemplates: true,  whitelabel: true,  exportExcel: true,  gestor: false },
+  business: { name: 'Business', maxLeads: Infinity,   maxUsers: Infinity,  whatsappTemplates: true,  whitelabel: true,  exportExcel: true,  gestor: true  }
+};
+
+// ─── ESTADO GLOBAL ─────────────────────────────────────────────────────────
+let allLeads   = [];
+let chart1     = null;
+let chart2     = null;
+let goalAmount = parseFloat(localStorage.getItem('negohub-goal') || '0');
+let currentPlan = 'starter';   // padrão; sobrescrito pelo Firestore
+let currentUid  = null;
+
+// ─── AUTH ──────────────────────────────────────────────────────────────────
+onAuthStateChanged(auth, async (user) => {
   if (user) {
-    document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('sidebar').style.display = 'flex';
-    document.getElementById('main-wrapper').style.display = 'flex';
+    currentUid = user.uid;
+    document.getElementById('login-screen').style.display  = 'none';
+    document.getElementById('sidebar').style.display       = 'flex';
+    document.getElementById('main-wrapper').style.display  = 'flex';
+
+    // Carrega plano do usuário no Firestore
+    await loadUserPlan(user.uid);
     loadData(user.uid);
     initTemplates();
     if (goalAmount) document.getElementById('meta-input').value = goalAmount;
   } else {
-    document.getElementById('login-screen').style.display = 'flex';
-    document.getElementById('sidebar').style.display = 'none';
-    document.getElementById('main-wrapper').style.display = 'none';
+    currentUid = null;
+    document.getElementById('login-screen').style.display  = 'flex';
+    document.getElementById('sidebar').style.display       = 'none';
+    document.getElementById('main-wrapper').style.display  = 'none';
   }
 });
 
 window.appLogin = () => {
   const e = document.getElementById('loginEmail').value;
   const p = document.getElementById('loginPass').value;
-  signInWithEmailAndPassword(auth, e, p).catch(() => toast('Acesso negado. Verifique suas credenciais.', true));
+  signInWithEmailAndPassword(auth, e, p)
+    .catch(() => toast('Acesso negado. Verifique suas credenciais.', true));
 };
 
 window.appLogout = () => signOut(auth).then(() => location.reload());
@@ -619,16 +733,138 @@ window.appLogout = () => signOut(auth).then(() => location.reload());
 window.changePassword = () => {
   const np = document.getElementById('new-password').value;
   if (!np || np.length < 6) { toast('Senha deve ter ao menos 6 caracteres', true); return; }
-  fbUpdatePassword(auth.currentUser, np).then(() => toast('Senha alterada!')).catch(() => toast('Erro ao alterar senha', true));
+  fbUpdatePassword(auth.currentUser, np)
+    .then(() => toast('Senha alterada!'))
+    .catch(() => toast('Erro ao alterar senha', true));
 };
 
-// --- DATA ---
+// ─── CARREGAR / SALVAR PLANO ───────────────────────────────────────────────
+async function loadUserPlan(uid) {
+  try {
+    const snap = await getDoc(doc(db, "users", uid));
+    if (snap.exists()) {
+      const data = snap.data();
+      currentPlan = data.plan || 'starter';
+    } else {
+      // Cria documento do usuário com plano Starter por padrão
+      await setDoc(doc(db, "users", uid), { plan: 'starter', createdAt: serverTimestamp() });
+      currentPlan = 'starter';
+    }
+  } catch (e) {
+    console.warn('Não foi possível carregar plano, usando starter.', e);
+    currentPlan = 'starter';
+  }
+  applyPlanUI();
+}
+
+function getPlan() {
+  return PLANS[currentPlan] || PLANS.starter;
+}
+
+// ─── APLICAR RESTRIÇÕES DE PLANO NA UI ────────────────────────────────────
+function applyPlanUI() {
+  const plan = getPlan();
+  const planKey = currentPlan;
+
+  // Badge no header
+  const badge = document.getElementById('header-plan-badge');
+  badge.textContent = plan.name.toUpperCase();
+  badge.className   = `plan-badge ${planKey}`;
+
+  // Barra de limite de leads (só para Starter)
+  const limitBar = document.getElementById('header-limit-bar');
+  if (plan.maxLeads !== Infinity) {
+    limitBar.style.display = 'flex';
+  } else {
+    limitBar.style.display = 'none';
+  }
+
+  // Export Excel
+  const btnExport = document.getElementById('btn-export');
+  if (!plan.exportExcel) {
+    btnExport.disabled = true;
+    btnExport.title    = 'Disponível a partir do plano Pro';
+  } else {
+    btnExport.disabled = false;
+    btnExport.title    = '';
+  }
+
+  // Plano no perfil
+  const actPlano = document.getElementById('act-plano');
+  if (actPlano) actPlano.textContent = plan.name;
+
+  // View de planos — destacar atual e atualizar botões
+  ['starter','pro','business'].forEach(p => {
+    const card = document.getElementById('plan-card-' + p);
+    const btn  = document.getElementById('btn-plan-' + p);
+    const badge2 = document.getElementById('badge-' + p);
+    if (!card || !btn) return;
+    card.classList.remove('current');
+    if (badge2) badge2.style.display = 'none';
+    if (p === planKey) {
+      card.classList.add('current');
+      btn.textContent = '✓ Plano atual';
+      btn.disabled    = true;
+      btn.className   = 'btn btn-ghost btn-full btn-sm';
+      if (badge2) badge2.style.display = 'block';
+    } else if (planRank(p) > planRank(planKey)) {
+      btn.textContent = `Fazer upgrade → ${PLANS[p].name}`;
+      btn.disabled    = false;
+      btn.className   = 'btn btn-upgrade btn-full btn-sm';
+    } else {
+      btn.textContent = `Fazer downgrade → ${PLANS[p].name}`;
+      btn.disabled    = false;
+      btn.className   = 'btn btn-ghost btn-full btn-sm';
+    }
+  });
+
+  // Atualizar uso na view de planos
+  updateUsageView();
+}
+
+function planRank(p) {
+  return { starter: 0, pro: 1, business: 2 }[p] || 0;
+}
+
+function updateUsageView() {
+  const plan     = getPlan();
+  const total    = allLeads.length;
+  const maxL     = plan.maxLeads === Infinity ? '∞' : plan.maxLeads;
+  const maxU     = plan.maxUsers === Infinity ? '∞' : plan.maxUsers;
+  const pctLeads = plan.maxLeads !== Infinity ? Math.min((total / plan.maxLeads) * 100, 100) : 0;
+
+  document.getElementById('usage-leads-count').textContent = `${total} / ${maxL}`;
+  document.getElementById('usage-users-count').textContent = `1 / ${maxU}`;
+
+  const leadsBar = document.getElementById('usage-leads-bar');
+  leadsBar.style.width = plan.maxLeads !== Infinity ? pctLeads + '%' : '5%';
+  leadsBar.className   = 'usage-bar-fill ' + (pctLeads >= 100 ? 'red' : pctLeads >= 80 ? 'orange' : 'green');
+
+  document.getElementById('usage-users-bar').style.width = '10%';
+
+  const ok  = '<span style="font-size:12px;color:var(--accent)">✓ Disponível</span>';
+  const no  = '<span style="font-size:12px;color:var(--lost)">✕ Não disponível</span>';
+  document.getElementById('usage-whitelabel').innerHTML  = plan.whitelabel  ? ok : no;
+  document.getElementById('usage-templates').innerHTML   = plan.whatsappTemplates ? ok : no;
+  document.getElementById('usage-excel').innerHTML       = plan.exportExcel ? ok : no;
+  document.getElementById('usage-gestor').innerHTML      = plan.gestor      ? ok : no;
+
+  // Header limit bar
+  if (plan.maxLeads !== Infinity) {
+    document.getElementById('header-limit-text').textContent = `${total}/${plan.maxLeads} leads`;
+    const fill = document.getElementById('header-limit-fill');
+    fill.style.width = pctLeads + '%';
+    fill.className   = 'limit-fill ' + (pctLeads >= 100 ? 'full' : pctLeads >= 80 ? 'warn' : '');
+  }
+}
+
+// ─── DADOS ─────────────────────────────────────────────────────────────────
 const stages = {
   'Contato Inicial': 'list-contato',
   'Proposta Enviada': 'list-proposta',
-  'Negociação': 'list-negociacao',
-  'Fechamento': 'list-fechado',
-  'Perdido': 'list-perdido'
+  'Negociação':       'list-negociacao',
+  'Fechamento':       'list-fechado',
+  'Perdido':          'list-perdido'
 };
 
 function loadData(uid) {
@@ -638,9 +874,11 @@ function loadData(uid) {
     snap.forEach(d => allLeads.push({ id: d.id, ...d.data() }));
     renderFunnel();
     updateAllViews();
+    updateUsageView();
   });
 }
 
+// ─── FUNIL ─────────────────────────────────────────────────────────────────
 function renderFunnel(filtered = null) {
   const leads = filtered || allLeads;
   document.querySelectorAll('.body-list').forEach(el => el.innerHTML = '');
@@ -655,32 +893,32 @@ function renderFunnel(filtered = null) {
     document.getElementById(listId).appendChild(buildCard(l));
   });
 
-  // update headers
   const map = {
-    'Contato Inicial': ['contato', 'Prospecção'],
-    'Proposta Enviada': ['proposta', 'Proposta'],
-    'Negociação': ['negociacao', 'Negociação'],
-    'Fechamento': ['fechado', 'Fechamento'],
-    'Perdido': ['perdido', 'Perdido']
+    'Contato Inicial': 'contato',
+    'Proposta Enviada': 'proposta',
+    'Negociação':       'negociacao',
+    'Fechamento':       'fechado',
+    'Perdido':          'perdido'
   };
-  Object.entries(map).forEach(([stage, [key]]) => {
-    const el = document.getElementById('tot-' + key);
+  Object.entries(map).forEach(([stage, key]) => {
+    const el  = document.getElementById('tot-' + key);
     const cnt = document.getElementById('cnt-' + key);
-    if (el) el.innerText = fmtBRL(totals[stage]);
+    if (el)  el.innerText  = fmtBRL(totals[stage]);
     if (cnt) cnt.innerText = counts[stage];
   });
 }
 
 function buildCard(l) {
   const card = document.createElement('div');
-  card.className = 'card';
+  card.className  = 'card';
   card.dataset.id = l.id;
 
-  const tasks = l.tasks || [];
-  const now = new Date();
+  const tasks   = l.tasks || [];
+  const now     = new Date();
   const overdue = tasks.filter(t => !t.done && t.date && new Date(t.date) < now);
   const pending = tasks.filter(t => !t.done);
   let taskBadge = '';
+
   if (overdue.length > 0) {
     taskBadge = `<span class="card-task-badge overdue">⚠ ${overdue.length} vencida(s)</span>`;
     const dot = document.createElement('div');
@@ -694,7 +932,9 @@ function buildCard(l) {
   }
 
   const svcClass = svcColor(l.service);
-  const whatsapp = l.phone ? `<a class="card-whatsapp" href="https://wa.me/${l.phone.replace(/\D/g,'')}" target="_blank">💬 WhatsApp</a>` : '';
+  const whatsapp = l.phone
+    ? `<a class="card-whatsapp" href="https://wa.me/${l.phone.replace(/\D/g,'')}" target="_blank">💬 WhatsApp</a>`
+    : '';
 
   card.innerHTML += `
     <div onclick="editLead('${l.id}')">
@@ -703,106 +943,104 @@ function buildCard(l) {
         <span class="card-service ${svcClass}">${l.service}</span>
       </div>
       <div class="card-val">${fmtBRL(l.value)}</div>
-      <div class="card-meta">
-        ${taskBadge}
-        ${whatsapp}
-      </div>
-    </div>
-  `;
+      <div class="card-meta">${taskBadge}${whatsapp}</div>
+    </div>`;
   return card;
 }
 
 function svcColor(s) {
-  const m = {'Google Ads':'svc-google','Instagram Ads':'svc-instagram','Prospecção':'svc-prospeccao','Indicação':'svc-indicacao'};
+  const m = { 'Google Ads':'svc-google','Instagram Ads':'svc-instagram','Prospecção':'svc-prospeccao','Indicação':'svc-indicacao' };
   return m[s] || 'svc-outro';
 }
 
+// ─── TODOS OS VIEWS ────────────────────────────────────────────────────────
 function updateAllViews() {
   const fechados = allLeads.filter(l => l.stage === 'Fechamento');
-  const receita = fechados.reduce((a, l) => a + Number(l.value || 0), 0);
-  const gasto = allLeads.reduce((a, l) => a + Number(l.cost || 0), 0);
-  const ativos = allLeads.filter(l => l.stage !== 'Fechamento' && l.stage !== 'Perdido').length;
-  const conv = allLeads.length > 0 ? ((fechados.length / allLeads.length) * 100).toFixed(0) : 0;
+  const receita  = fechados.reduce((a, l) => a + Number(l.value || 0), 0);
+  const gasto    = allLeads.reduce((a, l) => a + Number(l.cost  || 0), 0);
+  const ativos   = allLeads.filter(l => l.stage !== 'Fechamento' && l.stage !== 'Perdido').length;
+  const conv     = allLeads.length > 0 ? ((fechados.length / allLeads.length) * 100).toFixed(0) : 0;
 
-  // KPIs
-  document.getElementById('dash-roi').innerText = gasto > 0 ? (receita / gasto).toFixed(1) + 'x' : '—';
+  document.getElementById('dash-roi').innerText    = gasto > 0 ? (receita / gasto).toFixed(1) + 'x' : '—';
   document.getElementById('dash-receita').innerText = fmtBRL(receita);
-  document.getElementById('dash-ativos').innerText = ativos;
-  document.getElementById('dash-conv').innerText = conv + '%';
+  document.getElementById('dash-ativos').innerText  = ativos;
+  document.getElementById('dash-conv').innerText    = conv + '%';
 
-  // Meta
   updateMeta(receita);
 
-  // Perfil
-  document.getElementById('act-leads').innerText = allLeads.length;
+  document.getElementById('act-leads').innerText    = allLeads.length;
   document.getElementById('act-fechados').innerText = fechados.length;
-  document.getElementById('act-conv').innerText = conv + '%';
-  document.getElementById('act-gasto').innerText = fmtBRL(gasto);
+  document.getElementById('act-conv').innerText     = conv + '%';
+  document.getElementById('act-gasto').innerText    = fmtBRL(gasto);
   document.getElementById('act-faturado').innerText = fmtBRL(receita);
 
   renderTable();
-  renderCharts(receita);
+  renderCharts();
 }
 
 function updateMeta(receita) {
   if (!goalAmount) return;
-  const pct = Math.min((receita / goalAmount) * 100, 100);
+  const pct  = Math.min((receita / goalAmount) * 100, 100);
   document.getElementById('meta-numbers').innerText = `${fmtBRL(receita)} / ${fmtBRL(goalAmount)}`;
   const fill = document.getElementById('meta-fill');
   fill.style.width = pct + '%';
-  fill.className = 'progress-fill' + (pct >= 100 ? ' over' : '');
+  fill.className   = 'progress-fill' + (pct >= 100 ? ' over' : '');
 }
 
 window.saveMeta = () => {
   goalAmount = parseFloat(document.getElementById('meta-input').value) || 0;
   localStorage.setItem('negohub-goal', goalAmount);
   const fechados = allLeads.filter(l => l.stage === 'Fechamento');
-  const receita = fechados.reduce((a, l) => a + Number(l.value || 0), 0);
+  const receita  = fechados.reduce((a, l) => a + Number(l.value || 0), 0);
   updateMeta(receita);
   toast('Meta salva!');
 };
 
-// --- TABELA ---
+// ─── TABELA ────────────────────────────────────────────────────────────────
 window.renderTable = () => {
-  const stage = document.getElementById('filter-stage').value;
+  const stage   = document.getElementById('filter-stage').value;
   const service = document.getElementById('filter-service').value;
-  const search = (document.getElementById('table-search').value || '').toLowerCase();
-  const corpo = document.getElementById('tabela-leads-corpo');
+  const search  = (document.getElementById('table-search').value || '').toLowerCase();
+  const corpo   = document.getElementById('tabela-leads-corpo');
   corpo.innerHTML = '';
+
   const filtered = allLeads.filter(l =>
-    (!stage || l.stage === stage) &&
+    (!stage   || l.stage   === stage)   &&
     (!service || l.service === service) &&
-    (!search || l.name.toLowerCase().includes(search))
+    (!search  || l.name.toLowerCase().includes(search))
   );
+
   if (!filtered.length) {
     corpo.innerHTML = '<tr><td colspan="7"><div class="empty-state">Nenhum lead encontrado</div></td></tr>';
     return;
   }
+
   filtered.forEach(l => {
-    const roi = (l.cost > 0 && l.stage === 'Fechamento') ? (l.value / l.cost).toFixed(1) + 'x' : '—';
-    const roiClass = l.stage === 'Fechamento' && l.cost > 0 ? (l.value/l.cost >= 1 ? 'roi-pos' : 'roi-neg') : '';
-    const stagePill = stagePillClass(l.stage);
+    const roi      = (l.cost > 0 && l.stage === 'Fechamento') ? (l.value / l.cost).toFixed(1) + 'x' : '—';
+    const roiClass = (l.stage === 'Fechamento' && l.cost > 0) ? (l.value / l.cost >= 1 ? 'roi-pos' : 'roi-neg') : '';
+    const pill     = stagePillClass(l.stage);
     corpo.innerHTML += `<tr>
       <td style="font-weight:600">${l.name}</td>
       <td>${fmtBRL(l.value)}</td>
       <td>${fmtBRL(l.cost)}</td>
       <td class="${roiClass}">${roi}</td>
       <td><span class="card-service ${svcColor(l.service)}">${l.service}</span></td>
-      <td><span class="status-pill ${stagePill}">${l.stage}</span></td>
+      <td><span class="status-pill ${pill}">${l.stage}</span></td>
       <td><button onclick="editLead('${l.id}')" class="btn btn-ghost btn-sm">Ver</button></td>
     </tr>`;
   });
 };
 
 function stagePillClass(s) {
-  const m = {'Contato Inicial':'pill-contato','Proposta Enviada':'pill-proposta','Negociação':'pill-proposta','Fechamento':'pill-fechado','Perdido':'pill-perdido'};
+  const m = { 'Contato Inicial':'pill-contato','Proposta Enviada':'pill-proposta','Negociação':'pill-proposta','Fechamento':'pill-fechado','Perdido':'pill-perdido' };
   return m[s] || '';
 }
 
-// --- CHARTS ---
+// ─── CHARTS ────────────────────────────────────────────────────────────────
 function renderCharts() {
   const svcMap = {};
   allLeads.forEach(l => { svcMap[l.service] = (svcMap[l.service] || 0) + 1; });
+
   const ctxO = document.getElementById('chartOrigem').getContext('2d');
   if (chart1) chart1.destroy();
   chart1 = new Chart(ctxO, {
@@ -811,53 +1049,95 @@ function renderCharts() {
       labels: Object.keys(svcMap),
       datasets: [{ data: Object.values(svcMap), backgroundColor: ['#00e5a0','#7c5cfc','#f5a623','#ff4757','#4a9eff'], borderWidth: 0, hoverOffset: 6 }]
     },
-    options: { cutout: '68%', plugins: { legend: { position: 'bottom', labels: { color: '#8b90a7', font: { family: 'Geist', size: 11 }, padding: 14 } } } }
+    options: { cutout: '68%', plugins: { legend: { position: 'bottom', labels: { color: '#8b90a7', font: { size: 11 }, padding: 14 } } } }
   });
 
-  const stageLabels = ['Prospecção','Proposta','Negociação','Fechado','Perdido'];
   const stageCounts = [
-    allLeads.filter(l=>l.stage==='Contato Inicial').length,
-    allLeads.filter(l=>l.stage==='Proposta Enviada').length,
-    allLeads.filter(l=>l.stage==='Negociação').length,
-    allLeads.filter(l=>l.stage==='Fechamento').length,
-    allLeads.filter(l=>l.stage==='Perdido').length,
+    allLeads.filter(l => l.stage === 'Contato Inicial').length,
+    allLeads.filter(l => l.stage === 'Proposta Enviada').length,
+    allLeads.filter(l => l.stage === 'Negociação').length,
+    allLeads.filter(l => l.stage === 'Fechamento').length,
+    allLeads.filter(l => l.stage === 'Perdido').length,
   ];
   const ctxE = document.getElementById('chartEtapas').getContext('2d');
   if (chart2) chart2.destroy();
   chart2 = new Chart(ctxE, {
     type: 'bar',
     data: {
-      labels: stageLabels,
+      labels: ['Prospecção','Proposta','Negociação','Fechado','Perdido'],
       datasets: [{ data: stageCounts, backgroundColor: ['#818cf8','#fb923c','#38bdf8','#4ade80','#f87171'], borderRadius: 6, borderSkipped: false }]
     },
     options: {
       plugins: { legend: { display: false } },
-      scales: { y: { beginAtZero: true, ticks: { color: '#555a72', font: { family: 'Geist', size: 11 } }, grid: { color: '#2a2e42' } }, x: { ticks: { color: '#555a72', font: { family: 'Geist', size: 11 } }, grid: { display: false } } }
+      scales: {
+        y: { beginAtZero: true, ticks: { color: '#555a72', font: { size: 11 } }, grid: { color: '#2a2e42' } },
+        x: { ticks: { color: '#555a72', font: { size: 11 } }, grid: { display: false } }
+      }
     }
   });
 }
 
-// --- LEAD CRUD ---
+// ─── ABRIR NOVO LEAD (COM VERIFICAÇÃO DE LIMITE) ───────────────────────────
+window.openNewLead = () => {
+  const plan  = getPlan();
+  const warn  = document.getElementById('modal-limit-warn');
+  const btn   = document.getElementById('btn-save-lead');
+  const total = allLeads.length;
+
+  if (plan.maxLeads !== Infinity && total >= plan.maxLeads) {
+    // Bloqueado: limite atingido
+    warn.style.display  = 'block';
+    warn.innerHTML = `⚠️ Você atingiu o limite de <strong>${plan.maxLeads} leads</strong> do plano ${plan.name}.<br>
+      <a href="#" onclick="closeM('modal-new');showView('planos',null)" style="color:var(--accent);font-weight:600;text-decoration:none;">
+        Faça upgrade para continuar adicionando leads →
+      </a>`;
+    btn.disabled = true;
+  } else if (plan.maxLeads !== Infinity && total >= plan.maxLeads * 0.9) {
+    // Alerta: perto do limite
+    warn.style.display  = 'block';
+    warn.style.background  = 'rgba(245,166,35,0.08)';
+    warn.style.borderColor = 'rgba(245,166,35,0.3)';
+    warn.style.color       = 'var(--warm)';
+    warn.innerHTML = `⚡ Você está usando <strong>${total}/${plan.maxLeads} leads</strong>. Considere fazer upgrade antes de atingir o limite.`;
+    btn.disabled = false;
+  } else {
+    warn.style.display = 'none';
+    btn.disabled = false;
+  }
+
+  openM('modal-new');
+};
+
+// ─── LEAD CRUD ─────────────────────────────────────────────────────────────
 window.saveLead = async () => {
+  const plan  = getPlan();
+  const total = allLeads.length;
+
+  // Verificação final no momento de salvar
+  if (plan.maxLeads !== Infinity && total >= plan.maxLeads) {
+    toast(`Limite de ${plan.maxLeads} leads atingido. Faça upgrade para continuar.`, true);
+    return;
+  }
+
   const name = document.getElementById('new-name').value.trim();
   if (!name) { toast('Informe o nome do cliente', true); return; }
+
   await addDoc(collection(db, "leads"), {
-    ownerId: auth.currentUser.uid,
+    ownerId:     auth.currentUser.uid,
     name,
-    phone: document.getElementById('new-phone').value.replace(/\D/g,''),
-    value: parseFloat(document.getElementById('new-val').value) || 0,
-    cost: parseFloat(document.getElementById('new-cost').value) || 0,
-    service: document.getElementById('new-svc').value,
-    stage: 'Contato Inicial',
-    notes: '',
-    tasks: [],
-    history: [{ text: 'Lead criado', date: new Date().toISOString() }],
-    lastUpdate: serverTimestamp()
+    phone:       document.getElementById('new-phone').value.replace(/\D/g,''),
+    value:       parseFloat(document.getElementById('new-val').value) || 0,
+    cost:        parseFloat(document.getElementById('new-cost').value) || 0,
+    service:     document.getElementById('new-svc').value,
+    stage:       'Contato Inicial',
+    notes:       '',
+    tasks:       [],
+    history:     [{ text: 'Lead criado', date: new Date().toISOString() }],
+    lastUpdate:  serverTimestamp()
   });
+
   closeM('modal-new');
-  document.getElementById('new-name').value = '';
-  document.getElementById('new-phone').value = '';
-  document.getElementById('new-val').value = '';
+  ['new-name','new-phone','new-val'].forEach(id => { document.getElementById(id).value = ''; });
   document.getElementById('new-cost').value = '0';
   toast('Lead cadastrado!');
 };
@@ -865,38 +1145,39 @@ window.saveLead = async () => {
 window.editLead = (id) => {
   const l = allLeads.find(x => x.id === id);
   if (!l) return;
-  document.getElementById('edit-id').value = l.id;
+  document.getElementById('edit-id').value            = l.id;
   document.getElementById('edit-modal-title').innerText = l.name;
-  document.getElementById('edit-name').value = l.name;
-  document.getElementById('edit-phone').value = l.phone || '';
-  document.getElementById('edit-val').value = l.value;
-  document.getElementById('edit-cost').value = l.cost || 0;
-  document.getElementById('edit-notes').value = l.notes || '';
-  document.getElementById('edit-stage').value = l.stage;
+  document.getElementById('edit-name').value          = l.name;
+  document.getElementById('edit-phone').value         = l.phone || '';
+  document.getElementById('edit-val').value           = l.value;
+  document.getElementById('edit-cost').value          = l.cost || 0;
+  document.getElementById('edit-notes').value         = l.notes || '';
+  document.getElementById('edit-stage').value         = l.stage;
 
   const roi = (l.cost > 0 && l.stage === 'Fechamento') ? (l.value / l.cost).toFixed(1) + 'x' : 'Não calculado';
   document.getElementById('edit-roi-chip').innerText = `ROI: ${roi}`;
 
-  // WhatsApp
   const waWrap = document.getElementById('edit-whatsapp-wrap');
+  const plan   = getPlan();
   if (l.phone) {
-    const tmplOptions = getTemplates().map((t,i) => `<option value="${i}">${t.substring(0,40)}...</option>`).join('');
+    let tmplSel = '';
+    if (plan.whatsappTemplates) {
+      const tmplOptions = getTemplates().map((t,i) => `<option value="${i}">${t.substring(0,40)}...</option>`).join('');
+      tmplSel = `
+        <select id="tmpl-sel" class="filter-sel" style="font-size:11px;">${tmplOptions}</select>
+        <button class="btn btn-ghost btn-sm" onclick="sendWithTemplate('${l.phone}','${l.name}',${l.value})">Usar template</button>`;
+    }
     waWrap.innerHTML = `
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
         <a class="card-whatsapp" href="https://wa.me/${l.phone}" target="_blank" style="font-size:12px;padding:6px 12px;">💬 Abrir WhatsApp</a>
-        <select id="tmpl-sel" class="filter-sel" style="font-size:11px;">${tmplOptions}</select>
-        <button class="btn btn-ghost btn-sm" onclick="sendWithTemplate('${l.phone}','${l.name}',${l.value})">Usar template</button>
+        ${tmplSel}
       </div>`;
   } else {
     waWrap.innerHTML = `<span style="font-size:12px;color:var(--ink3)">Adicione um telefone para habilitar o WhatsApp</span>`;
   }
 
-  // Tasks
   renderTasksUI(l.tasks || []);
-
-  // History
   renderHistoryUI(l.history || []);
-
   openM('modal-edit');
 };
 
@@ -904,10 +1185,10 @@ function renderTasksUI(tasks) {
   const el = document.getElementById('edit-tasks');
   el.innerHTML = '';
   if (!tasks.length) { el.innerHTML = '<div style="font-size:12px;color:var(--ink3);padding:6px 0;">Nenhuma tarefa ainda.</div>'; return; }
+  const now = new Date();
   tasks.forEach((t, i) => {
-    const now = new Date();
     const overdue = t.date && new Date(t.date) < now && !t.done;
-    el.innerHTML += `<div class="task-item ${t.done ? 'opacity: .5' : ''}">
+    el.innerHTML += `<div class="task-item">
       <input type="checkbox" ${t.done ? 'checked' : ''} onchange="toggleTask(${i})">
       <span class="task-text" style="${t.done ? 'text-decoration:line-through;opacity:.5' : ''}">${t.text}</span>
       <span class="task-date ${overdue ? 'overdue' : ''}">${t.date ? fmtDate(t.date) : ''}</span>
@@ -921,7 +1202,7 @@ function renderHistoryUI(history) {
   el.innerHTML = '';
   const sorted = [...(history || [])].reverse();
   if (!sorted.length) { el.innerHTML = '<div style="font-size:12px;color:var(--ink3);">Nenhum histórico.</div>'; return; }
-  sorted.slice(0,8).forEach(h => {
+  sorted.slice(0, 8).forEach(h => {
     el.innerHTML += `<div class="hist-item">
       <div class="hist-dot"></div>
       <div class="hist-content">
@@ -936,8 +1217,8 @@ window.addTask = () => {
   const text = document.getElementById('new-task-text').value.trim();
   if (!text) return;
   const date = document.getElementById('new-task-date').value;
-  const id = document.getElementById('edit-id').value;
-  const l = allLeads.find(x => x.id === id);
+  const id   = document.getElementById('edit-id').value;
+  const l    = allLeads.find(x => x.id === id);
   const tasks = [...(l.tasks || []), { text, date, done: false }];
   updateDoc(doc(db, "leads", id), { tasks, lastUpdate: serverTimestamp() });
   document.getElementById('new-task-text').value = '';
@@ -945,37 +1226,37 @@ window.addTask = () => {
 };
 
 window.toggleTask = (i) => {
-  const id = document.getElementById('edit-id').value;
-  const l = allLeads.find(x => x.id === id);
+  const id    = document.getElementById('edit-id').value;
+  const l     = allLeads.find(x => x.id === id);
   const tasks = [...(l.tasks || [])];
   tasks[i].done = !tasks[i].done;
   updateDoc(doc(db, "leads", id), { tasks, lastUpdate: serverTimestamp() });
 };
 
 window.removeTask = (i) => {
-  const id = document.getElementById('edit-id').value;
-  const l = allLeads.find(x => x.id === id);
+  const id    = document.getElementById('edit-id').value;
+  const l     = allLeads.find(x => x.id === id);
   const tasks = (l.tasks || []).filter((_, idx) => idx !== i);
   updateDoc(doc(db, "leads", id), { tasks, lastUpdate: serverTimestamp() });
 };
 
 window.updateLead = async () => {
-  const id = document.getElementById('edit-id').value;
-  const l = allLeads.find(x => x.id === id);
+  const id       = document.getElementById('edit-id').value;
+  const l        = allLeads.find(x => x.id === id);
   const newStage = document.getElementById('edit-stage').value;
-  const hist = [...(l.history || [])];
+  const hist     = [...(l.history || [])];
   if (newStage !== l.stage) {
     hist.push({ text: `Movido de "${l.stage}" para "${newStage}"`, date: new Date().toISOString() });
   }
   await updateDoc(doc(db, "leads", id), {
-    name: document.getElementById('edit-name').value,
-    phone: document.getElementById('edit-phone').value.replace(/\D/g,''),
-    value: parseFloat(document.getElementById('edit-val').value) || 0,
-    cost: parseFloat(document.getElementById('edit-cost').value) || 0,
-    notes: document.getElementById('edit-notes').value,
-    stage: newStage,
-    history: hist,
-    lastUpdate: serverTimestamp()
+    name:        document.getElementById('edit-name').value,
+    phone:       document.getElementById('edit-phone').value.replace(/\D/g,''),
+    value:       parseFloat(document.getElementById('edit-val').value) || 0,
+    cost:        parseFloat(document.getElementById('edit-cost').value) || 0,
+    notes:       document.getElementById('edit-notes').value,
+    stage:       newStage,
+    history:     hist,
+    lastUpdate:  serverTimestamp()
   });
   closeM('modal-edit');
   toast('Lead atualizado!');
@@ -988,14 +1269,14 @@ window.deleteLead = async () => {
   toast('Lead excluído.');
 };
 
-// --- SEARCH GLOBAL ---
+// ─── BUSCA GLOBAL ──────────────────────────────────────────────────────────
 window.globalSearch = (q) => {
   if (!q.trim()) { renderFunnel(); return; }
   const filtered = allLeads.filter(l => l.name.toLowerCase().includes(q.toLowerCase()));
   renderFunnel(filtered);
 };
 
-// --- TEMPLATES ---
+// ─── TEMPLATES ─────────────────────────────────────────────────────────────
 function getTemplates() {
   return JSON.parse(localStorage.getItem('negohub-templates') || '[]');
 }
@@ -1009,16 +1290,54 @@ function initTemplates() {
   if (!localStorage.getItem('negohub-templates')) {
     localStorage.setItem('negohub-templates', JSON.stringify(defaults));
   }
-  renderTemplates();
 }
 
 function renderTemplates() {
-  const el = document.getElementById('tmpl-whatsapp');
+  const plan = getPlan();
+  const el   = document.getElementById('templates-content');
   if (!el) return;
+
+  if (!plan.whatsappTemplates) {
+    // Recurso bloqueado para este plano
+    el.innerHTML = `
+      <div class="locked-feature">
+        <div class="locked-icon">🔒</div>
+        <div class="locked-title">Templates WhatsApp — Plano Pro ou superior</div>
+        <div class="locked-sub">Esta funcionalidade permite criar mensagens personalizadas com variáveis ({nome}, {valor}) para envio rápido via WhatsApp.</div>
+        <button class="btn btn-upgrade" onclick="showView('planos',null)">Ver planos de upgrade →</button>
+      </div>`;
+    return;
+  }
+
   const tmpls = getTemplates();
-  el.innerHTML = '';
+  el.innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+      <div class="section-card">
+        <h3>Templates de Mensagem WhatsApp</h3>
+        <div class="tmpl-list" id="tmpl-whatsapp"></div>
+        <div style="margin-top:16px;display:flex;flex-direction:column;gap:8px;">
+          <input id="tmpl-new-text" class="field" style="margin:0" placeholder="Novo template de mensagem...">
+          <button class="btn btn-dark btn-sm" onclick="addTemplate()">+ Adicionar</button>
+        </div>
+      </div>
+      <div class="section-card">
+        <h3>Como usar</h3>
+        <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:16px;">
+          No perfil de qualquer lead, clique em <b>Usar template</b> para enviar via WhatsApp com variáveis preenchidas automaticamente.
+        </p>
+        <div style="background:var(--bg);border-radius:8px;padding:14px;font-size:12px;color:var(--ink2);line-height:2;">
+          <code>{nome}</code> → Nome do cliente<br>
+          <code>{valor}</code> → Valor do lead<br>
+          <code>{empresa}</code> → Sua empresa
+        </div>
+      </div>
+    </div>`;
+
+  const tmplEl = document.getElementById('tmpl-whatsapp');
+  if (!tmplEl) return;
+  tmplEl.innerHTML = '';
   tmpls.forEach((t, i) => {
-    el.innerHTML += `<div class="tmpl-item">
+    tmplEl.innerHTML += `<div class="tmpl-item">
       <span>${t}</span>
       <button class="tmpl-copy" onclick="copyTemplate(${i})">Copiar</button>
     </div>`;
@@ -1045,19 +1364,25 @@ window.sendWithTemplate = (phone, name, value) => {
   const sel = document.getElementById('tmpl-sel');
   if (!sel) return;
   const tmpl = getTemplates()[parseInt(sel.value)] || '';
-  const msg = tmpl.replace('{nome}', name).replace('{valor}', fmtBRL(value));
+  const msg  = tmpl.replace('{nome}', name).replace('{valor}', fmtBRL(value));
   window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
 };
 
-// --- SORTABLE DRAG ---
+// ─── UPGRADE REQUEST ───────────────────────────────────────────────────────
+window.requestPlan = (planName) => {
+  const msg = `Olá! Quero ${planName === currentPlan ? 'informações sobre' : 'fazer upgrade para'} o Plano ${planName} do NegoHub CRM.`;
+  window.open(`https://api.whatsapp.com/send?phone=5511939180038&text=${encodeURIComponent(msg)}`, '_blank');
+};
+
+// ─── DRAG-AND-DROP ─────────────────────────────────────────────────────────
 document.querySelectorAll('.body-list').forEach(el => {
   new Sortable(el, {
     group: 'funnel',
     animation: 150,
     onEnd: async (e) => {
       const newStage = e.to.dataset.stage;
-      const id = e.item.dataset.id;
-      const l = allLeads.find(x => x.id === id);
+      const id       = e.item.dataset.id;
+      const l        = allLeads.find(x => x.id === id);
       if (!l || l.stage === newStage) return;
       const hist = [...(l.history || []), { text: `Movido para "${newStage}"`, date: new Date().toISOString() }];
       await updateDoc(doc(db, "leads", id), { stage: newStage, history: hist, lastUpdate: serverTimestamp() });
@@ -1066,8 +1391,14 @@ document.querySelectorAll('.body-list').forEach(el => {
   });
 });
 
-// --- EXPORT ---
+// ─── EXPORT EXCEL (com verificação de plano) ───────────────────────────────
 window.exportToExcel = () => {
+  const plan = getPlan();
+  if (!plan.exportExcel) {
+    toast('Export Excel disponível a partir do Plano Pro.', true);
+    showView('planos', null);
+    return;
+  }
   const ws = XLSX.utils.json_to_sheet(allLeads.map(l => ({
     Nome: l.name, Telefone: l.phone, 'Valor (R$)': l.value,
     'Custo (R$)': l.cost, Status: l.stage, Origem: l.service, Notas: l.notes
@@ -1078,18 +1409,19 @@ window.exportToExcel = () => {
   toast('Excel exportado!');
 };
 
-// --- HELPERS ---
+// ─── HELPERS ───────────────────────────────────────────────────────────────
 window.showView = (v, el) => {
   document.querySelectorAll('.view').forEach(x => x.classList.remove('active'));
   document.getElementById('view-' + v).classList.add('active');
   document.querySelectorAll('.nav-item').forEach(x => x.classList.remove('active'));
   if (el) el.classList.add('active');
-  const titles = { funil:'Funil de Vendas', dashboard:'Dashboard', leads:'Base de Clientes', templates:'Templates', perfil:'Minha Conta' };
+  const titles = { funil:'Funil de Vendas', dashboard:'Dashboard', leads:'Base de Clientes', templates:'Templates WhatsApp', planos:'Meu Plano', perfil:'Minha Conta' };
   document.getElementById('page-title').innerText = titles[v] || '';
   if (v === 'templates') renderTemplates();
+  if (v === 'planos')    updateUsageView();
 };
 
-window.openM = (id) => document.getElementById(id).classList.add('open');
+window.openM  = (id) => document.getElementById(id).classList.add('open');
 window.closeM = (id) => document.getElementById(id).classList.remove('open');
 
 document.querySelectorAll('.overlay').forEach(o => {
@@ -1107,8 +1439,9 @@ function fmtDate(d) {
 
 function toast(msg, error = false) {
   const t = document.getElementById('toast');
-  t.innerText = (error ? '✕ ' : '✓ ') + msg;
-  t.style.background = error ? '#ef4444' : '#1a1a2e';
+  t.innerText        = (error ? '✕ ' : '✓ ') + msg;
+  t.style.background = error ? '#ef4444' : 'var(--accent)';
+  t.style.color      = error ? '#fff' : '#000';
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 3000);
 }
