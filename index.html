@@ -2,9 +2,9 @@
 <html lang="pt-BR">
 <meta charset="UTF-8"/>
 <head>
-  <script>
-  if (location.pathname.endsWith('/index.html')) {
-    location.replace(location.href.replace('/index.html', '/'));
+ <script>
+  if (location.pathname === '/index.html') {
+    location.replace('/');
   }
 </script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18099762359"></script>
