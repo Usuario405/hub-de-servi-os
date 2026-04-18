@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NegoHub — Painel Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0c0e14;
+  --ink: #e8eaf0;
+  --ink2: #8b90a7;
+  --ink3: #555a72;
+  --surface: #1a1d28;
+  --surface2: #222536;
+  --border: #2a2e42;
+  --border2: #3a3f58;
+  --accent: #00e5a0;
+  --lost: #ff4757;
+  --warm: #f5a623;
+  --pro-color: #a78bfa;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;display:flex;flex-direction:column;}
+
+/* LOGIN */
+#admin-login{position:fixed;inset:0;background:var(--bg);z-index:9000;display:flex;align-items:center;justify-content:center;}
+.login-box{width:400px;padding:48px;background:var(--surface);border-radius:20px;border:1px solid var(--border);}
+.login-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:28px;color:var(--accent);margin-bottom:4px;}
+.login-badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.1em;padding:3px 10px;border-radius:20px;background:rgba(255,71,87,0.12);color:var(--lost);border:1px solid rgba(255,71,87,0.3);margin-bottom:22px;}
+
+.field{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 16px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--ink);outline:none;transition:.2s;margin-bottom:10px;}
+.field:focus{border-color:var(--accent);}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:8px;font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;border:none;transition:.15s;}
+.btn-accent{background:var(--accent);color:#000;}
+.btn-accent:hover{background:#00c98e;}
+.btn-ghost{background:transparent;color:var(--ink2);border:1px solid var(--border2);}
+.btn-ghost:hover{border-color:var(--ink2);color:var(--ink);}
+.btn-danger{background:rgba(255,71,87,0.12);color:var(--lost);border:1px solid rgba(255,71,87,0.3);}
+.btn-danger:hover{background:rgba(255,71,87,0.2);}
+.btn-sm{padding:7px 14px;font-size:12px;}
+.btn-full{width:100%;}
+.btn:disabled{opacity:.4;cursor:not-allowed;}
+
+/* HEADER */
+header{background:#13151e;border-bottom:1px solid var(--border);padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--accent);}
+.admin-chip{font-size:10px;font-weight:700;letter-spacing:.08em;padding:4px 12px;border-radius:20px;background:rgba(255,71,87,0.1);color:var(--lost);border:1px solid rgba(255,71,87,0.25);}
+.header-right{display:flex;align-items:center;gap:12px;}
+
+/* MAIN */
+main{flex:1;padding:32px;max-width:1200px;width:100%;margin:0 auto;}
+
+/* KPI */
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px;}
+.kpi{background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--accent);border-radius:14px;padding:20px 22px;position:relative;overflow:hidden;}
+.kpi::after{content:'';position:absolute;bottom:-20px;right:-20px;width:80px;height:80px;border-radius:50%;background:var(--accent);opacity:.05;}
+.kpi.k-all{border-top-color:var(--ink3);}
+.kpi.k-pro{border-top-color:var(--pro-color);}
+.kpi.k-biz{border-top-color:var(--accent);}
+.kpi-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3);margin-bottom:8px;}
+.kpi-val{font-size:28px;font-weight:700;color:var(--ink);line-height:1;}
+.kpi-sub{font-size:11px;color:var(--ink3);margin-top:6px;}
+
+/* SECTION */
+.section{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:24px;}
+.section-header{padding:18px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.section-title{font-size:14px;font-weight:600;}
+.section-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+
+/* ADD FORM */
+.add-form{display:grid;grid-template-columns:1fr 1fr 160px auto;gap:10px;align-items:end;padding:16px 22px;border-bottom:1px solid var(--border);background:rgba(0,229,160,.025);}
+.lbl{display:block;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--ink3);margin-bottom:5px;}
+.add-form .field{margin:0;}
+
+/* FILTERS */
+.filters{display:flex;gap:10px;flex-wrap:wrap;padding:14px 22px;border-bottom:1px solid var(--border);background:rgba(0,0,0,.08);}
+.filters input,.filters select{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:12px;font-family:'DM Sans',sans-serif;color:var(--ink);outline:none;transition:.2s;}
+.filters input:focus,.filters select:focus{border-color:var(--accent);}
+.filters input{flex:1;min-width:200px;}
+
+/* TABLE */
+.table-scroll{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{text-align:left;color:var(--ink3);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;padding:12px 18px;border-bottom:1px solid var(--border);background:var(--surface2);white-space:nowrap;}
+td{padding:13px 18px;border-bottom:1px solid var(--border);vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,.02);}
+
+.avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;}
+.av-starter{background:var(--surface2);color:var(--ink2);}
+.av-pro{background:rgba(167,139,250,0.15);color:var(--pro-color);}
+.av-business{background:rgba(0,229,160,0.12);color:var(--accent);}
+.user-cell{display:flex;align-items:center;gap:12px;}
+.user-email{font-weight:600;font-size:13px;}
+.user-uid{font-size:10px;color:var(--ink3);margin-top:3px;font-family:monospace;}
+
+.plan-pill{display:inline-flex;align-items:center;padding:4px 12px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.05em;}
+.pp-starter{background:var(--surface2);color:var(--ink2);border:1px solid var(--border2);}
+.pp-pro{background:rgba(167,139,250,0.12);color:var(--pro-color);border:1px solid rgba(167,139,250,.3);}
+.pp-business{background:rgba(0,229,160,0.1);color:var(--accent);border:1px solid rgba(0,229,160,.3);}
+
+.leads-tag{display:inline-block;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;}
+.tag-ok{background:rgba(0,229,160,0.08);color:var(--accent);}
+.tag-warn{background:rgba(245,166,35,0.1);color:var(--warm);}
+.tag-over{background:rgba(255,71,87,0.1);color:var(--lost);}
+
+/* PLAN SWITCHER */
+.plan-switcher{display:inline-flex;background:var(--bg);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.plan-switcher button{background:transparent;border:none;border-right:1px solid var(--border);padding:6px 12px;font-size:11px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;color:var(--ink3);transition:.15s;}
+.plan-switcher button:last-child{border-right:none;}
+.plan-switcher button:hover{color:var(--ink);background:rgba(255,255,255,.04);}
+.ps-starter{background:var(--surface2)!important;color:var(--ink)!important;}
+.ps-pro{background:rgba(167,139,250,0.15)!important;color:var(--pro-color)!important;}
+.ps-business{background:rgba(0,229,160,0.12)!important;color:var(--accent)!important;}
+
+/* LOG */
+.log-wrap{padding:18px 22px;max-height:280px;overflow-y:auto;}
+.log-empty{font-size:12px;color:var(--ink3);text-align:center;padding:24px 0;}
+.log-item{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);font-size:12px;}
+.log-item:last-child{border-bottom:none;}
+.log-time{color:var(--ink3);white-space:nowrap;font-family:monospace;flex-shrink:0;padding-top:1px;}
+.log-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:3px;}
+.d-up{background:var(--accent);}
+.d-dw{background:var(--warm);}
+.d-add{background:#60a5fa;}
+.d-del{background:var(--lost);}
+.log-msg{color:var(--ink2);line-height:1.5;}
+.log-msg b{color:var(--ink);}
+
+/* CONFIRM MODAL */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);backdrop-filter:blur(6px);z-index:3000;display:none;align-items:center;justify-content:center;}
+.overlay.open{display:flex;}
+.modal{background:#13151e;border:1px solid var(--border);border-radius:16px;padding:30px;width:440px;}
+.modal-title{font-size:18px;font-weight:700;margin-bottom:8px;}
+.modal-body{font-size:13px;color:var(--ink2);margin-bottom:22px;line-height:1.65;}
+.modal-body b{color:var(--ink);}
+.modal-actions{display:flex;gap:10px;}
+
+/* TOAST */
+.toast{position:fixed;bottom:28px;right:28px;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:600;z-index:9999;transform:translateY(80px);opacity:0;transition:.3s;display:flex;align-items:center;gap:8px;pointer-events:none;}
+.toast.show{transform:translateY(0);opacity:1;}
+.t-ok{background:var(--accent);color:#000;}
+.t-err{background:var(--lost);color:#fff;}
+.t-warn{background:var(--warm);color:#000;}
+
+/* UTIL */
+.empty-state{text-align:center;padding:40px;color:var(--ink3);font-size:13px;}
+.loading{text-align:center;padding:32px;color:var(--ink3);font-size:13px;display:flex;align-items:center;justify-content:center;gap:10px;}
+.spinner{width:16px;height:16px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+main{animation:fadeUp .25s ease;}
+::-webkit-scrollbar{width:4px;height:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px;}
+</style>
+</head>
+<body>
+
+<!-- ══ LOGIN ═══════════════════════════════════════════════════════════════ -->
+<div id="admin-login">
+  <div class="login-box">
+    <div class="login-logo">NegoHub</div>
+    <div class="login-badge">PAINEL ADMIN</div>
+    <p style="font-size:13px;color:var(--ink3);margin-bottom:22px;line-height:1.6;">
+      Use o mesmo email e senha do sistema principal.<br>
+      Apenas administradores cadastrados têm acesso.
+    </p>
+    <input type="email"    id="login-email" class="field" placeholder="admin@empresa.com">
+    <input type="password" id="login-pass"  class="field" placeholder="Senha"
+      onkeydown="if(event.key==='Enter') doLogin()">
+    <button onclick="doLogin()" class="btn btn-accent btn-full" style="margin-top:4px;">
+      Acessar painel admin
+    </button>
+    <p id="login-err" style="font-size:12px;color:var(--lost);margin-top:12px;text-align:center;display:none;"></p>
+  </div>
+</div>
+
+<!-- ══ HEADER ══════════════════════════════════════════════════════════════ -->
+<header>
+  <div style="display:flex;align-items:center;gap:14px;">
+    <div class="logo">N.</div>
+    <div class="admin-chip">ADMIN</div>
+  </div>
+  <div class="header-right">
+    <span style="font-size:12px;color:var(--ink3);" id="header-email"></span>
+    <a href="index.html" class="btn btn-ghost btn-sm">← Voltar ao sistema</a>
+    <button onclick="doLogout()" class="btn btn-danger btn-sm">Sair</button>
+  </div>
+</header>
+
+<!-- ══ MAIN ════════════════════════════════════════════════════════════════ -->
+<main>
+
+  <!-- KPIs -->
+  <div class="kpi-row">
+    <div class="kpi k-all">
+      <div class="kpi-label">Total de usuários</div>
+      <div class="kpi-val" id="kpi-total">—</div>
+      <div class="kpi-sub">cadastrados no sistema</div>
+    </div>
+    <div class="kpi k-all">
+      <div class="kpi-label">Plano Starter</div>
+      <div class="kpi-val" id="kpi-starter">—</div>
+      <div class="kpi-sub">R$ 197/mês cada</div>
+    </div>
+    <div class="kpi k-pro">
+      <div class="kpi-label">Plano Pro</div>
+      <div class="kpi-val" id="kpi-pro">—</div>
+      <div class="kpi-sub">R$ 697/mês cada</div>
+    </div>
+    <div class="kpi k-biz">
+      <div class="kpi-label">Plano Business</div>
+      <div class="kpi-val" id="kpi-business">—</div>
+      <div class="kpi-sub">R$ 1.897/mês cada</div>
+    </div>
+  </div>
+
+  <!-- GERENCIAR USUÁRIOS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Usuários e Planos</div>
+      <div class="section-actions">
+        <span id="last-updated" style="font-size:11px;color:var(--ink3);"></span>
+        <button class="btn btn-ghost btn-sm" onclick="loadUsers()">↻ Atualizar lista</button>
+      </div>
+    </div>
+
+    <!-- Adicionar / editar usuário -->
+    <div class="add-form">
+      <div>
+        <span class="lbl">UID do usuário (Firebase Auth)</span>
+        <input type="text"  id="add-uid"   class="field" placeholder="Cole o UID aqui...">
+      </div>
+      <div>
+        <span class="lbl">Email (para identificação)</span>
+        <input type="email" id="add-email" class="field" placeholder="cliente@email.com">
+      </div>
+      <div>
+        <span class="lbl">Plano</span>
+        <select id="add-plan" class="field" style="background:var(--bg);color:var(--ink);margin:0;">
+          <option value="starter">Starter</option>
+          <option value="pro">Pro</option>
+          <option value="business">Business</option>
+        </select>
+      </div>
+      <button class="btn btn-accent btn-sm" onclick="addUser()" style="white-space:nowrap;">
+        + Salvar usuário
+      </button>
+    </div>
+
+    <!-- Filtros -->
+    <div class="filters">
+      <input  type="text" id="filter-search" placeholder="Buscar por email ou UID..." oninput="renderTable()">
+      <select id="filter-plan" onchange="renderTable()" style="background:var(--bg);color:var(--ink);">
+        <option value="">Todos os planos</option>
+        <option value="starter">Starter</option>
+        <option value="pro">Pro</option>
+        <option value="business">Business</option>
+      </select>
+    </div>
+
+    <!-- Tabela -->
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Usuário</th>
+            <th>Leads</th>
+            <th>Plano atual</th>
+            <th>Alterar plano</th>
+            <th>Salvar</th>
+            <th>Remover</th>
+          </tr>
+        </thead>
+        <tbody id="users-tbody">
+          <tr><td colspan="6">
+            <div class="loading"><div class="spinner"></div>Aguardando login...</div>
+          </td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- LOG -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Log de alterações da sessão</div>
+      <button class="btn btn-ghost btn-sm" onclick="clearLog()">Limpar log</button>
+    </div>
+    <div class="log-wrap" id="log-wrap">
+      <div class="log-empty">Nenhuma alteração registrada ainda.</div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ══ CONFIRM MODAL ═══════════════════════════════════════════════════════ -->
+<div class="overlay" id="confirm-overlay">
+  <div class="modal">
+    <div class="modal-title" id="confirm-title">Confirmar ação</div>
+    <div class="modal-body"  id="confirm-body"></div>
+    <div class="modal-actions">
+      <button class="btn btn-accent" id="confirm-ok">Confirmar</button>
+      <button class="btn btn-ghost"  onclick="closeConfirm()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TOAST ═══════════════════════════════════════════════════════════════ -->
+<div class="toast" id="toast"></div>
+
+<!-- ══ SCRIPT ══════════════════════════════════════════════════════════════ -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+import {
+  getFirestore, collection, getDocs, getDoc,
+  setDoc, deleteDoc, doc, serverTimestamp, query, where
+} from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
+import {
+  getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut
+} from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
+
+// ── FIREBASE CONFIG ────────────────────────────────────────────────────────
+// ⚠️  Mesmo config do index.html — não altere nada aqui
+const firebaseConfig = {
+  apiKey:            "AIzaSyDMiJmwgxep1USbcmWa8ck3eEI1_I13HRg",
+  authDomain:        "negofunil-9dda9.firebaseapp.com",
+  projectId:         "negofunil-9dda9",
+  storageBucket:     "negofunil-9dda9.firebasestorage.app",
+  messagingSenderId: "441217367666",
+  appId:             "1:441217367666:web:64f2e84c4db69366a9cceb"
+};
+
+const app  = initializeApp(firebaseConfig);
+const db   = getFirestore(app);
+const auth = getAuth(app);
+
+// ── PLANOS ─────────────────────────────────────────────────────────────────
+const PLANS = {
+  starter:  { name: 'STARTER',  maxLeads: 500,     preco: 197  },
+  pro:      { name: 'PRO',      maxLeads: Infinity, preco: 697  },
+  business: { name: 'BUSINESS', maxLeads: Infinity, preco: 1897 }
+};
+
+// ── ESTADO ─────────────────────────────────────────────────────────────────
+let users   = [];   // lista de usuários carregados
+let pending = {};   // uid → plano selecionado mas ainda não salvo
+let logs    = [];   // log da sessão
+
+// ── AUTH ───────────────────────────────────────────────────────────────────
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    document.getElementById('admin-login').style.display = 'flex';
+    return;
+  }
+
+  // Verifica se existe doc em "admins/{uid}"
+  const adminSnap = await getDoc(doc(db, 'admins', user.uid));
+  if (!adminSnap.exists()) {
+    showLoginErr('Acesso negado. Você não é um administrador cadastrado.');
+    await signOut(auth);
+    document.getElementById('admin-login').style.display = 'flex';
+    return;
+  }
+
+  document.getElementById('admin-login').style.display = 'none';
+  document.getElementById('header-email').textContent  = user.email;
+  loadUsers();
+});
+
+window.doLogin = async () => {
+  const e = document.getElementById('login-email').value.trim();
+  const p = document.getElementById('login-pass').value;
+  if (!e || !p) { showLoginErr('Preencha email e senha.'); return; }
+  try {
+    await signInWithEmailAndPassword(auth, e, p);
+  } catch {
+    showLoginErr('Email ou senha incorretos. Tente novamente.');
+  }
+};
+
+window.doLogout = () => signOut(auth).then(() => location.reload());
+
+function showLoginErr(msg) {
+  const el = document.getElementById('login-err');
+  el.textContent   = msg;
+  el.style.display = 'block';
+  setTimeout(() => el.style.display = 'none', 4500);
+}
+
+// ── CARREGAR USUÁRIOS ──────────────────────────────────────────────────────
+window.loadUsers = async () => {
+  setLoading(true);
+  users   = [];
+  pending = {};
+
+  // Busca todos os usuários
+  const usersSnap = await getDocs(collection(db, 'users'));
+
+  // Busca todos os leads de uma vez e conta por ownerId
+  const leadsSnap = await getDocs(collection(db, 'leads'));
+  const leadCount = {};
+  leadsSnap.forEach(l => {
+    const oid = l.data().ownerId;
+    if (oid) leadCount[oid] = (leadCount[oid] || 0) + 1;
+  });
+
+  usersSnap.forEach(d => {
+    users.push({
+      uid:   d.id,
+      email: d.data().email || '—',
+      plan:  d.data().plan  || 'starter',
+      leads: leadCount[d.id] || 0
+    });
+  });
+
+  // Ordena por email
+  users.sort((a, b) => a.email.localeCompare(b.email));
+
+  updateKPIs();
+  renderTable();
+
+  const now = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+  document.getElementById('last-updated').textContent = `Atualizado às ${now}`;
+};
+
+function setLoading(on) {
+  if (on) {
+    document.getElementById('users-tbody').innerHTML =
+      '<tr><td colspan="6"><div class="loading"><div class="spinner"></div>Carregando usuários...</div></td></tr>';
+  }
+}
+
+// ── KPIs ───────────────────────────────────────────────────────────────────
+function updateKPIs() {
+  document.getElementById('kpi-total').textContent    = users.length;
+  document.getElementById('kpi-starter').textContent  = users.filter(u => u.plan === 'starter').length;
+  document.getElementById('kpi-pro').textContent      = users.filter(u => u.plan === 'pro').length;
+  document.getElementById('kpi-business').textContent = users.filter(u => u.plan === 'business').length;
+}
+
+// ── TABELA ─────────────────────────────────────────────────────────────────
+window.renderTable = () => {
+  const q  = (document.getElementById('filter-search').value || '').toLowerCase();
+  const fp = document.getElementById('filter-plan').value;
+
+  const filtered = users.filter(u =>
+    (!q  || u.email.toLowerCase().includes(q) || u.uid.toLowerCase().includes(q)) &&
+    (!fp || u.plan === fp)
+  );
+
+  const tbody = document.getElementById('users-tbody');
+  if (!filtered.length) {
+    tbody.innerHTML = '<tr><td colspan="6"><div class="empty-state">Nenhum usuário encontrado.</div></td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = filtered.map(u => {
+    const dp        = pending[u.uid] || u.plan;
+    const hasChange = pending[u.uid] && pending[u.uid] !== u.plan;
+    const maxL      = PLANS[dp].maxLeads;
+    const pct       = maxL !== Infinity ? u.leads / maxL : 0;
+    const tagClass  = pct >= 1 ? 'tag-over' : pct >= .85 ? 'tag-warn' : 'tag-ok';
+    const leadsStr  = maxL !== Infinity ? `${u.leads} / ${maxL}` : `${u.leads} leads`;
+    const initials  = u.email !== '—' ? u.email.slice(0, 2).toUpperCase() : 'US';
+
+    return `<tr>
+      <td>
+        <div class="user-cell">
+          <div class="avatar av-${dp}">${initials}</div>
+          <div>
+            <div class="user-email">${u.email}</div>
+            <div class="user-uid">${u.uid}</div>
+          </div>
+        </div>
+      </td>
+      <td><span class="leads-tag ${tagClass}">${leadsStr}</span></td>
+      <td><span class="plan-pill pp-${u.plan}">${PLANS[u.plan].name}</span></td>
+      <td>
+        <div class="plan-switcher">
+          <button class="${dp === 'starter'  ? 'ps-starter'  : ''}" onclick="setPending('${u.uid}','starter')">Starter</button>
+          <button class="${dp === 'pro'      ? 'ps-pro'      : ''}" onclick="setPending('${u.uid}','pro')">Pro</button>
+          <button class="${dp === 'business' ? 'ps-business' : ''}" onclick="setPending('${u.uid}','business')">Business</button>
+        </div>
+      </td>
+      <td>
+        <button class="btn btn-accent btn-sm" ${hasChange ? '' : 'disabled'} onclick="confirmSave('${u.uid}')">
+          ${hasChange ? '💾 Salvar' : '✓ Salvo'}
+        </button>
+      </td>
+      <td>
+        <button class="btn btn-danger btn-sm" onclick="confirmDelete('${u.uid}')">Excluir</button>
+      </td>
+    </tr>`;
+  }).join('');
+};
+
+// ── SELECIONAR PLANO (pendente) ────────────────────────────────────────────
+window.setPending = (uid, plan) => {
+  pending[uid] = plan;
+  renderTable();
+};
+
+// ── SALVAR PLANO ───────────────────────────────────────────────────────────
+window.confirmSave = (uid) => {
+  const u       = users.find(x => x.uid === uid);
+  const newPlan = pending[uid];
+  if (!u || !newPlan) return;
+
+  const isUp = planRank(newPlan) > planRank(u.plan);
+  showConfirm(
+    isUp ? '⬆ Fazer upgrade' : '⬇ Fazer downgrade',
+    `Deseja alterar o plano de <b>${u.email}</b> de <b>${PLANS[u.plan].name}</b> para <b>${PLANS[newPlan].name}</b>?<br><br>
+     <span style="font-size:12px;color:var(--ink3);">A alteração tem efeito imediato — o cliente verá o novo plano ao recarregar a página.</span>`,
+    async () => {
+      await setDoc(doc(db, 'users', uid), { plan: newPlan }, { merge: true });
+      addLog(isUp ? 'up' : 'dw',
+        `Plano de <b>${u.email}</b>: <b>${PLANS[u.plan].name}</b> → <b>${PLANS[newPlan].name}</b>`);
+      u.plan = newPlan;
+      delete pending[uid];
+      updateKPIs();
+      renderTable();
+      toast('Plano atualizado! O cliente já pode usar os novos recursos.');
+    }
+  );
+};
+
+function planRank(p) { return { starter: 0, pro: 1, business: 2 }[p] || 0; }
+
+// ── ADICIONAR / EDITAR USUÁRIO ─────────────────────────────────────────────
+window.addUser = async () => {
+  const uid   = document.getElementById('add-uid').value.trim();
+  const email = document.getElementById('add-email').value.trim();
+  const plan  = document.getElementById('add-plan').value;
+  if (!uid) { toast('Informe o UID do usuário.', 'err'); return; }
+
+  const exists = users.find(u => u.uid === uid);
+  const label  = email || uid.slice(0, 14) + '…';
+
+  if (exists) {
+    showConfirm(
+      'Atualizar usuário existente',
+      `O usuário <b>${exists.email}</b> já está cadastrado. Deseja atualizar o email e plano?`,
+      async () => {
+        const payload = { plan };
+        if (email) payload.email = email;
+        await setDoc(doc(db, 'users', uid), payload, { merge: true });
+        exists.plan = plan;
+        if (email) exists.email = email;
+        addLog('add', `Usuário <b>${label}</b> atualizado → plano <b>${PLANS[plan].name}</b>`);
+        clearAddForm(); updateKPIs(); renderTable();
+        toast('Usuário atualizado!');
+      }
+    );
+  } else {
+    await setDoc(doc(db, 'users', uid), { plan, email, createdAt: serverTimestamp() });
+    users.push({ uid, email: email || '—', plan, leads: 0 });
+    addLog('add', `Novo usuário <b>${label}</b> criado → plano <b>${PLANS[plan].name}</b>`);
+    clearAddForm(); updateKPIs(); renderTable();
+    toast('Usuário cadastrado!');
+  }
+};
+
+function clearAddForm() {
+  document.getElementById('add-uid').value   = '';
+  document.getElementById('add-email').value = '';
+  document.getElementById('add-plan').value  = 'starter';
+}
+
+// ── EXCLUIR USUÁRIO ────────────────────────────────────────────────────────
+window.confirmDelete = (uid) => {
+  const u = users.find(x => x.uid === uid);
+  if (!u) return;
+  showConfirm(
+    '🗑 Excluir usuário',
+    `Tem certeza que deseja remover <b>${u.email}</b>?<br><br>
+     <span style="font-size:12px;color:var(--lost);">⚠ Os leads do usuário NÃO serão excluídos — apenas o perfil de plano.</span>`,
+    async () => {
+      await deleteDoc(doc(db, 'users', uid));
+      addLog('del', `Usuário <b>${u.email}</b> removido.`);
+      users = users.filter(x => x.uid !== uid);
+      updateKPIs(); renderTable();
+      toast('Usuário removido.', 'warn');
+    }
+  );
+};
+
+// ── LOG ────────────────────────────────────────────────────────────────────
+function addLog(type, text) {
+  const time = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  logs.unshift({ type, text, time });
+  const el  = document.getElementById('log-wrap');
+  const map = { up: 'd-up', dw: 'd-dw', add: 'd-add', del: 'd-del' };
+  el.innerHTML = logs.slice(0, 60).map(l =>
+    `<div class="log-item">
+      <span class="log-time">${l.time}</span>
+      <div class="log-dot ${map[l.type] || 'd-add'}"></div>
+      <span class="log-msg">${l.text}</span>
+    </div>`).join('');
+}
+
+window.clearLog = () => {
+  logs = [];
+  document.getElementById('log-wrap').innerHTML = '<div class="log-empty">Nenhuma alteração registrada ainda.</div>';
+};
+
+// ── CONFIRM MODAL ──────────────────────────────────────────────────────────
+function showConfirm(title, body, onOk) {
+  document.getElementById('confirm-title').innerHTML = title;
+  document.getElementById('confirm-body').innerHTML  = body;
+  document.getElementById('confirm-ok').onclick      = () => { onOk(); closeConfirm(); };
+  document.getElementById('confirm-overlay').classList.add('open');
+}
+window.closeConfirm = () =>
+  document.getElementById('confirm-overlay').classList.remove('open');
+
+document.getElementById('confirm-overlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('confirm-overlay')) closeConfirm();
+});
+
+// ── TOAST ──────────────────────────────────────────────────────────────────
+function toast(msg, type = 'ok') {
+  const t = document.getElementById('toast');
+  const icon = type === 'ok' ? '✓' : type === 'warn' ? '⚡' : '✕';
+  t.textContent = `${icon} ${msg}`;
+  t.className   = `toast t-${type} show`;
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+</script>
+</body>
+</html>
